@@ -8,15 +8,7 @@
     href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
     rel="stylesheet"
   />
-  <style>
-    body {
-      font-family: "Indie Flower", cursive;
-    }
-    button:focus {
-      outline: 2px solid black;
-      outline-offset: 2px;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-white p-8 min-h-screen flex flex-col items-center">
   <header class="mb-6">
@@ -32,44 +24,44 @@
     class="flex items-center border-2 border-black rounded-lg px-6 py-3 w-full max-w-[1400px]"
     style="min-height: 56px"
   >
-    <ul class="flex space-x-8 text-xl select-none">
+    <ul class="flex flex-wrap items-center gap-2 text-xl select-none">
       <li>
         <button
           id="homeBtn"
-          class="focus:outline-none"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
           aria-label="Home"
           type="button"
         >
           HOME
         </button>
       </li>
-      <li>|</li>
+      <li class="text-gray-400">|</li>
       <li>
         <button
-          id="containtsBtn"
-          class="focus:outline-none"
-          aria-label="Containts"
+          id="contentsBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="Contents"
           type="button"
         >
-          CONTAINTS
+          CONTENTS
         </button>
       </li>
-      <li>|</li>
+      <li class="text-gray-400">|</li>
       <li>
         <button
           id="settingsBtn"
-          class="focus:outline-none"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
           aria-label="Settings"
           type="button"
         >
           SETTINGS
         </button>
       </li>
-      <li>|</li>
+      <li class="text-gray-400">|</li>
       <li>
         <button
           id="aboutBtn"
-          class="focus:outline-none"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
           aria-label="About"
           type="button"
         >
@@ -79,18 +71,18 @@
     </ul>
     <form
       class="ml-auto flex border-2 border-black rounded-lg overflow-hidden"
-      style="width: 280px; min-height: 40px"
+      style="min-width: 200px; max-width: 280px; min-height: 40px"
       onsubmit="event.preventDefault()"
     >
       <input
         type="text"
         aria-label="Search"
-        class="outline-none px-3 text-base font-normal font-[Indie Flower] text-black"
+        class="outline-none px-3 text-base font-normal font-[Indie Flower] text-black w-full"
         style="font-family: 'Indie Flower', cursive"
       />
       <button
         type="submit"
-        class="border-l-2 border-black px-5 text-base font-[Indie Flower] font-normal select-none"
+        class="border-l-2 border-black px-5 text-base font-[Indie Flower] font-normal select-none whitespace-nowrap"
         style="font-family: 'Indie Flower', cursive"
       >
         search
@@ -99,15 +91,15 @@
   </nav>
 
   <main
-    class="flex mt-6 w-full max-w-[1400px] space-x-6 flex-grow"
+    class="flex mt-6 w-full max-w-[1400px] mx-auto space-x-6 flex-grow"
     style="font-size: 18px; line-height: 1.4"
   >
     <aside
-      class="border-2 border-black rounded-lg p-6"
-      style="width: 280px; min-height: 600px"
+      class="border-2 border-black rounded-lg p-6 w-[280px] flex-shrink-0"
+      style="min-height: 600px"
     >
       <h2 class="font-[Indie Flower] font-normal text-2xl mb-4 select-none">
-        RECENT VLOGS
+        RECENT CONTENTS
       </h2>
       <ul id="recentBlogsList" class="space-y-3">
         <!-- Blog items inserted by JS -->
@@ -116,182 +108,21 @@
 
     <section
       id="contentArea"
-      class="border-2 border-black rounded-lg p-8 flex-1 overflow-auto"
+      class="border-2 border-black rounded-lg p-8 flex-1 overflow-auto min-w-0"
       style="min-height: 600px"
     >
       <!-- Content inserted by JS -->
     </section>
   </main>
 
-  <script>
-    const contentArea = document.getElementById("contentArea");
-    const recentBlogsList = document.getElementById("recentBlogsList");
+  <footer class="mt-6 w-full max-w-[1400px] mx-auto">
+    <div class="border-2 border-black rounded-lg p-4 text-center">
+      <p class="font-[Indie Flower] text-lg">
+        © HAWATRI 2025
+      </p>
+    </div>
+  </footer>
 
-    // Simulated blog posts stored in a "blogs" folder (represented here as an object)
-    const blogs = {
-      "how-to-start-writing-daily": {
-        title: "How to Start Writing Daily",
-        content: `
-          <h2 class="font-[Indie Flower] font-normal text-2xl mb-4">How to Start Writing Daily</h2>
-          <p>Starting a daily writing habit can be challenging but rewarding.</p>
-          <p class="mt-5">Here are some tips to help you get started:</p>
-          <ul class="list-disc list-inside mt-3">
-            <li>Set a specific time each day for writing.</li>
-            <li>Start with small goals, like 5 minutes or 100 words.</li>
-            <li>Don't worry about perfection; just write.</li>
-            <li>Keep a dedicated notebook or digital document.</li>
-            <li>Reflect on your progress weekly.</li>
-          </ul>
-          <p class="mt-5">Remember, consistency is key. Happy writing!</p>
-        `,
-      },
-      "example-blog-2": {
-        title: "Example Blog Post 2",
-        content: `
-          <h2 class="font-[Indie Flower] font-normal text-2xl mb-4">Example Blog Post 2</h2>
-          <p>This is an example blog post content for demonstration purposes.</p>
-          <p class="mt-5">You can add your own blog posts in the blogs folder.</p>
-        `,
-      },
-      "example-blog-3": {
-        title: "Example Blog Post 3",
-        content: `
-          <h2 class="font-[Indie Flower] font-normal text-2xl mb-4">Example Blog Post 3</h2>
-          <p>Another example blog post to show multiple entries.</p>
-          <p class="mt-5">Feel free to expand this with your own content.</p>
-        `,
-      },
-    };
-
-    // Pages content
-    const pages = {
-      home: `
-        <p>Welcome to Hawatri<br />Welcome, traveler.</p>
-        <p class="mt-5">
-          You’ve stumbled upon Hawatri—a quiet corner of the internet where
-          thoughts take shape, stories breathe, and ideas find a home.<br />
-          This is not a blog in the noisy, click-chasing sense. It is a digital
-          diary of sorts, grounded in simplicity, soaked in curiosity, and built
-          with care.
-        </p>
-        <p class="mt-5">
-          Here, I share more than vlogs.<br />
-          I share projects that scratch an itch, solutions that solve problems,
-          and experiments born from long hours and quiet determination.
-        </p>
-        <p class="mt-5">
-          <strong>Who am I?</strong><br />
-          I’m a programmer by trade, but more than that—a thinker, a builder, and
-          a listener.<br />
-          I was raised with a respect for tradition, and I carry that into my
-          work: clean code, simple design, and functional ideas.<br />
-          This site is a mirror of that philosophy.
-        </p>
-        <p class="mt-5">
-          <strong>What you’ll find here</strong><br />
-          Projects — From terminal tools to full-stack experiments, you’ll see my
-          builds evolve.<br />
-          Solutions — Practical answers to real-world problems, many of them
-          inspired by my own needs.<br />
-          Vlogs — Not the flashy, fast-cut kind. Just slow, honest glimpses into
-          the journey—tech and otherwise.<br />
-          Thoughts — Reflections on code, life, process, and growth.<br />
-          Whether you’re here to learn, to explore, or just to wander through
-          someone else’s mental workshop—you’re welcome.
-        </p>
-        <p class="mt-5">This is Hawatri. Let’s build something meaningful.</p>
-      `,
-      containts: () => {
-        // Show all blogs as a list with clickable titles
-        let listHTML = `<h2 class="font-[Indie Flower] font-normal text-2xl mb-4">Containts - All Blogs</h2><ul class="list-disc list-inside space-y-3">`;
-        for (const slug in blogs) {
-          listHTML += `<li><button type="button" data-slug="${slug}" class="text-black underline hover:text-gray-700 focus:outline-none">${blogs[slug].title}</button></li>`;
-        }
-        listHTML += "</ul>";
-        return listHTML;
-      },
-      settings: `
-        <h2 class="font-[Indie Flower] font-normal text-2xl mb-4">Settings</h2>
-        <p>This is the Settings page content.</p>
-        <p class="mt-5">Adjust your preferences here.</p>
-      `,
-      about: `
-        <h2 class="font-[Indie Flower] font-normal text-2xl mb-4">About</h2>
-        <p>This is the About page content.</p>
-        <p class="mt-5">Learn more about Hawatri and its creator.</p>
-      `,
-    };
-
-    // Render recent blogs list in sidebar
-    function renderRecentBlogs() {
-      recentBlogsList.innerHTML = "";
-      // Show up to 5 recent blogs (in order of keys here)
-      const recentSlugs = Object.keys(blogs).slice(0, 5);
-      recentSlugs.forEach((slug) => {
-        const li = document.createElement("li");
-        li.className = "flex items-center space-x-3 select-none";
-        const circle = document.createElement("span");
-        circle.className = "block w-4 h-4 rounded-full border-2 border-black";
-        circle.setAttribute("aria-hidden", "true");
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className =
-          "text-black underline hover:text-gray-700 focus:outline-none";
-        btn.textContent = blogs[slug].title;
-        btn.dataset.slug = slug;
-        btn.addEventListener("click", () => {
-          openBlog(slug);
-        });
-        li.appendChild(circle);
-        li.appendChild(btn);
-        recentBlogsList.appendChild(li);
-      });
-    }
-
-    // Open blog post content in main area
-    function openBlog(slug) {
-      if (blogs[slug]) {
-        contentArea.innerHTML = blogs[slug].content;
-      } else {
-        contentArea.innerHTML = `<p>Blog post not found.</p>`;
-      }
-    }
-
-    // Load page content by name
-    function loadPage(page) {
-      if (page === "containts") {
-        contentArea.innerHTML = pages.containts();
-        // Add event listeners to blog links in containts page
-        const blogButtons = contentArea.querySelectorAll("button[data-slug]");
-        blogButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            openBlog(btn.dataset.slug);
-          });
-        });
-      } else if (pages[page]) {
-        contentArea.innerHTML = pages[page];
-      } else {
-        contentArea.innerHTML = `<p>Page not found.</p>`;
-      }
-    }
-
-    // Navigation buttons event listeners
-    document.getElementById("homeBtn").addEventListener("click", () => {
-      loadPage("home");
-    });
-    document.getElementById("containtsBtn").addEventListener("click", () => {
-      loadPage("containts");
-    });
-    document.getElementById("settingsBtn").addEventListener("click", () => {
-      loadPage("settings");
-    });
-    document.getElementById("aboutBtn").addEventListener("click", () => {
-      loadPage("about");
-    });
-
-    // Initial load
-    renderRecentBlogs();
-    loadPage("home");
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

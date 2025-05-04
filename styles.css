@@ -1,0 +1,268 @@
+body {
+  font-family: "Indie Flower", cursive;
+}
+
+button:focus {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+.code-snippet {
+  background-color: #f8f8f8;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-family: monospace;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  position: relative;
+}
+
+.code-snippet pre {
+  margin: 0;
+  padding: 0;
+}
+
+.code-snippet code {
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.code-snippet-copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #f8f8f8;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.code-snippet-copy:hover {
+  background-color: #e8e8e8;
+}
+
+.code-snippet-copy:active {
+  background-color: #d8d8d8;
+}
+
+.code-snippet-copy.copied {
+  background-color: #666;
+  color: white;
+  border-color: #666;
+}
+
+/* Blog image styles */
+.blog-image {
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.blog-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.blog-image-caption {
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  border-top: 1px solid #ddd;
+}
+
+/* Dark mode styles */
+.dark .code-snippet {
+  background-color: #1a1a1a;
+  color: #f8f8f8;
+}
+
+.dark .code-snippet-copy {
+  background-color: #1a1a1a;
+  color: #f8f8f8;
+  border-color: #f8f8f8;
+}
+
+.dark .code-snippet-copy:hover {
+  background-color: #2a2a2a;
+}
+
+.dark .code-snippet-copy:active {
+  background-color: #3a3a3a;
+}
+
+.dark .code-snippet-copy.copied {
+  background-color: #666;
+  color: white;
+  border-color: #666;
+}
+
+.dark .blog-image-caption {
+  color: #999;
+  border-top-color: #333;
+}
+
+/* Additional styles can be added here */
+
+/* Main content area styles */
+main {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+#contentArea {
+  min-width: 0; /* Prevents content from overflowing */
+  width: 100%;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  aside {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+
+  #contentArea {
+    width: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+    max-width: 95%;
+  }
+}
+
+/* Blog grid responsive adjustments */
+@media (max-width: 768px) {
+  #blogGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Code snippet responsive adjustments */
+@media (max-width: 768px) {
+  .code-snippet {
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+  }
+
+  .code-snippet pre {
+    font-size: 0.85rem;
+  }
+}
+
+/* Navigation menu styles */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: flex;
+  align-items: center;
+}
+
+nav li:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+nav button {
+  white-space: nowrap;
+  padding: 0.25rem 0.5rem;
+}
+
+nav form {
+  flex: 1;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+/* Responsive navigation adjustments */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem;
+  }
+
+  nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+  }
+
+  nav li {
+    width: auto;
+    margin: 0;
+  }
+
+  nav li:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+
+  nav button {
+    width: auto;
+    text-align: left;
+    padding: 0.5rem;
+  }
+
+  nav form {
+    width: 100%;
+    max-width: none;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Footer styles */
+footer {
+  margin-bottom: 2rem;
+}
+
+footer div {
+  background-color: white;
+}
+
+.dark footer div {
+  background-color: #1a1a1a;
+}
+
+/* Responsive footer adjustments */
+@media (max-width: 768px) {
+  footer {
+    padding: 0 1rem;
+  }
+  
+  footer div {
+    padding: 0.75rem;
+  }
+} 
