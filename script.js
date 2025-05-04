@@ -100,7 +100,7 @@ function initializeCodeSnippetCopy() {
 // Function to load page content
 async function loadPage(pageName) {
   try {
-    const response = await fetch(`/pages/${pageName}.html`);
+    const response = await fetch(`pages/${pageName}.html`);
     if (!response.ok) throw new Error('Page not found');
     const content = await response.text();
     contentArea.innerHTML = content;
@@ -123,7 +123,7 @@ async function loadPage(pageName) {
 async function loadBlog(slug) {
   try {
     console.log('Loading blog:', slug);
-    const response = await fetch(`/blog/${slug}.html`);
+    const response = await fetch(`blog/${slug}.html`);
     if (!response.ok) throw new Error('Blog not found');
     const content = await response.text();
     contentArea.innerHTML = content;
@@ -138,7 +138,7 @@ async function loadBlog(slug) {
 async function loadBlogs() {
   try {
     console.log('Fetching blog index...');
-    const response = await fetch('/blog/index.json');
+    const response = await fetch('blog/index.json');
     if (!response.ok) throw new Error('Blog index not found');
     const data = await response.json();
     console.log('Raw blog data:', data);
@@ -180,7 +180,7 @@ async function renderBlogList(searchQuery = '') {
     
     // Create thumbnail image
     const thumbnail = document.createElement('img');
-    thumbnail.src = '/blog/images/shutterstock_1049564585-960.jpg';
+    thumbnail.src = 'blog/images/shutterstock_1049564585-960.jpg';
     thumbnail.alt = blog.title;
     thumbnail.className = 'w-full h-full object-cover';
     thumbnail.onerror = function() {
