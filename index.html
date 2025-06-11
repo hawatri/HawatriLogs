@@ -1,75 +1,128 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hawatri - Digital Diary & Blog</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hawatri</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower:wght@400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="styles.css">
-  <meta name="description" content="Hawatri - A quiet corner of the internet where thoughts take shape, stories breathe, and ideas find a home.">
 </head>
-<body class="font-indie-flower bg-white text-black transition-all duration-300 ease-in-out">
-  <!-- Header -->
-  <header class="flex justify-center mb-6 px-4">
-    <div class="hawatri-logo">
+<body class="bg-white p-8 min-h-screen flex flex-col items-center">
+  <header class="mb-6">
+    <div
+      class="border-2 rounded-lg border-black px-8 py-3 text-center text-2xl select-none"
+      style="width: 240px"
+    >
       HAWATRI
     </div>
   </header>
 
-  <!-- Navigation -->
-  <nav class="hawatri-nav">
-    <div class="nav-content">
-      <ul class="nav-menu">
-        <li><button class="nav-btn active" data-page="home">HOME</button></li>
-        <li class="nav-separator">|</li>
-        <li><button class="nav-btn" data-page="contents">CONTENTS</button></li>
-        <li class="nav-separator">|</li>
-        <li><button class="nav-btn" data-page="settings">SETTINGS</button></li>
-        <li class="nav-separator">|</li>
-        <li><button class="nav-btn" data-page="about">ABOUT</button></li>
-      </ul>
-      
-      <form class="search-form" role="search">
-        <input 
-          type="text" 
-          placeholder="Search..." 
-          class="search-input"
-          aria-label="Search content"
+  <nav
+    class="flex items-center border-2 border-black rounded-lg px-6 py-3 w-full max-w-[1400px]"
+    style="min-height: 56px"
+  >
+    <ul class="flex flex-wrap items-center gap-2 text-xl select-none">
+      <li>
+        <button
+          id="homeBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="Home"
+          type="button"
         >
-        <button type="submit" class="search-btn">search</button>
-      </form>
-    </div>
+          HOME
+        </button>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <button
+          id="contentsBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="Contents"
+          type="button"
+        >
+          CONTENTS
+        </button>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <button
+          id="settingsBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="Settings"
+          type="button"
+        >
+          SETTINGS
+        </button>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <button
+          id="aboutBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="About"
+          type="button"
+        >
+          ABOUT
+        </button>
+      </li>
+    </ul>
+    <form
+      class="ml-auto flex border-2 border-black rounded-lg overflow-hidden"
+      style="min-width: 200px; max-width: 280px; min-height: 40px"
+      onsubmit="event.preventDefault()"
+    >
+      <input
+        type="text"
+        aria-label="Search"
+        class="outline-none px-3 text-base font-normal font-[Indie Flower] text-black w-full"
+        style="font-family: 'Indie Flower', cursive"
+      />
+      <button
+        type="submit"
+        class="border-l-2 border-black px-5 text-base font-[Indie Flower] font-normal select-none whitespace-nowrap"
+        style="font-family: 'Indie Flower', cursive"
+      >
+        search
+      </button>
+    </form>
   </nav>
 
-  <!-- Main Content -->
-  <main class="main-layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2 class="sidebar-title">RECENT CONTENTS</h2>
-      <ul class="recent-list" id="recentList">
-        <!-- Recent content will be populated by JavaScript -->
+  <main
+    class="flex mt-6 w-full max-w-[1400px] mx-auto space-x-6 flex-grow"
+    style="font-size: 18px; line-height: 1.4"
+  >
+    <aside
+      class="border-2 border-black rounded-lg p-6 w-[280px] flex-shrink-0"
+      style="min-height: 600px"
+    >
+      <h2 class="font-[Indie Flower] font-normal text-2xl mb-4 select-none">
+        RECENT CONTENTS
+      </h2>
+      <ul id="recentBlogsList" class="space-y-3">
+        <!-- Blog items inserted by JS -->
       </ul>
     </aside>
 
-    <!-- Content Area -->
-    <section class="content-area" id="contentArea">
-      <!-- Dynamic content will be loaded here -->
+    <section
+      id="contentArea"
+      class="border-2 border-black rounded-lg p-8 flex-1 overflow-auto min-w-0"
+      style="min-height: 600px"
+    >
+      <!-- Content inserted by JS -->
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="hawatri-footer">
-    <div class="footer-content">
-      <p>© HAWATRI 2025</p>
+  <footer class="mt-6 w-full max-w-[1400px] mx-auto">
+    <div class="border-2 border-black rounded-lg p-4 text-center">
+      <p class="font-[Indie Flower] text-lg">
+        © HAWATRI 2025
+      </p>
     </div>
   </footer>
 
-  <!-- Loading Indicator -->
-  <div class="loading-indicator" id="loadingIndicator">
-    <div class="loading-spinner"></div>
-  </div>
-
-  <script src="app.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
