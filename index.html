@@ -1,0 +1,128 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hawatri</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white p-8 min-h-screen flex flex-col items-center">
+  <header class="mb-6">
+    <div
+      class="border-2 rounded-lg border-black px-8 py-3 text-center text-2xl select-none"
+      style="width: 240px"
+    >
+      HAWATRI
+    </div>
+  </header>
+
+  <nav
+    class="flex items-center border-2 border-black rounded-lg px-6 py-3 w-full max-w-[1400px]"
+    style="min-height: 56px"
+  >
+    <ul class="flex flex-wrap items-center gap-2 text-xl select-none">
+      <li>
+        <button
+          id="homeBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="Home"
+          type="button"
+        >
+          HOME
+        </button>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <button
+          id="contentsBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="Contents"
+          type="button"
+        >
+          CONTENTS
+        </button>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <button
+          id="settingsBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="Settings"
+          type="button"
+        >
+          SETTINGS
+        </button>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <button
+          id="aboutBtn"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+          aria-label="About"
+          type="button"
+        >
+          ABOUT
+        </button>
+      </li>
+    </ul>
+    <form
+      class="ml-auto flex border-2 border-black rounded-lg overflow-hidden"
+      style="min-width: 200px; max-width: 280px; min-height: 40px"
+      onsubmit="event.preventDefault()"
+    >
+      <input
+        type="text"
+        aria-label="Search"
+        class="outline-none px-3 text-base font-normal font-[Indie Flower] text-black w-full"
+        style="font-family: 'Indie Flower', cursive"
+      />
+      <button
+        type="submit"
+        class="border-l-2 border-black px-5 text-base font-[Indie Flower] font-normal select-none whitespace-nowrap"
+        style="font-family: 'Indie Flower', cursive"
+      >
+        search
+      </button>
+    </form>
+  </nav>
+
+  <main
+    class="flex mt-6 w-full max-w-[1400px] mx-auto space-x-6 flex-grow"
+    style="font-size: 18px; line-height: 1.4"
+  >
+    <aside
+      class="border-2 border-black rounded-lg p-6 w-[280px] flex-shrink-0"
+      style="min-height: 600px"
+    >
+      <h2 class="font-[Indie Flower] font-normal text-2xl mb-4 select-none">
+        RECENT CONTENTS
+      </h2>
+      <ul id="recentBlogsList" class="space-y-3">
+        <!-- Blog items inserted by JS -->
+      </ul>
+    </aside>
+
+    <section
+      id="contentArea"
+      class="border-2 border-black rounded-lg p-8 flex-1 overflow-auto min-w-0"
+      style="min-height: 600px"
+    >
+      <!-- Content inserted by JS -->
+    </section>
+  </main>
+
+  <footer class="mt-6 w-full max-w-[1400px] mx-auto">
+    <div class="border-2 border-black rounded-lg p-4 text-center">
+      <p class="font-[Indie Flower] text-lg">
+        © HAWATRI 2025
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{
+  "blogs": [
+    {
+      "slug": "code-snippet-example",
+      "title": "How to Use Code Snippets in Your Blog",
+      "date": "2024-05-05",
+      "excerpt": "Learn how to include code snippets in your blog posts with proper formatting and styling.",
+      "thumbnail": "/blog/images/shutterstock_1049564585-960.jpg"
+    },
+    {
+      "slug": "test-for-last",
+      "title": "Test for Last",
+      "date": "2024-05-05",
+      "excerpt": "A test blog post to demonstrate how to add new blogs to Hawatri.",
+      "thumbnail": "/blog/images/shutterstock_1049564585-960.jpg"
+    },
+    {
+      "slug": "yet-another-example-blog",
+      "title": "Yet Another Example Blog",
+      "date": "2024-05-05",
+      "excerpt": "A demonstration of how to add new blog posts to Hawatri.",
+      "thumbnail": "/blog/images/shutterstock_1049564585-960.jpg"
+    },
+    {
+      "slug": "how-to-start-writing-daily",
+      "title": "How to Start Writing Daily",
+      "date": "2024-05-04",
+      "excerpt": "Starting a daily writing habit can be challenging but rewarding.",
+      "thumbnail": "/blog/images/shutterstock_1049564585-960.jpg"
+    },
+    {
+      "slug": "example-blog-2",
+      "title": "Example Blog Post 2",
+      "date": "2024-05-03",
+      "excerpt": "This is an example blog post content for demonstration purposes.",
+      "thumbnail": "/blog/images/shutterstock_1049564585-960.jpg"
+    },
+    {
+      "slug": "example-blog-3",
+      "title": "Example Blog Post 3",
+      "date": "2024-05-02",
+      "excerpt": "Another example blog post to show multiple entries.",
+      "thumbnail": "/blog/images/shutterstock_1049564585-960.jpg"
+    },
+    {
+      "slug": "example-blog-4",
+      "title": "Example Blog Post 4",
+      "date": "2024-05-02",
+      "excerpt": "Yet Another example blog post to show multiple entries.",
+      "thumbnail": "/blog/images/shutterstock_1049564585-960.jpg"
+    },
+    {
+      "slug": "how-to-add-images",
+      "title": "How to Add Images to Your Blog",
+      "date": "2024-03-20",
+      "excerpt": "Learn how to add and style images in your blog posts with captions and responsive layouts.",
+      "thumbnail": "/blog/images/shutterstock_1049564585-960.jpg"
+    }
+  ]
+} 
