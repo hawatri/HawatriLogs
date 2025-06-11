@@ -8,39 +8,59 @@ let blogs = [];
 function initializeDarkMode() {
   const darkModeYes = document.getElementById('darkModeYes');
   const darkModeNo = document.getElementById('darkModeNo');
-  if (!darkModeYes || !darkModeNo) return;
-
-  // Check for saved dark mode preference
-  const isDarkMode = localStorage.getItem('darkMode') === 'true';
-  if (isDarkMode) {
-    darkModeYes.checked = true;
-  } else {
-    darkModeNo.checked = true;
-  }
+  
+  // Check for saved dark mode preference or default to light mode
+  const savedDarkMode = localStorage.getItem('darkMode');
+  const isDarkMode = savedDarkMode === 'true';
+  
+  // Apply initial dark mode state
   updateDarkMode(isDarkMode);
+  
+  // Set radio button states
+  if (darkModeYes && darkModeNo) {
+    if (isDarkMode) {
+      darkModeYes.checked = true;
+      darkModeNo.checked = false;
+    } else {
+      darkModeYes.checked = false;
+      darkModeNo.checked = true;
+    }
 
-  // Add event listeners for dark mode radio buttons
-  darkModeYes.addEventListener('change', () => {
-    localStorage.setItem('darkMode', 'true');
-    updateDarkMode(true);
-  });
+    // Add event listeners for dark mode radio buttons
+    darkModeYes.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        localStorage.setItem('darkMode', 'true');
+        updateDarkMode(true);
+      }
+    });
 
-  darkModeNo.addEventListener('change', () => {
-    localStorage.setItem('darkMode', 'false');
-    updateDarkMode(false);
-  });
+    darkModeNo.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        localStorage.setItem('darkMode', 'false');
+        updateDarkMode(false);
+      }
+    });
+  }
 }
 
 function updateDarkMode(isDark) {
+  const html = document.documentElement;
+  const body = document.body;
+  
   if (isDark) {
-    document.documentElement.classList.add('dark');
-    document.body.classList.add('bg-gray-900', 'text-white');
-    document.body.classList.remove('bg-white', 'text-black');
+    html.classList.add('dark');
+    body.classList.add('dark');
   } else {
-    document.documentElement.classList.remove('dark');
-    document.body.classList.remove('bg-gray-900', 'text-white');
-    document.body.classList.add('bg-white', 'text-black');
+    html.classList.remove('dark');
+    body.classList.remove('dark');
   }
+  
+  // Force a repaint to ensure all styles are applied
+  setTimeout(() => {
+    document.body.style.display = 'none';
+    document.body.offsetHeight; // Trigger reflow
+    document.body.style.display = '';
+  }, 0);
 }
 
 // Function to update active page button styling
@@ -69,6 +89,12 @@ function filterBlogs(query) {
 // Function to handle code snippet copying
 function initializeCodeSnippetCopy() {
   document.querySelectorAll('.code-snippet').forEach(snippet => {
+    // Remove existing copy button if present
+    const existingButton = snippet.querySelector('.code-snippet-copy');
+    if (existingButton) {
+      existingButton.remove();
+    }
+    
     const copyButton = document.createElement('button');
     copyButton.className = 'code-snippet-copy';
     copyButton.textContent = 'Copy';
@@ -110,9 +136,12 @@ async function loadPage(pageName) {
     if (pageName === 'contents') {
       await renderBlogList();
     } else if (pageName === 'settings') {
-      initializeDarkMode();
+      // Wait for DOM to update before initializing dark mode
+      setTimeout(() => {
+        initializeDarkMode();
+      }, 100);
     }
-    initializeCodeSnippetCopy(); // Initialize copy buttons for code snippets
+    initializeCodeSnippetCopy();
   } catch (error) {
     console.error('Error loading page:', error);
     contentArea.innerHTML = '<p>Error loading page content.</p>';
@@ -127,7 +156,12 @@ async function loadBlog(slug) {
     if (!response.ok) throw new Error('Blog not found');
     const content = await response.text();
     contentArea.innerHTML = content;
-    initializeCodeSnippetCopy(); // Initialize copy buttons for code snippets
+    currentPage = 'blog';
+    // Clear active button styling when viewing a blog
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.classList.remove('border-2', 'border-black', 'rounded-lg', 'px-4', 'py-1');
+    });
+    initializeCodeSnippetCopy();
   } catch (error) {
     console.error('Error loading blog:', error);
     contentArea.innerHTML = '<p>Error loading blog content.</p>';
@@ -290,7 +324,11 @@ document.getElementById("aboutBtn").addEventListener("click", () => loadPage("ab
 // Initialize the page
 renderRecentBlogs();
 loadPage("home");
-initializeDarkMode(); // Initialize dark mode on page load
+
+// Initialize dark mode on page load
+const savedDarkMode = localStorage.getItem('darkMode');
+const isDarkMode = savedDarkMode === 'true';
+updateDarkMode(isDarkMode);
 
 // Refresh recent blogs every 30 seconds to catch new additions
-setInterval(renderRecentBlogs, 30000); 
+setInterval(renderRecentBlogs, 30000);
