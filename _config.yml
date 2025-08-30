@@ -1,9 +1,9 @@
-# Site settings
+# Site settings for GitHub Pages
 title: Hawatri
 description: A personal blog and content platform
 author: Hawatri
-url: "https://hawatri.com" # Change this to your actual domain
-baseurl: "" # Leave empty for root domain, or set to "/repository-name" for GitHub Pages
+url: "https://fardi.github.io"
+baseurl: "/HawatriLogs"
 
 # Build settings
 markdown: kramdown
@@ -29,16 +29,10 @@ defaults:
 
 # Exclude from processing
 exclude:
-  - node_modules
-  - package.json
-  - package-lock.json
-  - script.js
-  - pages/
-  - blog/*.html
-  - blog/index.json
   - _site
   - .jekyll-cache
   - .jekyll-metadata
+  - README.md
 
 # Include in processing
 include:
@@ -46,4 +40,4 @@ include:
   - _layouts
   - _includes
   - assets
-  - images
+  - styles.css
