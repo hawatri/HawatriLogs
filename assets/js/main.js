@@ -126,8 +126,13 @@ function performSearch(query = null) {
     let visibleCount = 0;
     
     posts.forEach(post => {
-      const title = post.querySelector('h3').textContent.toLowerCase();
-      const excerpt = post.querySelector('p:last-of-type').textContent.toLowerCase();
+      const titleElement = post.querySelector('h3 a');
+      const excerptElement = post.querySelector('.text-gray-700');
+      
+      if (!titleElement || !excerptElement) return;
+      
+      const title = titleElement.textContent.toLowerCase();
+      const excerpt = excerptElement.textContent.toLowerCase();
       const categories = Array.from(post.querySelectorAll('.bg-gray-200')).map(cat => cat.textContent.toLowerCase());
       
       const matches = searchQuery === '' || 
@@ -166,12 +171,15 @@ function performSearch(query = null) {
   if (recentPostsList && searchQuery !== '') {
     const recentPosts = recentPostsList.querySelectorAll('li');
     recentPosts.forEach(post => {
-      const title = post.querySelector('a').textContent.toLowerCase();
-      if (title.includes(searchQuery)) {
-        post.style.display = 'flex';
-        post.style.backgroundColor = 'rgba(59, 130, 246, 0.1)'; // Highlight matching posts
-      } else {
-        post.style.display = 'none';
+      const linkElement = post.querySelector('a');
+      if (linkElement) {
+        const title = linkElement.textContent.toLowerCase();
+        if (title.includes(searchQuery)) {
+          post.style.display = 'flex';
+          post.style.backgroundColor = 'rgba(59, 130, 246, 0.1)'; // Highlight matching posts
+        } else {
+          post.style.display = 'none';
+        }
       }
     });
   } else if (recentPostsList) {

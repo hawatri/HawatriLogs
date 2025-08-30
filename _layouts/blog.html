@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<div class="p-8">
+<div>
   <h1 class="font-[Indie Flower] text-3xl mb-6">All Posts</h1>
   
   <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -12,7 +12,7 @@ layout: default
       <div class="h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
         {% if post.thumbnail %}
           <img 
-            src="{{ post.thumbnail | absolute_url }}" 
+            src="{{ post.thumbnail | relative_url }}" 
             alt="{{ post.title }}"
             class="w-full h-full object-cover"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -84,4 +84,3 @@ layout: default
     <p class="text-gray-600 text-lg">No posts yet. Start writing!</p>
   </div>
   {% endif %}
-</div>

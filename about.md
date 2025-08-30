@@ -3,7 +3,7 @@ layout: page
 title: About
 ---
 
-<div class="max-w-3xl mx-auto">
+<div class="max-w-3xl mx-auto p-8">
   <h1 class="font-[Indie Flower] text-3xl mb-6">About Hawatri</h1>
   
   <div class="prose max-w-none">
@@ -33,4 +33,3 @@ title: About
       Thank you for being part of this journey.
     </p>
   </div>
-</div>

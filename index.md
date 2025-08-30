@@ -3,7 +3,7 @@ layout: page
 title: Home
 ---
 
-<div class="text-center">
+<div class="text-center p-8">
   <h1 class="font-[Indie Flower] text-4xl mb-6">Welcome to Hawatri</h1>
   <p class="text-xl mb-8">A place for thoughts, ideas, and daily reflections.</p>
   
@@ -31,4 +31,3 @@ title: Home
       </a>
     </div>
   </div>
-</div>

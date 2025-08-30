@@ -3,7 +3,7 @@ layout: page
 title: Settings
 ---
 
-<div class="max-w-2xl mx-auto">
+<div class="max-w-2xl mx-auto p-8">
   <h1 class="font-[Indie Flower] text-3xl mb-6">Settings</h1>
   
   <div class="space-y-6">
@@ -83,4 +83,3 @@ title: Settings
       </div>
     </div>
   </div>
-</div>
