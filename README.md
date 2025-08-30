@@ -29,7 +29,7 @@ A clean, minimal personal blog built with Jekyll and hosted on GitHub Pages.
 
 1. **Push to GitHub**
 2. **Enable GitHub Pages** in repository settings
-3. **Your site will be available at:** `https://fardi.github.io/HawatriLogs`
+3. **Your site will be available at:** `https://hawatri.github.io/HawatriLogs`
 
 ## Writing Posts
 
