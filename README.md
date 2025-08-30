@@ -1,4 +1,4 @@
-# Hawatri - Personal Blog
+# HawatriLogs - Personal Blog
 
 A clean, minimal personal blog built with Jekyll and hosted on GitHub Pages.
 

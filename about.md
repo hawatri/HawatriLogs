@@ -4,11 +4,11 @@ title: About
 ---
 
 <div class="max-w-3xl mx-auto p-8">
-  <h1 class="font-[Indie Flower] text-3xl mb-6">About Hawatri</h1>
+  <h1 class="font-[Indie Flower] text-3xl mb-6">About HawatriLogs</h1>
   
   <div class="prose max-w-none">
     <p class="mb-4">
-      Hawatri is a personal blog and content platform created to share thoughts, experiences, and knowledge with the world.
+      HawatriLogs is a personal blog and content platform created to share thoughts, experiences, and knowledge with the world.
     </p>
     
     <h2 class="font-[Indie Flower] text-2xl mt-8 mb-4">Our Mission</h2>
