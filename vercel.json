@@ -1,0 +1,10 @@
+{
+  "outputDirectory": "_site",
+  "framework": null,
+  "builds": [
+    {
+      "src": "**/*",
+      "use": "@vercel/static"
+    }
+  ]
+}
