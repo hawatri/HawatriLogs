@@ -4,7 +4,7 @@ title: Home
 ---
 
 <div class="text-center p-8">
-  <h1 class="font-[Indie Flower] text-4xl mb-6">Welcome to Hawatri</h1>
+  <h1 class="font-[Indie Flower] text-4xl mb-6">Welcome to Hawatri Logs</h1>
   <p class="text-xl mb-8">A place for thoughts, ideas, and daily reflections.</p>
   
   <div class="max-w-2xl mx-auto">

@@ -59,4 +59,4 @@ Your content here...
 
 ---
 
-**Welcome to Hawatri!** 🚀
+**Welcome to Hawatri Logs!** 🚀
