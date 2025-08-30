@@ -8,14 +8,24 @@ layout: default
   <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for post in site.posts %}
     <div class="border-2 border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <!-- Thumbnail container -->
-      <div class="h-48 overflow-hidden bg-gray-100">
-        <img 
-          src="{{ '/blog/images/shutterstock_1049564585-960.jpg' | absolute_url }}" 
-          alt="{{ post.title }}"
-          class="w-full h-full object-cover"
-          onerror="this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzQvLy8vLzQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ3/2wBDAR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';"
-        />
+      <!-- Thumbnail container with fallback -->
+      <div class="h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+        {% if post.thumbnail %}
+          <img 
+            src="{{ post.thumbnail | absolute_url }}" 
+            alt="{{ post.title }}"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div class="hidden w-full h-full bg-gray-200 items-center justify-center">
+            <span class="text-gray-500 text-lg font-[Indie Flower]">{{ post.title | truncate: 20 }}</span>
+          </div>
+        {% else %}
+          <!-- Default placeholder -->
+          <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+            <span class="text-gray-600 text-lg font-[Indie Flower] text-center px-4">{{ post.title | truncate: 30 }}</span>
+          </div>
+        {% endif %}
       </div>
       
       <!-- Content container -->
@@ -27,17 +37,32 @@ layout: default
           </a>
         </h3>
         
-        <!-- Date -->
+        <!-- Date and Reading Time -->
         <p class="text-sm text-gray-600 mb-2">
           {{ post.date | date: "%B %d, %Y" }}
+          {% if post.content %}
+            • {% assign words = post.content | number_of_words %}
+            {% if words < 360 %}1 min{% else %}{{ words | divided_by: 180 }} min{% endif %} read
+          {% endif %}
         </p>
+        
+        <!-- Categories -->
+        {% if post.categories.size > 0 %}
+        <div class="mb-2">
+          {% for category in post.categories limit:2 %}
+            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-1">
+              {{ category }}
+            </span>
+          {% endfor %}
+        </div>
+        {% endif %}
         
         <!-- Excerpt -->
         <p class="text-gray-700 mb-4">
           {% if post.excerpt %}
-            {{ post.excerpt }}
+            {{ post.excerpt | strip_html | truncate: 100 }}
           {% else %}
-            {{ post.content | strip_html | truncatewords: 30 }}
+            {{ post.content | strip_html | truncate: 100 }}
           {% endif %}
         </p>
         
@@ -52,4 +77,11 @@ layout: default
     </div>
     {% endfor %}
   </div>
+  
+  <!-- No posts message -->
+  {% if site.posts.size == 0 %}
+  <div class="text-center py-8">
+    <p class="text-gray-600 text-lg">No posts yet. Start writing!</p>
+  </div>
+  {% endif %}
 </div>

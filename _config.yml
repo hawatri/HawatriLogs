@@ -1,20 +1,37 @@
 # Site settings for GitHub Pages
 title: Hawatri
-description: A personal blog and content platform
+description: A personal blog and content platform where thoughts, experiences, and knowledge come together
 author: Hawatri
+email: your-email@example.com
 url: "https://hawatri.github.io"
 baseurl: "/HawatriLogs"
+
+# Social media (add your profiles)
+social:
+  twitter: your_twitter
+  github: hawatri
+  linkedin: your_linkedin
 
 # Build settings
 markdown: kramdown
 highlighter: rouge
 permalink: /blog/:title/
 
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
 # Collections
 collections:
   posts:
     output: true
     permalink: /blog/:title/
+
+# Pagination (if you add jekyll-paginate plugin)
+paginate: 12
+paginate_path: "/blog/page:num/"
 
 # Defaults
 defaults:
@@ -25,7 +42,21 @@ defaults:
       layout: "post"
       author: "Hawatri"
       comments: false
-      share: false
+      share: true
+      show_date: true
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Reading settings
+reading_time: true
+words_per_minute: 180
+
+# SEO settings
+lang: en_US
+# timezone: Asia/Kolkata  # Commented out to avoid Windows tzinfo issues
 
 # Exclude from processing
 exclude:
@@ -33,6 +64,11 @@ exclude:
   - .jekyll-cache
   - .jekyll-metadata
   - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package.json
+  - package-lock.json
 
 # Include in processing
 include:
@@ -41,3 +77,25 @@ include:
   - _includes
   - assets
   - styles.css
+
+# Sass settings
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Markdown settings
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+
+# Feed settings
+feed:
+  posts_limit: 20
+  excerpt_only: true
+
+# Sitemap settings
+sitemap:
+  filename: "/sitemap.xml"

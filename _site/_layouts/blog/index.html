@@ -4,12 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hawatri</title>
+  <meta name="description" content="A personal blog and content platform where thoughts, experiences, and knowledge come together">
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="http://localhost:4000/HawatriLogs/styles.css">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Hawatri | A personal blog and content platform where thoughts, experiences, and knowledge come together</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Hawatri" />
+<meta name="author" content="Hawatri" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A personal blog and content platform where thoughts, experiences, and knowledge come together" />
+<meta property="og:description" content="A personal blog and content platform where thoughts, experiences, and knowledge come together" />
+<link rel="canonical" href="http://localhost:4000/HawatriLogs/_layouts/blog/" />
+<meta property="og:url" content="http://localhost:4000/HawatriLogs/_layouts/blog/" />
+<meta property="og:site_name" content="Hawatri" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Hawatri" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"Hawatri"},"description":"A personal blog and content platform where thoughts, experiences, and knowledge come together","headline":"Hawatri","url":"http://localhost:4000/HawatriLogs/_layouts/blog/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/HawatriLogs/feed.xml" title="Hawatri" />
 </head>
 <body class="bg-white p-8 min-h-screen flex flex-col items-center">
   <header class="mb-6">
@@ -17,7 +37,7 @@
       class="border-2 rounded-lg border-black px-8 py-3 text-center text-2xl select-none"
       style="width: 240px"
     >
-      HAWATRI
+      <a href="http://localhost:4000/HawatriLogs/" class="text-current no-underline">HAWATRI</a>
     </div>
   </header>
 
@@ -39,7 +59,7 @@
       <li>
         <a
           href="http://localhost:4000/HawatriLogs/blog/"
-          class="focus:outline-none hover:bg-gray-100 rounded px-2 border-2 border-black rounded-lg px-4 py-1"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 "
           aria-label="Contents"
         >
           CONTENTS
@@ -69,7 +89,7 @@
     <form
       class="ml-auto flex border-2 border-black rounded-lg overflow-hidden"
       style="min-width: 200px; max-width: 280px; min-height: 40px"
-      onsubmit="event.preventDefault()"
+      onsubmit="event.preventDefault(); performSearch();"
     >
       <input
         type="text"
@@ -148,14 +168,19 @@
   <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     
     <div class="border-2 border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <!-- Thumbnail container -->
-      <div class="h-48 overflow-hidden bg-gray-100">
-        <img 
-          src="http://localhost:4000/HawatriLogs/blog/images/shutterstock_1049564585-960.jpg" 
-          alt="How to Use Code Snippets in Your Blog"
-          class="w-full h-full object-cover"
-          onerror="this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzQvLy8vLzQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ3/2wBDAR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';"
-        />
+      <!-- Thumbnail container with fallback -->
+      <div class="h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+        
+          <img 
+            src="http://localhost:4000/HawatriLogs/blog/images/shutterstock_1049564585-960.jpg" 
+            alt="How to Use Code Snippets in Your Blog"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div class="hidden w-full h-full bg-gray-200 items-center justify-center">
+            <span class="text-gray-500 text-lg font-[Indie Flower]">How to Use Code S...</span>
+          </div>
+        
       </div>
       
       <!-- Content container -->
@@ -167,10 +192,29 @@
           </a>
         </h3>
         
-        <!-- Date -->
+        <!-- Date and Reading Time -->
         <p class="text-sm text-gray-600 mb-2">
           May 05, 2024
+          
+            • 
+            2 min read
+          
         </p>
+        
+        <!-- Categories -->
+        
+        <div class="mb-2">
+          
+            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-1">
+              tutorial
+            </span>
+          
+            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-1">
+              coding
+            </span>
+          
+        </div>
+        
         
         <!-- Excerpt -->
         <p class="text-gray-700 mb-4">
@@ -190,14 +234,19 @@
     </div>
     
     <div class="border-2 border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <!-- Thumbnail container -->
-      <div class="h-48 overflow-hidden bg-gray-100">
-        <img 
-          src="http://localhost:4000/HawatriLogs/blog/images/shutterstock_1049564585-960.jpg" 
-          alt="How to Start Writing Daily"
-          class="w-full h-full object-cover"
-          onerror="this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzQvLy8vLzQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ3/2wBDAR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';"
-        />
+      <!-- Thumbnail container with fallback -->
+      <div class="h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+        
+          <img 
+            src="http://localhost:4000/HawatriLogs/blog/images/shutterstock_1049564585-960.jpg" 
+            alt="How to Start Writing Daily"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div class="hidden w-full h-full bg-gray-200 items-center justify-center">
+            <span class="text-gray-500 text-lg font-[Indie Flower]">How to Start Writ...</span>
+          </div>
+        
       </div>
       
       <!-- Content container -->
@@ -209,10 +258,29 @@
           </a>
         </h3>
         
-        <!-- Date -->
+        <!-- Date and Reading Time -->
         <p class="text-sm text-gray-600 mb-2">
           May 04, 2024
+          
+            • 
+            1 min read
+          
         </p>
+        
+        <!-- Categories -->
+        
+        <div class="mb-2">
+          
+            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-1">
+              writing
+            </span>
+          
+            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-1">
+              habits
+            </span>
+          
+        </div>
+        
         
         <!-- Excerpt -->
         <p class="text-gray-700 mb-4">
@@ -232,14 +300,19 @@
     </div>
     
     <div class="border-2 border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <!-- Thumbnail container -->
-      <div class="h-48 overflow-hidden bg-gray-100">
-        <img 
-          src="http://localhost:4000/HawatriLogs/blog/images/shutterstock_1049564585-960.jpg" 
-          alt="How to Add Images to Your Blog"
-          class="w-full h-full object-cover"
-          onerror="this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzQvLy8vLzQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ3/2wBDAR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';"
-        />
+      <!-- Thumbnail container with fallback -->
+      <div class="h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+        
+          <img 
+            src="http://localhost:4000/HawatriLogs/blog/images/shutterstock_1049564585-960.jpg" 
+            alt="How to Add Images to Your Blog"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div class="hidden w-full h-full bg-gray-200 items-center justify-center">
+            <span class="text-gray-500 text-lg font-[Indie Flower]">How to Add Images...</span>
+          </div>
+        
       </div>
       
       <!-- Content container -->
@@ -251,10 +324,29 @@
           </a>
         </h3>
         
-        <!-- Date -->
+        <!-- Date and Reading Time -->
         <p class="text-sm text-gray-600 mb-2">
           March 20, 2024
+          
+            • 
+            1 min read
+          
         </p>
+        
+        <!-- Categories -->
+        
+        <div class="mb-2">
+          
+            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-1">
+              tutorial
+            </span>
+          
+            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-1">
+              blogging
+            </span>
+          
+        </div>
+        
         
         <!-- Excerpt -->
         <p class="text-gray-700 mb-4">
@@ -274,8 +366,10 @@
     </div>
     
   </div>
+  
+  <!-- No posts message -->
+  
 </div>
-
     </section>
   </main>
 

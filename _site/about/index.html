@@ -4,12 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About - Hawatri</title>
+  <meta name="description" content="A personal blog and content platform where thoughts, experiences, and knowledge come together">
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="http://localhost:4000/HawatriLogs/styles.css">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>About | Hawatri</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="About" />
+<meta name="author" content="Hawatri" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A personal blog and content platform where thoughts, experiences, and knowledge come together" />
+<meta property="og:description" content="A personal blog and content platform where thoughts, experiences, and knowledge come together" />
+<link rel="canonical" href="http://localhost:4000/HawatriLogs/about/" />
+<meta property="og:url" content="http://localhost:4000/HawatriLogs/about/" />
+<meta property="og:site_name" content="Hawatri" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="About" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Hawatri"},"description":"A personal blog and content platform where thoughts, experiences, and knowledge come together","headline":"About","name":"Hawatri","url":"http://localhost:4000/HawatriLogs/about/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/HawatriLogs/feed.xml" title="Hawatri" />
 </head>
 <body class="bg-white p-8 min-h-screen flex flex-col items-center">
   <header class="mb-6">
@@ -17,7 +37,7 @@
       class="border-2 rounded-lg border-black px-8 py-3 text-center text-2xl select-none"
       style="width: 240px"
     >
-      HAWATRI
+      <a href="http://localhost:4000/HawatriLogs/" class="text-current no-underline">HAWATRI</a>
     </div>
   </header>
 
@@ -69,7 +89,7 @@
     <form
       class="ml-auto flex border-2 border-black rounded-lg overflow-hidden"
       style="min-width: 200px; max-width: 280px; min-height: 40px"
-      onsubmit="event.preventDefault()"
+      onsubmit="event.preventDefault(); performSearch();"
     >
       <input
         type="text"

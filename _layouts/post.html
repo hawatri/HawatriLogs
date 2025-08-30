@@ -2,10 +2,91 @@
 layout: default
 ---
 
-<div class="p-8">
-  <h1 class="font-[Indie Flower] text-3xl mb-4">{{ page.title }}</h1>
+<article class="p-8">
+  <!-- Post Header -->
+  <header class="mb-8">
+    <h1 class="font-[Indie Flower] text-4xl mb-4">{{ page.title }}</h1>
+    
+    <!-- Post Meta -->
+    <div class="flex flex-wrap items-center gap-4 text-gray-600 mb-4">
+      <time datetime="{{ page.date | date_to_xmlschema }}">
+        {{ page.date | date: "%B %d, %Y" }}
+      </time>
+      
+      {% if page.content %}
+        <span>•</span>
+        <span>
+          {% assign words = page.content | number_of_words %}
+          {% if words < 360 %}1 min{% else %}{{ words | divided_by: 180 }} min{% endif %} read
+        </span>
+      {% endif %}
+      
+      {% if page.author %}
+        <span>•</span>
+        <span>by {{ page.author }}</span>
+      {% endif %}
+    </div>
+    
+    <!-- Categories and Tags -->
+    {% if page.categories.size > 0 or page.tags.size > 0 %}
+    <div class="flex flex-wrap gap-2 mb-4">
+      {% for category in page.categories %}
+        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">
+          {{ category }}
+        </span>
+      {% endfor %}
+      
+      {% for tag in page.tags limit:5 %}
+        <span class="border border-gray-300 text-gray-600 px-3 py-1 rounded-full text-sm">
+          #{{ tag }}
+        </span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
   
-  <div class="prose max-w-none">
+  <!-- Post Content -->
+  <div class="prose prose-lg max-w-none mb-8">
     {{ content }}
   </div>
-</div>
+  
+  <!-- Post Footer -->
+  <footer class="border-t border-gray-200 pt-6">
+    <!-- Navigation between posts -->
+    <div class="flex justify-between items-center mb-6">
+      {% if page.previous.url %}
+        <a href="{{ page.previous.url | absolute_url }}" 
+           class="flex items-center text-black hover:text-gray-700 group">
+          <span class="mr-2">←</span>
+          <div>
+            <div class="text-sm text-gray-600">Previous</div>
+            <div class="group-hover:underline">{{ page.previous.title | truncate: 30 }}</div>
+          </div>
+        </a>
+      {% else %}
+        <div></div>
+      {% endif %}
+      
+      {% if page.next.url %}
+        <a href="{{ page.next.url | absolute_url }}" 
+           class="flex items-center text-black hover:text-gray-700 text-right group">
+          <div>
+            <div class="text-sm text-gray-600">Next</div>
+            <div class="group-hover:underline">{{ page.next.title | truncate: 30 }}</div>
+          </div>
+          <span class="ml-2">→</span>
+        </a>
+      {% else %}
+        <div></div>
+      {% endif %}
+    </div>
+    
+    <!-- Back to blog -->
+    <div class="text-center">
+      <a href="{{ '/blog/' | absolute_url }}" 
+         class="inline-flex items-center border-2 border-black rounded-lg px-6 py-2 hover:bg-gray-100 transition-colors">
+        ← Back to All Posts
+      </a>
+    </div>
+  </footer>
+</article>

@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="{{ '/styles.css' | absolute_url }}">
+  {% seo %}
+  {% feed_meta %}
 </head>
 <body class="bg-white p-8 min-h-screen flex flex-col items-center">
   <header class="mb-6">
@@ -17,7 +20,7 @@
       class="border-2 rounded-lg border-black px-8 py-3 text-center text-2xl select-none"
       style="width: 240px"
     >
-      HAWATRI
+      <a href="{{ '/' | absolute_url }}" class="text-current no-underline">HAWATRI</a>
     </div>
   </header>
 
@@ -39,7 +42,7 @@
       <li>
         <a
           href="{{ '/blog/' | absolute_url }}"
-          class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url contains '/blog/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url == '/blog/' or page.layout == 'blog' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="Contents"
         >
           CONTENTS
@@ -69,7 +72,7 @@
     <form
       class="ml-auto flex border-2 border-black rounded-lg overflow-hidden"
       style="min-width: 200px; max-width: 280px; min-height: 40px"
-      onsubmit="event.preventDefault()"
+      onsubmit="event.preventDefault(); performSearch();"
     >
       <input
         type="text"

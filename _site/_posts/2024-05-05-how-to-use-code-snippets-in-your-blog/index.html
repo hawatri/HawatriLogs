@@ -4,12 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>How to Use Code Snippets in Your Blog - Hawatri</title>
+  <meta name="description" content="Learn how to include code snippets in your blog posts with proper formatting and styling.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="http://localhost:4000/HawatriLogs/styles.css">
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>How to Use Code Snippets in Your Blog | Hawatri</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="How to Use Code Snippets in Your Blog" />
+<meta name="author" content="Hawatri" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Learn how to include code snippets in your blog posts with proper formatting and styling." />
+<meta property="og:description" content="Learn how to include code snippets in your blog posts with proper formatting and styling." />
+<link rel="canonical" href="http://localhost:4000/HawatriLogs/_posts/2024-05-05-how-to-use-code-snippets-in-your-blog/" />
+<meta property="og:url" content="http://localhost:4000/HawatriLogs/_posts/2024-05-05-how-to-use-code-snippets-in-your-blog/" />
+<meta property="og:site_name" content="Hawatri" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-05-05T00:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="How to Use Code Snippets in Your Blog" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hawatri"},"dateModified":"2024-05-05T00:00:00+05:30","datePublished":"2024-05-05T00:00:00+05:30","description":"Learn how to include code snippets in your blog posts with proper formatting and styling.","headline":"How to Use Code Snippets in Your Blog","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/HawatriLogs/_posts/2024-05-05-how-to-use-code-snippets-in-your-blog/"},"url":"http://localhost:4000/HawatriLogs/_posts/2024-05-05-how-to-use-code-snippets-in-your-blog/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/HawatriLogs/feed.xml" title="Hawatri" />
 </head>
 <body class="bg-white p-8 min-h-screen flex flex-col items-center">
   <header class="mb-6">
@@ -17,7 +38,7 @@
       class="border-2 rounded-lg border-black px-8 py-3 text-center text-2xl select-none"
       style="width: 240px"
     >
-      HAWATRI
+      <a href="http://localhost:4000/HawatriLogs/" class="text-current no-underline">HAWATRI</a>
     </div>
   </header>
 
@@ -69,7 +90,7 @@
     <form
       class="ml-auto flex border-2 border-black rounded-lg overflow-hidden"
       style="min-width: 200px; max-width: 280px; min-height: 40px"
-      onsubmit="event.preventDefault()"
+      onsubmit="event.preventDefault(); performSearch();"
     >
       <input
         type="text"
@@ -142,38 +163,107 @@
       class="border-2 border-black rounded-lg p-8 flex-1 overflow-auto min-w-0"
       style="min-height: 600px"
     >
-      <div class="p-8">
-  <h1 class="font-[Indie Flower] text-3xl mb-4">How to Use Code Snippets in Your Blog</h1>
+      <article class="p-8">
+  <!-- Post Header -->
+  <header class="mb-8">
+    <h1 class="font-[Indie Flower] text-4xl mb-4">How to Use Code Snippets in Your Blog</h1>
+    
+    <!-- Post Meta -->
+    <div class="flex flex-wrap items-center gap-4 text-gray-600 mb-4">
+      <time datetime="2024-05-05T00:00:00+05:30">
+        May 05, 2024
+      </time>
+      
+      
+        <span>•</span>
+        <span>
+          
+          1 min read
+        </span>
+      
+      
+      
+    </div>
+    
+    <!-- Categories and Tags -->
+    
+    <div class="flex flex-wrap gap-2 mb-4">
+      
+        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">
+          tutorial
+        </span>
+      
+        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">
+          coding
+        </span>
+      
+      
+      
+        <span class="border border-gray-300 text-gray-600 px-3 py-1 rounded-full text-sm">
+          #code-snippets
+        </span>
+      
+        <span class="border border-gray-300 text-gray-600 px-3 py-1 rounded-full text-sm">
+          #blog-tips
+        </span>
+      
+        <span class="border border-gray-300 text-gray-600 px-3 py-1 rounded-full text-sm">
+          #formatting
+        </span>
+      
+    </div>
+    
+  </header>
   
-  <div class="prose max-w-none">
+  <!-- Post Content -->
+  <div class="prose prose-lg max-w-none mb-8">
     <p>When writing technical blogs, it’s often helpful to include code snippets to demonstrate concepts or provide examples. In Hawatri, we’ve made it easy to include code snippets using a simple HTML structure.</p>
 
 <h2 id="basic-code-snippet">Basic Code Snippet</h2>
 
 <p>Here’s how you can include a simple code snippet in your blog:</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"code-snippet"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"code-snippet"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;pre&gt;&lt;code&gt;</span>Your code here<span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="example-with-javascript">Example with JavaScript</h2>
 
 <p>Let’s look at a practical example with some JavaScript code:</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nf">greet</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="kd">function</span> <span class="nf">greet</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s2">`Hello, </span><span class="p">${</span><span class="nx">name</span><span class="p">}</span><span class="s2">!`</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="c1">// Call the function</span>
 <span class="nf">greet</span><span class="p">(</span><span class="dl">'</span><span class="s1">World</span><span class="dl">'</span><span class="p">);</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="example-with-html-and-css">Example with HTML and CSS</h2>
 
 <p>You can also include HTML and CSS code:</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;style&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="nt">&lt;style&gt;</span>
   <span class="nc">.button</span> <span class="p">{</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="nx">black</span><span class="p">;</span>
     <span class="nl">color</span><span class="p">:</span> <span class="nx">white</span><span class="p">;</span>
@@ -183,7 +273,7 @@
 <span class="nt">&lt;/style&gt;</span>
 
 <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"button"</span><span class="nt">&gt;</span>Click me<span class="nt">&lt;/button&gt;</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="tips-for-using-code-snippets">Tips for Using Code Snippets</h2>
 
@@ -194,7 +284,21 @@
   <li>Keep snippets focused and relevant to your topic</li>
 </ul>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This is a well-commented code example</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="c1">// This is a well-commented code example</span>
 <span class="kd">function</span> <span class="nf">calculateTotal</span><span class="p">(</span><span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// Sum up all item prices</span>
   <span class="kd">const</span> <span class="nx">total</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nf">reduce</span><span class="p">((</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -208,13 +312,34 @@
 
   <span class="k">return</span> <span class="nx">total</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Remember that code snippets will automatically adapt to dark mode when enabled, making them readable in both light and dark themes.</p>
 
   </div>
-</div>
-
+  
+  <!-- Post Footer -->
+  <footer class="border-t border-gray-200 pt-6">
+    <!-- Navigation between posts -->
+    <div class="flex justify-between items-center mb-6">
+      
+        <div></div>
+      
+      
+      
+        <div></div>
+      
+    </div>
+    
+    <!-- Back to blog -->
+    <div class="text-center">
+      <a href="http://localhost:4000/HawatriLogs/blog/" 
+         class="inline-flex items-center border-2 border-black rounded-lg px-6 py-2 hover:bg-gray-100 transition-colors">
+        ← Back to All Posts
+      </a>
+    </div>
+  </footer>
+</article>
     </section>
   </main>
 

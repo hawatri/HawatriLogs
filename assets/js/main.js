@@ -90,23 +90,137 @@ function initializeCodeSnippetCopy() {
   });
 }
 
-// Search functionality
+// Enhanced search functionality
+let searchTimeout;
 function initializeSearch() {
   const searchInput = document.getElementById('searchInput');
   if (!searchInput) return;
   
+  // Debounced search for better performance
   searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
-    const posts = document.querySelectorAll('#blogGrid > div');
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+      performSearch(e.target.value.toLowerCase());
+    }, 300);
+  });
+  
+  // Handle search form submission
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      performSearch(e.target.value.toLowerCase());
+    }
+  });
+}
+
+function performSearch(query = null) {
+  const searchInput = document.getElementById('searchInput');
+  if (!searchInput) return;
+  
+  const searchQuery = query || searchInput.value.toLowerCase();
+  
+  // Search in blog grid (if on blog page)
+  const blogGrid = document.getElementById('blogGrid');
+  if (blogGrid) {
+    const posts = blogGrid.querySelectorAll('> div');
+    let visibleCount = 0;
     
     posts.forEach(post => {
       const title = post.querySelector('h3').textContent.toLowerCase();
-      const excerpt = post.querySelector('p').textContent.toLowerCase();
+      const excerpt = post.querySelector('p:last-of-type').textContent.toLowerCase();
+      const categories = Array.from(post.querySelectorAll('.bg-gray-200')).map(cat => cat.textContent.toLowerCase());
       
-      if (title.includes(query) || excerpt.includes(query)) {
+      const matches = searchQuery === '' || 
+        title.includes(searchQuery) || 
+        excerpt.includes(searchQuery) ||
+        categories.some(cat => cat.includes(searchQuery));
+      
+      if (matches) {
         post.style.display = 'block';
+        visibleCount++;
       } else {
         post.style.display = 'none';
+      }
+    });
+    
+    // Show/hide no results message
+    let noResultsMsg = document.getElementById('noSearchResults');
+    if (searchQuery !== '' && visibleCount === 0) {
+      if (!noResultsMsg) {
+        noResultsMsg = document.createElement('div');
+        noResultsMsg.id = 'noSearchResults';
+        noResultsMsg.className = 'col-span-full text-center py-8';
+        noResultsMsg.innerHTML = `
+          <p class="text-gray-600 text-lg mb-2">No posts found for "${searchQuery}"</p>
+          <button onclick="clearSearch()" class="text-black underline hover:text-gray-700">Clear search</button>
+        `;
+        blogGrid.appendChild(noResultsMsg);
+      }
+    } else if (noResultsMsg) {
+      noResultsMsg.remove();
+    }
+  }
+  
+  // Search in recent posts sidebar
+  const recentPostsList = document.getElementById('recentBlogsList');
+  if (recentPostsList && searchQuery !== '') {
+    const recentPosts = recentPostsList.querySelectorAll('li');
+    recentPosts.forEach(post => {
+      const title = post.querySelector('a').textContent.toLowerCase();
+      if (title.includes(searchQuery)) {
+        post.style.display = 'flex';
+        post.style.backgroundColor = 'rgba(59, 130, 246, 0.1)'; // Highlight matching posts
+      } else {
+        post.style.display = 'none';
+      }
+    });
+  } else if (recentPostsList) {
+    // Reset recent posts display
+    const recentPosts = recentPostsList.querySelectorAll('li');
+    recentPosts.forEach(post => {
+      post.style.display = 'flex';
+      post.style.backgroundColor = '';
+    });
+  }
+}
+
+function clearSearch() {
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) {
+    searchInput.value = '';
+    performSearch('');
+  }
+}
+
+// Handle image loading errors with better fallbacks
+function initializeImageFallbacks() {
+  document.querySelectorAll('img').forEach(img => {
+    if (!img.hasAttribute('onerror')) {
+      img.addEventListener('error', function() {
+        // Create a styled placeholder div
+        const placeholder = document.createElement('div');
+        placeholder.className = 'w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center';
+        placeholder.innerHTML = `<span class="text-gray-600 text-sm font-[Indie Flower]">Image unavailable</span>`;
+        
+        // Replace the broken image with placeholder
+        this.parentNode.insertBefore(placeholder, this);
+        this.style.display = 'none';
+      });
+    }
+  });
+}
+
+// Smooth scrolling for anchor links
+function initializeSmoothScrolling() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
       }
     });
   });
@@ -117,9 +231,19 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeDarkMode();
   initializeCodeSnippetCopy();
   initializeSearch();
+  initializeImageFallbacks();
+  initializeSmoothScrolling();
   
   // Apply saved dark mode on page load
   const savedDarkMode = localStorage.getItem('darkMode');
   const isDarkMode = savedDarkMode === 'true';
   updateDarkMode(isDarkMode);
+});
+
+// Handle localStorage errors gracefully
+window.addEventListener('error', function(e) {
+  if (e.message.includes('localStorage')) {
+    console.warn('localStorage not available, dark mode will not persist');
+    // Fallback to sessionStorage or disable persistence
+  }
 });
