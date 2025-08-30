@@ -3,12 +3,21 @@ layout: post
 title: "How You Can Easily Build Your Own Site with Jekyll"
 date: 2025-08-30
 excerpt: "Discover how to create a beautiful, fast, and maintainable website using Jekyll - the static site generator that powers GitHub Pages."
-thumbnail: "/blog/images/shutterstock_1049564585-960.jpg"
+thumbnail: "/assets/images/posts/2025-08-30-jekyll-tutorial/thumbnail.jpg"
 categories: [tutorial, web-development]
 tags: [jekyll, static-sites, github-pages, web-development]
 ---
 
 Building your own website doesn't have to be complicated or expensive. With Jekyll, you can create a beautiful, fast, and maintainable site that's perfect for blogs, portfolios, or documentation. Let's explore how you can get started with this powerful static site generator.
+
+<div class="blog-image w-1/2 mx-auto">
+  <img src="{{ '/assets/images/posts/2025-08-30-jekyll-tutorial/thumbnail.jpg' | relative_url }}" 
+       alt="Description" 
+       loading="lazy">
+  <div class="blog-image-caption">
+    Create Your Own Sites
+  </div>
+</div>
 
 ## What is Jekyll?
 
