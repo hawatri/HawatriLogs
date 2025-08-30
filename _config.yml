@@ -1,0 +1,46 @@
+# Site settings
+title: Hawatri
+description: A personal blog and content platform
+author: Hawatri
+url: "https://hawatri.com" # Change this to your actual domain
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:title/
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Hawatri"
+      comments: false
+      share: false
+
+# Exclude from processing
+exclude:
+  - node_modules
+  - package.json
+  - package-lock.json
+  - script.js
+  - pages/
+  - blog/*.html
+  - blog/index.json
+
+# Include in processing
+include:
+  - _posts
+  - _layouts
+  - _includes
+  - assets
+  - images

@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+<div class="p-8">
+  <h1 class="font-[Indie Flower] text-3xl mb-6">All Posts</h1>
+  
+  <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for post in site.posts %}
+    <div class="border-2 border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <!-- Thumbnail container -->
+      <div class="h-48 overflow-hidden bg-gray-100">
+        <img 
+          src="{{ '/blog/images/shutterstock_1049564585-960.jpg' | relative_url }}" 
+          alt="{{ post.title }}"
+          class="w-full h-full object-cover"
+          onerror="this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzQvLy8vLzQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ3/2wBDAR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';"
+        />
+      </div>
+      
+      <!-- Content container -->
+      <div class="p-4">
+        <!-- Title -->
+        <h3 class="font-[Indie Flower] text-xl font-normal mb-2">
+          <a href="{{ post.url | relative_url }}" class="text-black hover:text-gray-700">
+            {{ post.title }}
+          </a>
+        </h3>
+        
+        <!-- Date -->
+        <p class="text-sm text-gray-600 mb-2">
+          {{ post.date | date: "%B %d, %Y" }}
+        </p>
+        
+        <!-- Excerpt -->
+        <p class="text-gray-700 mb-4">
+          {% if post.excerpt %}
+            {{ post.excerpt }}
+          {% else %}
+            {{ post.content | strip_html | truncatewords: 30 }}
+          {% endif %}
+        </p>
+        
+        <!-- Read more button -->
+        <a 
+          href="{{ post.url | relative_url }}" 
+          class="text-black underline hover:text-gray-700 focus:outline-none"
+        >
+          Read More
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

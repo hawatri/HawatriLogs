@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Add Images to Your Blog - Hawatri</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg-white p-8 min-h-screen flex flex-col items-center">
+  <header class="mb-6">
+    <div
+      class="border-2 rounded-lg border-black px-8 py-3 text-center text-2xl select-none"
+      style="width: 240px"
+    >
+      HAWATRI
+    </div>
+  </header>
+
+  <nav
+    class="flex items-center border-2 border-black rounded-lg px-6 py-3 w-full max-w-[1400px]"
+    style="min-height: 56px"
+  >
+    <ul class="flex flex-wrap items-center gap-2 text-xl select-none">
+      <li>
+        <a
+          href="/"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 "
+          aria-label="Home"
+        >
+          HOME
+        </a>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <a
+          href="/blog/"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 "
+          aria-label="Contents"
+        >
+          CONTENTS
+        </a>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <a
+          href="/settings/"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 "
+          aria-label="Settings"
+        >
+          SETTINGS
+        </a>
+      </li>
+      <li class="text-gray-400">|</li>
+      <li>
+        <a
+          href="/about/"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 "
+          aria-label="About"
+        >
+          ABOUT
+        </a>
+      </li>
+    </ul>
+    <form
+      class="ml-auto flex border-2 border-black rounded-lg overflow-hidden"
+      style="min-width: 200px; max-width: 280px; min-height: 40px"
+      onsubmit="event.preventDefault()"
+    >
+      <input
+        type="text"
+        id="searchInput"
+        aria-label="Search"
+        class="outline-none px-3 text-base font-normal font-[Indie Flower] text-black w-full"
+        style="font-family: 'Indie Flower', cursive"
+        placeholder="Search posts..."
+      />
+      <button
+        type="submit"
+        class="border-l-2 border-black px-5 text-base font-[Indie Flower] font-normal select-none whitespace-nowrap"
+        style="font-family: 'Indie Flower', cursive"
+      >
+        search
+      </button>
+    </form>
+  </nav>
+
+  <main
+    class="flex mt-6 w-full max-w-[1400px] mx-auto space-x-6 flex-grow"
+    style="font-size: 18px; line-height: 1.4"
+  >
+    <aside
+      class="border-2 border-black rounded-lg p-6 w-[280px] flex-shrink-0"
+      style="min-height: 600px"
+    >
+      <h2 class="font-[Indie Flower] font-normal text-2xl mb-4 select-none">
+        RECENT CONTENTS
+      </h2>
+      <ul id="recentBlogsList" class="space-y-3">
+        
+
+<li class="flex items-center space-x-3 select-none">
+  <span class="block w-4 h-4 rounded-full border-2 border-black" aria-hidden="true"></span>
+  <a 
+    href="/blog/how-to-use-code-snippets-in-your-blog/" 
+    class="text-black underline hover:text-gray-700 focus:outline-none"
+  >
+    How to Use Code Snippets in Your Blog
+  </a>
+</li>
+
+<li class="flex items-center space-x-3 select-none">
+  <span class="block w-4 h-4 rounded-full border-2 border-black" aria-hidden="true"></span>
+  <a 
+    href="/blog/how-to-start-writing-daily/" 
+    class="text-black underline hover:text-gray-700 focus:outline-none"
+  >
+    How to Start Writing Daily
+  </a>
+</li>
+
+<li class="flex items-center space-x-3 select-none">
+  <span class="block w-4 h-4 rounded-full border-2 border-black" aria-hidden="true"></span>
+  <a 
+    href="/blog/how-to-add-images-to-your-blog/" 
+    class="text-black underline hover:text-gray-700 focus:outline-none"
+  >
+    How to Add Images to Your Blog
+  </a>
+</li>
+
+
+      </ul>
+    </aside>
+
+    <section
+      id="contentArea"
+      class="border-2 border-black rounded-lg p-8 flex-1 overflow-auto min-w-0"
+      style="min-height: 600px"
+    >
+      <div class="p-8">
+  <h1 class="font-[Indie Flower] text-3xl mb-4">How to Add Images to Your Blog</h1>
+  
+  <div class="prose max-w-none">
+    <p>Learn how to add and style images in your blog posts with captions and responsive layouts.</p>
+
+<h2 id="basic-image-usage">Basic Image Usage</h2>
+
+<p>To add an image to your blog post, use the standard markdown syntax:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">Alt text for the image</span><span class="p">](</span><span class="sx">path/to/image.jpg</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="responsive-images">Responsive Images</h2>
+
+<p>For better mobile experience, you can use HTML with responsive classes:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"path/to/image.jpg"</span> <span class="na">alt=</span><span class="s">"Description"</span> <span class="na">class=</span><span class="s">"w-full h-auto"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<h2 id="image-with-caption">Image with Caption</h2>
+
+<p>Add captions below your images:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"path/to/image.jpg"</span> <span class="na">alt=</span><span class="s">"Description"</span> <span class="na">class=</span><span class="s">"w-full h-auto"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;figcaption</span> <span class="na">class=</span><span class="s">"text-center text-gray-600 mt-2"</span><span class="nt">&gt;</span>Your caption here<span class="nt">&lt;/figcaption&gt;</span>
+<span class="nt">&lt;/figure&gt;</span>
+</code></pre></div></div>
+
+<h2 id="image-sizing-options">Image Sizing Options</h2>
+
+<p>Use Tailwind CSS classes to control image dimensions:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">w-full</code> - Full width</li>
+  <li><code class="language-plaintext highlighter-rouge">w-1/2</code> - Half width</li>
+  <li><code class="language-plaintext highlighter-rouge">w-64</code> - Fixed width (256px)</li>
+  <li><code class="language-plaintext highlighter-rouge">h-auto</code> - Maintain aspect ratio</li>
+</ul>
+
+<h2 id="best-practices">Best Practices</h2>
+
+<ol>
+  <li><strong>Optimize images</strong> before uploading</li>
+  <li><strong>Use descriptive alt text</strong> for accessibility</li>
+  <li><strong>Choose appropriate formats</strong> (JPG for photos, PNG for graphics)</li>
+  <li><strong>Consider loading performance</strong> with lazy loading</li>
+</ol>
+
+<h2 id="example-gallery">Example Gallery</h2>
+
+<p>Here’s how you can create a simple image gallery:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 md:grid-cols-2 gap-4"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image1.jpg"</span> <span class="na">alt=</span><span class="s">"First image"</span> <span class="na">class=</span><span class="s">"w-full h-auto"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"image2.jpg"</span> <span class="na">alt=</span><span class="s">"Second image"</span> <span class="na">class=</span><span class="s">"w-full h-auto"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>Remember to always provide meaningful alt text for your images to improve accessibility and SEO.</p>
+
+  </div>
+</div>
+
+    </section>
+  </main>
+
+  <footer class="mt-6 w-full max-w-[1400px] mx-auto">
+    <div class="border-2 border-black rounded-lg p-4 text-center">
+      <p class="font-[Indie Flower] text-lg">
+        © HAWATRI 2025
+      </p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js"></script>
+</body>
+</html>

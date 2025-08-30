@@ -1,14 +1,15 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hawatri</title>
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
 </head>
 <body class="bg-white p-8 min-h-screen flex flex-col items-center">
   <header class="mb-6">
@@ -26,47 +27,43 @@
   >
     <ul class="flex flex-wrap items-center gap-2 text-xl select-none">
       <li>
-        <button
-          id="homeBtn"
-          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+        <a
+          href="{{ '/' | relative_url }}"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url == '/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="Home"
-          type="button"
         >
           HOME
-        </button>
+        </a>
       </li>
       <li class="text-gray-400">|</li>
       <li>
-        <button
-          id="contentsBtn"
-          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+        <a
+          href="{{ '/blog/' | relative_url }}"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url contains '/blog/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="Contents"
-          type="button"
         >
           CONTENTS
-        </button>
+        </a>
       </li>
       <li class="text-gray-400">|</li>
       <li>
-        <button
-          id="settingsBtn"
-          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+        <a
+          href="{{ '/settings/' | relative_url }}"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url contains '/settings/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="Settings"
-          type="button"
         >
           SETTINGS
-        </button>
+        </a>
       </li>
       <li class="text-gray-400">|</li>
       <li>
-        <button
-          id="aboutBtn"
-          class="focus:outline-none hover:bg-gray-100 rounded px-2"
+        <a
+          href="{{ '/about/' | relative_url }}"
+          class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url contains '/about/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="About"
-          type="button"
         >
           ABOUT
-        </button>
+        </a>
       </li>
     </ul>
     <form
@@ -76,9 +73,11 @@
     >
       <input
         type="text"
+        id="searchInput"
         aria-label="Search"
         class="outline-none px-3 text-base font-normal font-[Indie Flower] text-black w-full"
         style="font-family: 'Indie Flower', cursive"
+        placeholder="Search posts..."
       />
       <button
         type="submit"
@@ -102,7 +101,7 @@
         RECENT CONTENTS
       </h2>
       <ul id="recentBlogsList" class="space-y-3">
-        <!-- Blog items inserted by JS -->
+        {% include recent-posts.html %}
       </ul>
     </aside>
 
@@ -111,7 +110,7 @@
       class="border-2 border-black rounded-lg p-8 flex-1 overflow-auto min-w-0"
       style="min-height: 600px"
     >
-      <!-- Content inserted by JS -->
+      {{ content }}
     </section>
   </main>
 
@@ -123,6 +122,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
 </body>
 </html>
