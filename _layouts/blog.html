@@ -11,7 +11,7 @@ layout: default
       <!-- Thumbnail container -->
       <div class="h-48 overflow-hidden bg-gray-100">
         <img 
-          src="{{ '/blog/images/shutterstock_1049564585-960.jpg' | relative_url }}" 
+          src="{{ '/blog/images/shutterstock_1049564585-960.jpg' | absolute_url }}" 
           alt="{{ post.title }}"
           class="w-full h-full object-cover"
           onerror="this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzQvLy8vLzQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ3/2wBDAR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR3/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k=';"
@@ -22,7 +22,7 @@ layout: default
       <div class="p-4">
         <!-- Title -->
         <h3 class="font-[Indie Flower] text-xl font-normal mb-2">
-          <a href="{{ post.url | relative_url }}" class="text-black hover:text-gray-700">
+          <a href="{{ post.url | absolute_url }}" class="text-black hover:text-gray-700">
             {{ post.title }}
           </a>
         </h3>
@@ -43,7 +43,7 @@ layout: default
         
         <!-- Read more button -->
         <a 
-          href="{{ post.url | relative_url }}" 
+          href="{{ post.url | absolute_url }}" 
           class="text-black underline hover:text-gray-700 focus:outline-none"
         >
           Read More

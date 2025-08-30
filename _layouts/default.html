@@ -9,7 +9,7 @@
     href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/styles.css' | absolute_url }}">
 </head>
 <body class="bg-white p-8 min-h-screen flex flex-col items-center">
   <header class="mb-6">
@@ -28,7 +28,7 @@
     <ul class="flex flex-wrap items-center gap-2 text-xl select-none">
       <li>
         <a
-          href="{{ '/' | relative_url }}"
+          href="{{ '/' | absolute_url }}"
           class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url == '/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="Home"
         >
@@ -38,7 +38,7 @@
       <li class="text-gray-400">|</li>
       <li>
         <a
-          href="{{ '/blog/' | relative_url }}"
+          href="{{ '/blog/' | absolute_url }}"
           class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url contains '/blog/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="Contents"
         >
@@ -48,7 +48,7 @@
       <li class="text-gray-400">|</li>
       <li>
         <a
-          href="{{ '/settings/' | relative_url }}"
+          href="{{ '/settings/' | absolute_url }}"
           class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url contains '/settings/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="Settings"
         >
@@ -58,7 +58,7 @@
       <li class="text-gray-400">|</li>
       <li>
         <a
-          href="{{ '/about/' | relative_url }}"
+          href="{{ '/about/' | absolute_url }}"
           class="focus:outline-none hover:bg-gray-100 rounded px-2 {% if page.url contains '/about/' %}border-2 border-black rounded-lg px-4 py-1{% endif %}"
           aria-label="About"
         >
@@ -122,6 +122,6 @@
     </div>
   </footer>
 
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/main.js' | absolute_url }}"></script>
 </body>
 </html>

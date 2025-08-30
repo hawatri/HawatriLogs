@@ -1,9 +1,9 @@
-# Site settings
+# Site settings for GitHub Pages
 title: Hawatri
 description: A personal blog and content platform
 author: Hawatri
-url: "https://hawatri.com" # Change this to your actual domain
-baseurl: "" # Leave empty for root domain, or set to "/repository-name" for GitHub Pages
+url: "https://[YOUR_USERNAME].github.io" # Change this to your GitHub Pages URL
+baseurl: "/HawatriLogs" # Change this to your repository name
 
 # Build settings
 markdown: kramdown

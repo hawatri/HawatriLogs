@@ -18,13 +18,13 @@ title: Home
     
     <div class="flex justify-center space-x-4">
       <a 
-        href="{{ '/blog/' | relative_url }}" 
+        href="{{ '/blog/' | absolute_url }}" 
         class="border-2 border-black rounded-lg px-6 py-3 hover:bg-gray-100 transition-colors duration-200"
       >
         Browse Posts
       </a>
       <a 
-        href="{{ '/about/' | relative_url }}" 
+        href="{{ '/about/' | absolute_url }}" 
         class="border-2 border-black rounded-lg px-6 py-3 hover:bg-gray-100 transition-colors duration-200"
       >
         Learn More
