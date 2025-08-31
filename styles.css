@@ -795,7 +795,6 @@ aside .w-4.h-4 {
   font-size: 0.9rem;
   line-height: 1.5;
   position: relative;
-  counter-reset: line-number;
 }
 
 #contentArea pre code {
@@ -809,30 +808,7 @@ aside .w-4.h-4 {
   white-space: pre;
 }
 
-/* Line numbers for code blocks */
-#contentArea pre.line-numbers {
-  padding-left: 3.5rem;
-}
-
-#contentArea pre.line-numbers code {
-  counter-reset: line-number;
-}
-
-#contentArea pre.line-numbers code .line {
-  display: block;
-  counter-increment: line-number;
-}
-
-#contentArea pre.line-numbers code .line::before {
-  content: counter(line-number);
-  position: absolute;
-  left: 1rem;
-  width: 2rem;
-  text-align: right;
-  color: #666;
-  font-size: 0.85em;
-  line-height: inherit;
-}
+/* Line numbers removed - will be added later */
 
 /* INLINE CODE */
 #contentArea code {
@@ -845,12 +821,7 @@ aside .w-4.h-4 {
   border: 1px solid #e2e8f0;
 }
 
-#contentArea pre code {
-  background: none;
-  border: none;
-  padding: 0;
-  color: inherit;
-}
+/* Removed duplicate rule */
 
 /* TABLES */
 #contentArea table {
@@ -998,50 +969,12 @@ aside .w-4.h-4 {
     font-size: 0.85rem;
   }
   
-  #contentArea pre.line-numbers {
-    padding-left: 3rem;
-  }
+  /* Line numbers removed from responsive */
 }
 
-/* Syntax Highlighting Colors - Add to your styles.css */
+/* Syntax highlighting removed - will be added later */
 
-/* Code syntax highlighting */
-#contentArea pre code .comment {
-  color: #6a9955;
-  font-style: italic;
-}
-
-#contentArea pre code .string {
-  color: #ce9178;
-}
-
-#contentArea pre code .keyword {
-  color: #569cd6;
-  font-weight: bold;
-}
-
-#contentArea pre code .number {
-  color: #b5cea8;
-}
-
-#contentArea pre code .tag {
-  color: #4ec9b0;
-}
-
-#contentArea pre code .property {
-  color: #9cdcfe;
-}
-
-#contentArea pre code .function {
-  color: #dcdcaa;
-}
-
-/* Line number styling */
-#contentArea pre.line-numbers code .line::before {
-  color: #858585;
-  user-select: none;
-  pointer-events: none;
-}
+/* Line number styling removed */
 
 /* Better code block appearance */
 #contentArea pre {
