@@ -1027,3 +1027,131 @@ aside .w-4.h-4 {
   text-transform: uppercase;
   font-weight: bold;
 }
+
+/* Enhanced Tag and Category Styling - Add this to your styles.css */
+
+/* Categories (filled background) */
+.bg-gray-200 {
+  background-color: #e5e7eb;
+  color: #374151;
+  transition: all 0.3s ease;
+}
+
+.dark .bg-gray-200 {
+  background-color: #4b5563;
+  color: #f9fafb;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.dark .text-gray-700 {
+  color: #d1d5db;
+}
+
+/* Tags (border style) */
+.border-gray-300 {
+  border-color: #d1d5db;
+}
+
+.dark .border-gray-300 {
+  border-color: #6b7280;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.dark .text-gray-600 {
+  color: #9ca3af;
+}
+
+/* Post meta information styling */
+#contentArea .flex.flex-wrap.gap-2.mb-4 span {
+  transition: all 0.3s ease;
+}
+
+/* Category badges (filled) */
+#contentArea .bg-gray-200.text-gray-700 {
+  background-color: #e5e7eb;
+  color: #374151;
+  border: 1px solid transparent;
+}
+
+.dark #contentArea .bg-gray-200.text-gray-700 {
+  background-color: #4b5563;
+  color: #f3f4f6;
+  border-color: #6b7280;
+}
+
+/* Tag badges (outlined) */
+#contentArea .border.border-gray-300.text-gray-600 {
+  background-color: transparent;
+  border-color: #d1d5db;
+  color: #4b5563;
+}
+
+.dark #contentArea .border.border-gray-300.text-gray-600 {
+  background-color: transparent;
+  border-color: #6b7280;
+  color: #d1d5db;
+}
+
+/* Blog card category styling */
+.border-2.border-black .bg-gray-200 {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.dark .border-2.border-black .bg-gray-200 {
+  background-color: #4b5563;
+  color: #f3f4f6;
+}
+
+/* Hover effects for tags and categories */
+#contentArea .bg-gray-200:hover {
+  background-color: #d1d5db;
+  transform: translateY(-1px);
+}
+
+.dark #contentArea .bg-gray-200:hover {
+  background-color: #6b7280;
+}
+
+#contentArea .border.border-gray-300:hover {
+  border-color: #9ca3af;
+  background-color: #f9fafb;
+  transform: translateY(-1px);
+}
+
+.dark #contentArea .border.border-gray-300:hover {
+  border-color: #9ca3af;
+  background-color: #374151;
+}
+
+/* Ensure proper spacing and appearance */
+#contentArea .rounded-full {
+  font-weight: 500;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+/* Additional contrast improvements */
+.dark #contentArea time {
+  color: #9ca3af;
+}
+
+.dark #contentArea .text-sm {
+  color: #9ca3af;
+}
+
+/* Fix for blog grid cards */
+.dark #blogGrid .bg-gray-200 {
+  background-color: #4b5563;
+  color: #f3f4f6;
+}
+
+.dark #blogGrid .text-gray-700 {
+  color: #d1d5db;
+}
