@@ -241,6 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeSearch();
   initializeImageFallbacks();
   initializeSmoothScrolling();
+  initializeCodeEnhancements();
   
   // Apply saved dark mode on page load
   const savedDarkMode = localStorage.getItem('darkMode');
@@ -255,3 +256,104 @@ window.addEventListener('error', function(e) {
     // Fallback to sessionStorage or disable persistence
   }
 });
+
+// Function to add line numbers to code blocks
+function addLineNumbers() {
+  console.log('🔧 addLineNumbers function called');
+  
+  const codeBlocks = document.querySelectorAll('pre code');
+  console.log(`📊 Found ${codeBlocks.length} code blocks`);
+  
+  codeBlocks.forEach((codeBlock, index) => {
+    console.log(`🔍 Processing code block ${index + 1}`);
+    
+    // Skip if already processed
+    if (codeBlock.classList.contains('line-numbered')) {
+      console.log(`⏭️ Code block ${index + 1} already processed`);
+      return;
+    }
+    
+    const pre = codeBlock.parentElement;
+    const textContent = codeBlock.textContent;
+    console.log(`📝 Code block ${index + 1} content length:`, textContent.length);
+    
+    const lines = textContent.split('\n');
+    console.log(`📋 Code block ${index + 1} has ${lines.length} lines`);
+    
+    // Remove empty last line if exists
+    if (lines.length > 0 && lines[lines.length - 1].trim() === '') {
+      lines.pop();
+      console.log(`🗑️ Removed empty last line, now ${lines.length} lines`);
+    }
+    
+    // Skip if too few lines - REDUCED THRESHOLD FOR TESTING
+    if (lines.length <= 0) {
+      console.log(`❌ Skipping code block ${index + 1} - too few lines (${lines.length})`);
+      return;
+    }
+    
+    console.log(`✅ Adding line numbers to code block ${index + 1}`);
+    
+    // Add line-numbers class to pre
+    pre.classList.add('line-numbers');
+    console.log(`🏷️ Added 'line-numbers' class to pre element`);
+    
+    // Wrap each line in a span with line class
+    const numberedContent = lines
+      .map((line, lineIndex) => {
+        console.log(`📝 Line ${lineIndex + 1}: "${line.substring(0, 20)}${line.length > 20 ? '...' : ''}"`);
+        return `<span class="line">${line}</span>`;
+      })
+      .join('\n');
+    
+    codeBlock.innerHTML = numberedContent;
+    codeBlock.classList.add('line-numbered');
+    
+    console.log(`🎉 Successfully processed code block ${index + 1}`);
+  });
+  
+  console.log('✨ addLineNumbers function completed');
+}
+
+// Enhanced syntax highlighting colors
+function applySyntaxHighlighting() {
+  document.querySelectorAll('pre code').forEach(codeBlock => {
+    let html = codeBlock.innerHTML;
+    
+    // Basic syntax highlighting patterns
+    const patterns = [
+      // Comments
+      { pattern: /(\/\*[\s\S]*?\*\/|\/\/.*$|#.*$)/gm, replacement: '<span class="comment">$1</span>' },
+      // Strings
+      { pattern: /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g, replacement: '<span class="string">$1</span>' },
+      // Keywords
+      { pattern: /\b(function|const|let|var|if|else|for|while|return|class|import|export|from|async|await|try|catch|finally|throw|new|this|super|extends|implements|interface|type|enum|public|private|protected|static|abstract|final|override|virtual|namespace|using|include|require|def|lambda|yield|with|as|pass|break|continue|global|nonlocal|and|or|not|in|is|True|False|None|null|undefined|void|boolean|string|number|object|array|any|never)\b/g, replacement: '<span class="keyword">$1</span>' },
+      // Numbers
+      { pattern: /\b(\d+\.?\d*)\b/g, replacement: '<span class="number">$1</span>' },
+      // HTML tags
+      { pattern: /&lt;(\/?[a-zA-Z][a-zA-Z0-9]*(?:\s[^&gt;]*)?)\s*&gt;/g, replacement: '&lt;<span class="tag">$1</span>&gt;' },
+      // CSS properties
+      { pattern: /([a-zA-Z-]+)(\s*:\s*)/g, replacement: '<span class="property">$1</span>$2' },
+      // Functions
+      { pattern: /\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\()/g, replacement: '<span class="function">$1</span>' }
+    ];
+    
+    patterns.forEach(({ pattern, replacement }) => {
+      html = html.replace(pattern, replacement);
+    });
+    
+    codeBlock.innerHTML = html;
+  });
+}
+
+// Initialize code enhancements
+function initializeCodeEnhancements() {
+  console.log('🚀 initializeCodeEnhancements called');
+  
+  // Wait a bit for DOM to be fully ready
+  setTimeout(() => {
+    console.log('⏰ Running code enhancements after timeout');
+    addLineNumbers();
+    applySyntaxHighlighting();
+  }, 100);
+}

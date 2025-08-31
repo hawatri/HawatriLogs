@@ -608,3 +608,489 @@ aside .w-4.h-4 {
 .dark .text-gray-400 {
   color: #666;
 }
+
+/* Enhanced Typography Styles - Add to your styles.css */
+
+/* HEADING HIERARCHY */
+#contentArea h1 {
+  font-family: 'Indie Flower', cursive;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: black;
+  margin: 2rem 0 1.5rem 0;
+  line-height: 1.2;
+  border-bottom: 3px solid black;
+  padding-bottom: 0.5rem;
+}
+
+#contentArea h2 {
+  font-family: 'Indie Flower', cursive;
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  margin: 1.75rem 0 1rem 0;
+  line-height: 1.3;
+  border-bottom: 2px solid black;
+  padding-bottom: 0.25rem;
+}
+
+#contentArea h3 {
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+  margin: 1.5rem 0 0.75rem 0;
+  line-height: 1.4;
+}
+
+#contentArea h4 {
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: black;
+  margin: 1.25rem 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+#contentArea h5 {
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: black;
+  margin: 1rem 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+#contentArea h6 {
+  font-family: 'Indie Flower', cursive;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  margin: 1rem 0 0.5rem 0;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* PARAGRAPH AND TEXT FORMATTING */
+#contentArea p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  margin: 1rem 0;
+  color: black;
+  text-align: justify;
+}
+
+/* BOLD AND ITALIC EMPHASIS */
+#contentArea strong,
+#contentArea b {
+  font-weight: 900;
+  color: black;
+  font-size: 1.1em;
+}
+
+#contentArea em,
+#contentArea i {
+  font-style: italic;
+  color: #333;
+  font-size: 1.05em;
+}
+
+#contentArea strong em,
+#contentArea em strong {
+  font-weight: 900;
+  font-style: italic;
+  color: black;
+  font-size: 1.15em;
+}
+
+/* HORIZONTAL RULES */
+#contentArea hr {
+  border: none;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, black, transparent);
+  margin: 2.5rem 0;
+  border-radius: 2px;
+}
+
+/* Alternative HR styles you can use with classes */
+#contentArea hr.thick {
+  height: 5px;
+  background: black;
+  margin: 3rem 0;
+}
+
+#contentArea hr.dotted {
+  border: none;
+  border-top: 3px dotted black;
+  height: 0;
+  background: none;
+}
+
+#contentArea hr.dashed {
+  border: none;
+  border-top: 3px dashed black;
+  height: 0;
+  background: none;
+}
+
+/* LISTS */
+#contentArea ul,
+#contentArea ol {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+#contentArea ul li,
+#contentArea ol li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  font-size: 1.125rem;
+}
+
+#contentArea ul li {
+  list-style-type: disc;
+}
+
+#contentArea ol li {
+  list-style-type: decimal;
+}
+
+#contentArea ul ul,
+#contentArea ol ol,
+#contentArea ul ol,
+#contentArea ol ul {
+  margin: 0.5rem 0;
+}
+
+/* BLOCKQUOTES */
+#contentArea blockquote {
+  border-left: 4px solid black;
+  background: #f8f9fa;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  font-style: italic;
+  font-size: 1.125rem;
+  border-radius: 0 8px 8px 0;
+}
+
+#contentArea blockquote p:first-child {
+  margin-top: 0;
+}
+
+#contentArea blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* CODE BLOCKS WITH LINE NUMBERS */
+#contentArea pre {
+  background: #1a1a1a;
+  color: #f8f8f2;
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  position: relative;
+  counter-reset: line-number;
+}
+
+#contentArea pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  color: inherit;
+  display: block;
+  white-space: pre;
+}
+
+/* Line numbers for code blocks */
+#contentArea pre.line-numbers {
+  padding-left: 3.5rem;
+}
+
+#contentArea pre.line-numbers code {
+  counter-reset: line-number;
+}
+
+#contentArea pre.line-numbers code .line {
+  display: block;
+  counter-increment: line-number;
+}
+
+#contentArea pre.line-numbers code .line::before {
+  content: counter(line-number);
+  position: absolute;
+  left: 1rem;
+  width: 2rem;
+  text-align: right;
+  color: #666;
+  font-size: 0.85em;
+  line-height: inherit;
+}
+
+/* INLINE CODE */
+#contentArea code {
+  background: #f1f5f9;
+  color: #e11d48;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: 0.9em;
+  border: 1px solid #e2e8f0;
+}
+
+#contentArea pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* TABLES */
+#contentArea table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  border: 2px solid black;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#contentArea th,
+#contentArea td {
+  border: 1px solid black;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+#contentArea th {
+  background: black;
+  color: white;
+  font-weight: bold;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.1rem;
+}
+
+#contentArea tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+/* LINKS */
+#contentArea a {
+  color: black;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+#contentArea a:hover {
+  color: #333;
+  text-decoration: none;
+  background: #f0f0f0;
+  padding: 0.25rem;
+  border-radius: 4px;
+}
+
+/* DARK MODE STYLES */
+.dark #contentArea h1,
+.dark #contentArea h2,
+.dark #contentArea h3,
+.dark #contentArea h4,
+.dark #contentArea h5,
+.dark #contentArea h6 {
+  color: #f0f0f0;
+  border-color: #f0f0f0;
+}
+
+.dark #contentArea p {
+  color: #e0e0e0;
+}
+
+.dark #contentArea strong,
+.dark #contentArea b {
+  color: #f0f0f0;
+}
+
+.dark #contentArea em,
+.dark #contentArea i {
+  color: #ccc;
+}
+
+.dark #contentArea hr {
+  background: linear-gradient(90deg, transparent, #f0f0f0, transparent);
+}
+
+.dark #contentArea hr.thick {
+  background: #f0f0f0;
+}
+
+.dark #contentArea hr.dotted,
+.dark #contentArea hr.dashed {
+  border-color: #f0f0f0;
+}
+
+.dark #contentArea blockquote {
+  border-left-color: #f0f0f0;
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+.dark #contentArea code {
+  background: #2a2a2a;
+  color: #fbbf24;
+  border-color: #4a4a4a;
+}
+
+.dark #contentArea pre {
+  border-color: #f0f0f0;
+}
+
+.dark #contentArea th {
+  background: #f0f0f0;
+  color: black;
+}
+
+.dark #contentArea th,
+.dark #contentArea td {
+  border-color: #f0f0f0;
+}
+
+.dark #contentArea tr:nth-child(even) {
+  background: #2a2a2a;
+}
+
+.dark #contentArea a {
+  color: #f0f0f0;
+}
+
+.dark #contentArea a:hover {
+  color: #ccc;
+  background: #3a3a3a;
+}
+
+/* RESPONSIVE TYPOGRAPHY */
+@media (max-width: 768px) {
+  #contentArea h1 {
+    font-size: 2rem;
+  }
+  
+  #contentArea h2 {
+    font-size: 1.75rem;
+  }
+  
+  #contentArea h3 {
+    font-size: 1.5rem;
+  }
+  
+  #contentArea p {
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  #contentArea pre {
+    padding: 1rem;
+    font-size: 0.85rem;
+  }
+  
+  #contentArea pre.line-numbers {
+    padding-left: 3rem;
+  }
+}
+
+/* Syntax Highlighting Colors - Add to your styles.css */
+
+/* Code syntax highlighting */
+#contentArea pre code .comment {
+  color: #6a9955;
+  font-style: italic;
+}
+
+#contentArea pre code .string {
+  color: #ce9178;
+}
+
+#contentArea pre code .keyword {
+  color: #569cd6;
+  font-weight: bold;
+}
+
+#contentArea pre code .number {
+  color: #b5cea8;
+}
+
+#contentArea pre code .tag {
+  color: #4ec9b0;
+}
+
+#contentArea pre code .property {
+  color: #9cdcfe;
+}
+
+#contentArea pre code .function {
+  color: #dcdcaa;
+}
+
+/* Line number styling */
+#contentArea pre.line-numbers code .line::before {
+  color: #858585;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Better code block appearance */
+#contentArea pre {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark #contentArea pre {
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+/* Copy button styling */
+#contentArea pre {
+  position: relative;
+}
+
+#contentArea .code-copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #2d3748;
+  color: white;
+  border: 1px solid #4a5568;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#contentArea pre:hover .code-copy-btn {
+  opacity: 1;
+}
+
+#contentArea .code-copy-btn:hover {
+  background: #4a5568;
+}
+
+/* Language badge */
+#contentArea pre[data-lang]::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #4a5568;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-bottom-left-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
