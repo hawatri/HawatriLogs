@@ -1,5 +1,6 @@
 // ========================================
-// HAWATRI LOGS - STREAMLINED JAVASCRIPT
+// HAWATRI LOGS - OPTIMIZED JAVASCRIPT
+// Compressed but readable and maintainable
 // ========================================
 
 // Safe storage helper functions
@@ -7,7 +8,6 @@ function getSavedDarkMode() {
   try {
     return localStorage.getItem('darkMode') === 'true';
   } catch (e) {
-    // Fallback to checking if dark class exists
     return document.body.classList.contains('dark');
   }
 }
@@ -16,7 +16,6 @@ function saveDarkMode(isDark) {
   try {
     localStorage.setItem('darkMode', isDark.toString());
   } catch (e) {
-    // If localStorage fails, just continue without saving
     console.warn('Could not save dark mode preference');
   }
 }
@@ -25,19 +24,14 @@ function saveDarkMode(isDark) {
 function initializeDarkMode() {
   const darkModeYes = document.getElementById('darkModeYes');
   const darkModeNo = document.getElementById('darkModeNo');
-  
-  // Get saved preference or default to false
   const savedDarkMode = getSavedDarkMode();
   
-  // Apply dark mode on page load
   updateDarkMode(savedDarkMode);
   
-  // Update radio buttons if they exist (on settings page)
   if (darkModeYes && darkModeNo) {
     darkModeYes.checked = savedDarkMode;
     darkModeNo.checked = !savedDarkMode;
 
-    // Event listeners
     darkModeYes.addEventListener('change', () => {
       if (darkModeYes.checked) {
         updateDarkMode(true);
@@ -68,13 +62,11 @@ function initializeSearch() {
   const searchInput = document.getElementById('searchInput');
   if (!searchInput) return;
   
-  // Debounced search
   searchInput.addEventListener('input', (e) => {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => performSearch(e.target.value), 300);
   });
   
-  // Enter key handling
   searchInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -85,11 +77,7 @@ function initializeSearch() {
 
 function performSearch(query = '') {
   const searchQuery = query.toLowerCase().trim();
-  
-  // Search blog posts
   searchBlogPosts(searchQuery);
-  
-  // Search recent posts sidebar
   searchRecentPosts(searchQuery);
 }
 
@@ -101,8 +89,8 @@ function searchBlogPosts(query) {
   let visibleCount = 0;
   
   posts.forEach(post => {
-    // More flexible selectors to match your actual HTML structure
-    const titleElement = post.querySelector('h3 a, .font-\\[Indie\\ Flower\\]') || post.querySelector('a');
+    const titleElement = post.querySelector('h3 a, .font-\\[Indie\\ Flower\\]') || 
+                        post.querySelector('a');
     const excerptElement = post.querySelector('.text-gray-700, p');
     const categoryElements = post.querySelectorAll('.bg-gray-200, .bg-gray-200.text-gray-700');
     
@@ -111,8 +99,6 @@ function searchBlogPosts(query) {
     const categories = Array.from(categoryElements).map(cat => 
       cat.textContent.toLowerCase().trim()
     );
-    
-    // Also search in post content if available
     const allText = post.textContent.toLowerCase();
     
     const matches = query === '' || 
@@ -125,7 +111,6 @@ function searchBlogPosts(query) {
     if (matches) visibleCount++;
   });
   
-  // Show/hide no results message
   toggleNoResultsMessage(query, visibleCount, blogGrid);
 }
 
@@ -166,7 +151,7 @@ function toggleNoResultsMessage(query, visibleCount, container) {
   }
 }
 
-// GLOBAL SEARCH FUNCTION (called from HTML)
+// GLOBAL SEARCH FUNCTIONS
 function performSearch() {
   const searchInput = document.getElementById('searchInput');
   if (searchInput) {
