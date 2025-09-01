@@ -1,10 +1,12 @@
-# Site settings for GitHub Pages
+# Site settings for GitHub Pages with Custom Domain
 title: HawatriLogs
 description: A personal blog and content platform where thoughts, experiences, and knowledge come together
 author: Hawatri
 email: fardinrahaman28@gmail.com
-url: "https://hawatri.github.io"
-baseurl: "/HawatriLogs"
+
+# IMPORTANT: Update these for your custom domain
+url: "https://logs.hawatri.in"    # Changed from hawatri.github.io
+baseurl: ""                       # Changed from "/HawatriLogs" to empty
 
 # Social media (add your profiles)
 social:
