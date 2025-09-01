@@ -473,3 +473,16 @@ button:focus, input:focus {
   }
 }
 
+/* Default light mode dropdown */
+select {
+  background-color: white;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+/* Dark mode dropdown */
+.dark select {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-color: #f0f0f0;
+}
