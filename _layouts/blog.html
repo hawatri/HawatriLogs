@@ -3,13 +3,13 @@ layout: default
 ---
 
 <div>
-  <h1 class="font-[Indie Flower] text-3xl mb-6">All Posts</h1>
+  <h1 class="font-[Indie Flower] text-2xl md:text-3xl mb-4 md:mb-6">All Posts</h1>
   
-  <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div id="blogGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
     {% for post in site.posts %}
-    <div class="border-2 border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div class="border-2 border-black rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col">
       <!-- Thumbnail container with fallback -->
-      <div class="h-48 overflow-hidden bg-gray-100 flex items-center justify-center">
+      <div class="h-40 md:h-48 overflow-hidden bg-gray-100 flex items-center justify-center flex-shrink-0">
         {% if post.thumbnail %}
           <img 
             src="{{ post.thumbnail | relative_url }}" 
@@ -18,27 +18,27 @@ layout: default
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
           <div class="hidden w-full h-full bg-gray-200 items-center justify-center">
-            <span class="text-gray-500 text-lg font-[Indie Flower]">{{ post.title | truncate: 20 }}</span>
+            <span class="text-gray-500 text-sm md:text-lg font-[Indie Flower] text-center px-2">{{ post.title | truncate: 20 }}</span>
           </div>
         {% else %}
           <!-- Default placeholder -->
           <div class="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-            <span class="text-gray-600 text-lg font-[Indie Flower] text-center px-4">{{ post.title | truncate: 30 }}</span>
+            <span class="text-gray-600 text-sm md:text-lg font-[Indie Flower] text-center px-2 md:px-4">{{ post.title | truncate: 30 }}</span>
           </div>
         {% endif %}
       </div>
       
       <!-- Content container -->
-      <div class="p-4">
+      <div class="p-3 md:p-4 flex-1 flex flex-col">
         <!-- Title -->
-        <h3 class="font-[Indie Flower] text-xl font-normal mb-2">
+        <h3 class="font-[Indie Flower] text-lg md:text-xl font-normal mb-2 line-clamp-2">
           <a href="{{ post.url | absolute_url }}" class="text-black hover:text-gray-700">
             {{ post.title }}
           </a>
         </h3>
         
         <!-- Date and Reading Time -->
-        <p class="text-sm text-gray-600 mb-2">
+        <p class="text-xs md:text-sm text-gray-600 mb-2">
           {{ post.date | date: "%B %d, %Y" }}
           {% if post.content %}
             • {% assign words = post.content | number_of_words %}
@@ -48,9 +48,9 @@ layout: default
         
         <!-- Categories -->
         {% if post.categories.size > 0 %}
-        <div class="mb-2">
+        <div class="mb-2 flex flex-wrap gap-1">
           {% for category in post.categories limit:2 %}
-            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded mr-1">
+            <span class="inline-block bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">
               {{ category }}
             </span>
           {% endfor %}
@@ -58,18 +58,18 @@ layout: default
         {% endif %}
         
         <!-- Excerpt -->
-        <p class="text-gray-700 mb-4">
+        <p class="text-gray-700 mb-4 text-sm md:text-base flex-1">
           {% if post.excerpt %}
-            {{ post.excerpt | strip_html | truncate: 100 }}
+            {{ post.excerpt | strip_html | truncate: 80 }}
           {% else %}
-            {{ post.content | strip_html | truncate: 100 }}
+            {{ post.content | strip_html | truncate: 80 }}
           {% endif %}
         </p>
         
         <!-- Read more button -->
         <a 
           href="{{ post.url | absolute_url }}" 
-          class="text-black underline hover:text-gray-700 focus:outline-none"
+          class="text-black underline hover:text-gray-700 focus:outline-none text-sm md:text-base mt-auto"
         >
           Read More
         </a>
@@ -80,7 +80,18 @@ layout: default
   
   <!-- No posts message -->
   {% if site.posts.size == 0 %}
-  <div class="text-center py-8">
-    <p class="text-gray-600 text-lg">No posts yet. Start writing!</p>
+  <div class="text-center py-6 md:py-8">
+    <p class="text-gray-600 text-base md:text-lg">No posts yet. Start writing!</p>
   </div>
   {% endif %}
+</div>
+
+<style>
+/* Line clamp utility for post titles */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</style>

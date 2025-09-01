@@ -1,10 +1,10 @@
 {% assign recent_posts = site.posts | slice: 0, 10 %}
 {% for post in recent_posts %}
-<li class="flex items-center space-x-3 select-none">
+<li class="flex items-start space-x-2 md:space-x-3 select-none">
   <span class="block w-4 h-4 rounded-full border-2 border-black" aria-hidden="true"></span>
   <a 
     href="{{ post.url | absolute_url }}" 
-    class="text-black underline hover:text-gray-700 focus:outline-none"
+    class="text-black underline hover:text-gray-700 focus:outline-none text-sm md:text-base leading-tight flex-1"
   >
     {{ post.title }}
   </a>

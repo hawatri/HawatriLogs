@@ -406,29 +406,47 @@ button:focus, input:focus {
   main {
     flex-direction: column;
     gap: 1rem;
+    margin-top: 1rem;
   }
 
   aside {
     width: 100% !important;
     min-height: auto !important;
     padding: 1rem;
+    order: 2;
   }
 
   #contentArea {
     width: 100%;
     padding: 1rem;
     min-height: 400px !important;
+    order: 1;
   }
   
   nav {
     padding: 0.75rem;
     min-height: auto !important;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  nav ul {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  nav ul li {
+    white-space: nowrap;
   }
   
   nav form {
     min-width: 150px;
     max-width: 200px;
     min-height: 36px !important;
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: 100%;
   }
   
   #blogGrid {
@@ -441,6 +459,38 @@ button:focus, input:focus {
   #contentArea h3 { font-size: 1.5rem; }
   #contentArea p { font-size: 1rem; text-align: left; }
   #contentArea pre { padding: 1rem; font-size: 0.85rem; }
+  
+  /* Blog post cards on mobile */
+  #blogGrid > div {
+    margin-bottom: 1rem;
+  }
+  
+  #blogGrid .h-48 {
+    height: 200px;
+  }
+  
+  /* Table responsiveness */
+  #contentArea table {
+    font-size: 0.875rem;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  #contentArea th, #contentArea td {
+    padding: 0.5rem;
+    min-width: 100px;
+  }
+  
+  /* Search dropdown mobile adjustments */
+  #searchDropdown {
+    max-height: 60vh;
+    font-size: 0.9rem;
+  }
+  
+  #searchDropdown > div {
+    padding: 0.75rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -449,27 +499,175 @@ button:focus, input:focus {
   header div {
     width: 180px !important;
     font-size: 1.25rem;
+    padding: 0.5rem;
   }
   
   nav {
     flex-direction: column;
     padding: 0.5rem;
     gap: 0.75rem;
+    align-items: stretch;
   }
 
   nav ul {
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.25rem;
+    font-size: 0.9rem;
   }
   
   nav form {
     width: 100%;
     max-width: none;
+    margin: 0;
   }
   
   aside, #contentArea {
     padding: 0.75rem;
+  }
+  
+  /* Typography adjustments for very small screens */
+  #contentArea {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  #contentArea h1 { 
+    font-size: 1.75rem; 
+    margin: 1.5rem 0 1rem 0;
+  }
+  
+  #contentArea h2 { 
+    font-size: 1.5rem; 
+    margin: 1.25rem 0 0.75rem 0;
+  }
+  
+  #contentArea h3 { 
+    font-size: 1.25rem; 
+    margin: 1rem 0 0.5rem 0;
+  }
+  
+  #contentArea pre {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+  
+  #contentArea blockquote {
+    padding: 1rem;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+  
+  /* Blog grid improvements for small screens */
+  #blogGrid .p-4 {
+    padding: 0.75rem;
+  }
+  
+  #blogGrid h3 {
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+  
+  #blogGrid .text-gray-700 {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  /* Recent posts sidebar adjustments */
+  aside h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  aside ul li {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  /* Search dropdown for small screens */
+  #searchDropdown {
+    max-height: 50vh;
+    font-size: 0.85rem;
+  }
+  
+  #searchDropdown .font-semibold {
+    font-size: 0.9rem;
+  }
+  
+  #searchDropdown .text-sm {
+    font-size: 0.8rem;
+  }
+}
+
+/* Additional responsive utilities */
+@media (max-width: 640px) {
+  /* Improve touch targets */
+  nav a, nav button {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Better spacing for touch interfaces */
+  #blogGrid a, aside a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  /* Improve form elements */
+  nav input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 44px;
+  }
+  
+  nav button {
+    min-width: 60px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  main {
+    flex-direction: row;
+  }
+  
+  aside {
+    width: 300px !important;
+    order: 1;
+  }
+  
+  #contentArea {
+    order: 2;
+  }
+  
+  nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  nav form {
+    margin-left: auto;
+    margin-top: 0;
+    width: auto;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #contentArea pre {
+    font-size: 0.85rem;
+  }
+  
+  nav {
+    border-width: 1px;
+  }
+  
+  header div, aside, #contentArea, footer div {
+    border-width: 1px;
   }
 }
 
