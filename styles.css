@@ -413,14 +413,14 @@ button:focus, input:focus {
     width: 100% !important;
     min-height: auto !important;
     padding: 1rem;
-    order: 2;
+    order: 1;
   }
 
   #contentArea {
     width: 100%;
     padding: 1rem;
     min-height: 400px !important;
-    order: 1;
+    order: 2;
   }
   
   nav {
