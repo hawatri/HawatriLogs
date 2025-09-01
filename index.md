@@ -88,26 +88,30 @@ title: Home
       </p>
     </div>
     
-    <div class="text-center border-2 border-black rounded-lg p-8 bg-gray-50 dark:bg-gray-800 dark:border-white">
-      <h2 class="font-[Indie Flower] text-2xl mb-4 dark:text-white">Ready to Explore?</h2>
-      <p class="mb-6 text-lg dark:text-gray-200">
+<div class="border-2 border-black rounded-lg p-6">
+  <h2 class="font-[Indie Flower] text-2xl mb-4">Ready to Explore?</h2>
+<p class="mb-6 text-lg">
         Dive into the collection of posts, tutorials, and insights that make up this growing knowledge base. Every entry represents a moment of learning captured and shared.
       </p>
-      
-      <div class="flex justify-center space-x-6">
-        <a 
-          href="{{ '/blog/' | absolute_url }}" 
-          class="border-2 border-black rounded-lg px-8 py-3 hover:bg-gray-100 dark:border-white dark:hover:bg-gray-700 transition-colors duration-200 text-lg font-medium dark:text-white"
-        >
-          Start Reading
-        </a>
-        <a 
-          href="{{ '/about/' | absolute_url }}" 
-          class="border-2 border-black rounded-lg px-8 py-3 hover:bg-gray-100 dark:border-white dark:hover:bg-gray-700 transition-colors duration-200 text-lg font-medium dark:text-white"
-        >
-          Learn More
-        </a>
-      </div>
-    </div>
+
+  <div class="flex justify-center space-x-6">
+    <a 
+      href="{{ '/blog/' | absolute_url }}" 
+      class="border-2 border-black rounded-lg px-6 py-3 hover:bg-gray-100 transition-colors duration-200"
+        
+    >
+      Start Reading
+    </a>
+    <a 
+      href="{{ '/about/' | absolute_url }}" 
+      class="border-2 border-black rounded-lg px-6 py-3 hover:bg-gray-100 transition-colors duration-200"
+        
+    >
+      Learn More
+    </a>
+  </div>
+</div>
+
+
   </div>
 </div>
