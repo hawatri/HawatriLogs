@@ -75,68 +75,6 @@ nav button:hover, .hover\:bg-gray-100:hover {
 .text-black.underline:hover { color: #666; }
 .dark .text-black.underline:hover { color: #ccc; }
 
-/* SEARCH DROPDOWN */
-#searchDropdown {
-  background-color: white;
-  border-color: black;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
-}
-
-.dark #searchDropdown {
-  background-color: #2a2a2a;
-  border-color: #f0f0f0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-#searchDropdown > div {
-  transition: background-color 0.2s ease;
-}
-
-#searchDropdown > div:hover {
-  background-color: #f8f9fa;
-}
-
-.dark #searchDropdown > div:hover {
-  background-color: #3a3a3a;
-}
-
-#searchDropdown .font-semibold {
-  font-weight: 600;
-}
-
-/* Keyboard navigation highlighting */
-#searchDropdown .bg-blue-100 {
-  background-color: #dbeafe;
-}
-
-.dark #searchDropdown .bg-blue-100 {
-  background-color: #1e40af;
-}
-
-#searchDropdown .text-blue-900 {
-  color: #1e3a8a;
-}
-
-.dark #searchDropdown .text-blue-900 {
-  color: #dbeafe;
-}
-
-/* Loading animation */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
-.dark .animate-spin {
-  border-color: #f0f0f0;
-}
-
 /* SEARCH INPUT ENHANCEMENTS */
 nav form {
   position: relative;
@@ -481,16 +419,6 @@ button:focus, input:focus {
     padding: 0.5rem;
     min-width: 100px;
   }
-  
-  /* Search dropdown mobile adjustments */
-  #searchDropdown {
-    max-height: 60vh;
-    font-size: 0.9rem;
-  }
-  
-  #searchDropdown > div {
-    padding: 0.75rem;
-  }
 }
 
 @media (max-width: 480px) {
@@ -583,20 +511,6 @@ button:focus, input:focus {
   aside ul li {
     font-size: 0.9rem;
     line-height: 1.4;
-  }
-  
-  /* Search dropdown for small screens */
-  #searchDropdown {
-    max-height: 50vh;
-    font-size: 0.85rem;
-  }
-  
-  #searchDropdown .font-semibold {
-    font-size: 0.9rem;
-  }
-  
-  #searchDropdown .text-sm {
-    font-size: 0.8rem;
   }
 }
 
