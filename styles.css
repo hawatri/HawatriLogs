@@ -257,8 +257,8 @@ nav input:focus {
 }
 
 #contentArea pre {
-  background: #1a1a1a;
-  color: #f8f8f2;
+  background: white;
+  color: black;
   border: 2px solid black;
   border-radius: 8px;
   padding: 1.5rem;
@@ -272,6 +272,8 @@ nav input:focus {
 
 .dark #contentArea pre {
   border-color: #f0f0f0;
+  background: transparent;
+  color: white
 }
 
 #contentArea pre code {

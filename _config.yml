@@ -91,7 +91,7 @@ kramdown:
   syntax_highlighter: null  # Disabled to prevent conflicts with custom syntax highlighting
   syntax_highlighter_opts:
     block:
-      line_numbers: false
+      line_numbers: true
 
 # Feed settings
 feed:
