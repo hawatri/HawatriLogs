@@ -173,19 +173,7 @@ function executeSearch(query = '') {
   
   if (searchQuery.length === 0) {
     hideSearchDropdown();
-    // If we're on the blog page, show all posts
-    if (window.location.pathname.includes('/blog/')) {
-      showAllPosts();
-    }
-    return;
-  }
-  
-  // If we're not on the blog page and there's a search query, redirect to blog page
-  if (!window.location.pathname.includes('/blog/') && searchQuery.length > 0) {
-    const blogUrl = '/blog/';
-    const searchParams = new URLSearchParams();
-    searchParams.set('search', searchQuery);
-    window.location.href = `${blogUrl}?${searchParams.toString()}`;
+    showAllPosts();
     return;
   }
   
@@ -197,6 +185,9 @@ function executeSearch(query = '') {
   
   // Filter blog posts
   searchBlogPosts(searchQuery);
+  
+  // Filter recent posts
+  searchRecentPosts(searchQuery);
 }
 
 function updateSearchDropdown(query) {
@@ -342,6 +333,22 @@ function searchBlogPosts(query) {
   toggleNoResultsMessage(query, visibleCount, blogGrid);
 }
 
+function searchRecentPosts(query) {
+  const recentPostsList = document.getElementById('recentBlogsList');
+  if (!recentPostsList) return;
+  
+  const posts = recentPostsList.querySelectorAll('li');
+  posts.forEach(post => {
+    const link = post.querySelector('a');
+    if (!link) return;
+    
+    const title = link.textContent.toLowerCase();
+    const matches = title.includes(query);
+    
+    post.style.display = matches ? 'flex' : 'none';
+    post.style.backgroundColor = matches && query ? 'rgba(59, 130, 246, 0.1)' : '';
+  });
+}
 
 function toggleNoResultsMessage(query, visibleCount, container) {
   const noResultsId = 'noSearchResults';
@@ -367,10 +374,7 @@ function toggleNoResultsMessage(query, visibleCount, container) {
 function performSearch() {
   const searchInput = document.getElementById('searchInput');
   if (searchInput) {
-    const query = searchInput.value.trim();
-    if (query) {
-      executeSearch(query);
-    }
+    executeSearch(searchInput.value);
   }
 }
 
@@ -380,13 +384,6 @@ function clearSearch() {
     searchInput.value = '';
     executeSearch('');
     hideSearchDropdown();
-    
-    // Clear URL search params if on blog page
-    if (window.location.pathname.includes('/blog/')) {
-      const url = new URL(window.location);
-      url.searchParams.delete('search');
-      window.history.replaceState({}, '', url.pathname);
-    }
   }
 }
 
@@ -457,25 +454,7 @@ function initializeSmoothScrolling() {
 document.addEventListener('DOMContentLoaded', () => {
   initializeDarkMode();
   initializeSearch();
-  handleUrlSearchParams();
   initializeCodeCopy();
   initializeImageFallbacks();
   initializeSmoothScrolling();
 });
-
-// Handle URL search parameters on page load
-function handleUrlSearchParams() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const searchQuery = urlParams.get('search');
-  
-  if (searchQuery && window.location.pathname.includes('/blog/')) {
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-      searchInput.value = searchQuery;
-      // Small delay to ensure posts are collected first
-      setTimeout(() => {
-        executeSearch(searchQuery);
-      }, 100);
-    }
-  }
-}
