@@ -146,11 +146,10 @@ function collectPostsData() {
   console.log('Found posts:', posts.length);
   
   allPosts = Array.from(posts).map(post => {
-    const titleElement = post.querySelector('h3 a, .font-\\[Indie\\ Flower\\]') || 
-                        post.querySelector('a');
-    const excerptElement = post.querySelector('.text-gray-700, p');
-    const categoryElements = post.querySelectorAll('.bg-gray-200, .bg-gray-200.text-gray-700');
-    const linkElement = post.querySelector('h3 a, a');
+    const titleElement = post.querySelector('h3 a') || post.querySelector('h3');
+    const excerptElement = post.querySelector('.text-gray-700') || post.querySelector('p');
+    const categoryElements = post.querySelectorAll('.bg-gray-200');
+    const linkElement = post.querySelector('h3 a') || post.querySelector('a[href*="/blog/"]');
     
     const postData = {
       element: post,
@@ -324,20 +323,29 @@ function searchBlogPosts(query) {
   
   let visibleCount = 0;
   
+  console.log('Searching for:', query);
+  console.log('Total posts to search:', allPosts.length);
+  
   allPosts.forEach(post => {
     const title = post.title.toLowerCase();
     const excerpt = post.excerpt.toLowerCase();
     const categories = post.categories.map(cat => cat.toLowerCase());
     const allText = post.allText.toLowerCase();
     
+    console.log('Checking post:', title);
+    
     const matches = title.includes(query) || 
       excerpt.includes(query) ||
       allText.includes(query) ||
       categories.some(cat => cat.includes(query));
     
+    console.log('Matches:', matches);
+    
     post.element.style.display = matches ? 'block' : 'none';
     if (matches) visibleCount++;
   });
+  
+  console.log('Visible posts after search:', visibleCount);
   
   toggleNoResultsMessage(query, visibleCount, blogGrid);
 }
@@ -455,9 +463,15 @@ function initializeSmoothScrolling() {
 
 // INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM loaded, initializing...');
   initializeDarkMode();
-  initializeSearch();
-  handleUrlSearchParams();
+  
+  // Add a small delay to ensure all elements are rendered
+  setTimeout(() => {
+    initializeSearch();
+    handleUrlSearchParams();
+  }, 100);
+  
   initializeCodeCopy();
   initializeImageFallbacks();
   initializeSmoothScrolling();
@@ -474,8 +488,9 @@ function handleUrlSearchParams() {
       searchInput.value = searchQuery;
       // Small delay to ensure posts are collected first
       setTimeout(() => {
+        console.log('Executing search from URL params:', searchQuery);
         executeSearch(searchQuery);
-      }, 100);
+      }, 500);
     }
   }
 }
