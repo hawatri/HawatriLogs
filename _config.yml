@@ -16,7 +16,7 @@ social:
 
 # Build settings
 markdown: kramdown
-highlighter: rouge
+# highlighter: rouge  # Disabled to prevent conflicts with custom syntax highlighting
 permalink: /blog/:title/
 
 # Plugins
@@ -88,10 +88,11 @@ sass:
 # Markdown settings
 kramdown:
   input: GFM
-  syntax_highlighter: rouge
+  syntax_highlighter: null  # Disabled to prevent conflicts with custom syntax highlighting
   syntax_highlighter_opts:
     block:
-      line_numbers: true
+      line_numbers: false
+
 # Feed settings
 feed:
   posts_limit: 20

@@ -42,8 +42,9 @@ Before diving in, you'll need:
 - Ruby installed (for local development)
 
 ### Installation
-```bash
-# Install Jekyll
+
+<div class="code-snippet">
+<pre><code># Install Jekyll
 gem install jekyll bundler
 
 # Create a new Jekyll site
@@ -53,8 +54,8 @@ jekyll new my-awesome-site
 cd my-awesome-site
 
 # Start the local server
-bundle exec jekyll serve
-```
+bundle exec jekyll serve</code></pre>
+</div>
 
 Your site will be available at `http://localhost:4000`!
 
@@ -77,7 +78,8 @@ A typical Jekyll site looks like this:
 
 Create a new file in the `_posts` directory with the naming convention `YYYY-MM-DD-title.md`:
 
-```
+<div class="code-snippet">
+<pre><code>---
 layout: post
 title: "My First Jekyll Post"
 date: 2025-08-30
@@ -96,8 +98,8 @@ converted to beautiful HTML automatically.
 - Simple markdown syntax
 - Automatic syntax highlighting
 - Built-in pagination
-- Theme support
-```
+- Theme support</code></pre>
+</div>
 
 ## Customizing Your Site
 
