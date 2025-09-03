@@ -57,7 +57,7 @@ function updateDarkMode(dark) {
 
 // CODE COPY FUNCTIONALITY
 function initializeCodeCopy() {
-  document.querySelectorAll('pre').forEach(preBlock => {
+  document.querySelectorAll('#contentarea pre' ).forEach(preBlock => {
     const copyButton = document.createElement('button');
     copyButton.className = 'absolute top-2 right-2 bg-gray-800 text-white px-2 py-1 rounded text-sm hover:bg-gray-700 opacity-75 hover:opacity-100 transition-opacity';
     copyButton.textContent = 'Copy';
