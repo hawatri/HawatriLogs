@@ -291,6 +291,7 @@ CSS example:
 ```
 
 Shell/Terminal commands:
+
 ```bash
 # Install Jekyll and dependencies
 gem install jekyll bundler
@@ -310,6 +311,7 @@ git add .
 git commit -m "Update blog content"
 git push origin main
 ```
+
 
 YAML configuration example:
 ```yaml
