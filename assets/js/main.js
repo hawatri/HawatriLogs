@@ -57,28 +57,31 @@ function updateDarkMode(dark) {
 
 // CODE COPY FUNCTIONALITY
 function initializeCodeCopy() {
-  document.querySelectorAll('#contentarea pre' ).forEach(preBlock => {
+  document.querySelectorAll('td.rouge-code pre').forEach(preBlock => {
+    // Prevent duplicates
+    if (preBlock.querySelector('button.copy-btn')) return;
+
     const copyButton = document.createElement('button');
-    copyButton.className = 'absolute top-2 right-2 bg-gray-800 text-white px-2 py-1 rounded text-sm hover:bg-gray-700 opacity-75 hover:opacity-100 transition-opacity';
+    copyButton.className =
+      'copy-btn absolute top-2 right-2 bg-gray-800 text-white px-2 py-1 rounded text-sm hover:bg-gray-700 opacity-75 hover:opacity-100 transition-opacity';
     copyButton.textContent = 'Copy';
     copyButton.setAttribute('aria-label', 'Copy code to clipboard');
-    
+
     copyButton.addEventListener('click', async () => {
-      const code = preBlock.querySelector('code');
-      if (!code) return;
       try {
-        await navigator.clipboard.writeText(code.innerText);
+        await navigator.clipboard.writeText(preBlock.innerText);
         showCopyFeedback(copyButton, 'Copied!', 'bg-green-600');
       } catch (err) {
         console.error('Copy failed:', err);
         showCopyFeedback(copyButton, 'Failed', 'bg-red-600');
       }
     });
-    
+
     preBlock.style.position = 'relative';
     preBlock.appendChild(copyButton);
   });
 }
+
 
 function showCopyFeedback(button, text, className) {
   const originalText = button.textContent;
