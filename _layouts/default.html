@@ -17,7 +17,20 @@
   {% seo %}
   {% feed_meta %}
 </head>
-<body class="bg-white p-4 md:p-8 min-h-screen flex flex-col items-center">
+<body class="p-4 md:p-8 min-h-screen flex flex-col items-center">
+  <!-- Hand-drawn pencil filter — applied to the ::before of papery boxes via styles.css -->
+  <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="pencil-border">
+        <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" />
+      </filter>
+      <filter id="pencil-border-strong">
+        <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" />
+      </filter>
+    </defs>
+  </svg>
   <header class="mb-6">
     <div
       class="border-2 rounded-lg border-black px-4 md:px-8 py-3 text-center text-xl md:text-2xl select-none"

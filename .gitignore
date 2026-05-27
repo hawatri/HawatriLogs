@@ -1,6 +1,17 @@
 # Jekyll
+_site/
 .jekyll-cache/
 .jekyll-metadata
+.sass-cache/
+
+# Bundler
+.bundle/
+vendor/
+*.gem
+
+# Node (in case Tailwind/PostCSS gets added later)
+node_modules/
+package-lock.json
 
 # OS generated files
 .DS_Store
@@ -10,7 +21,6 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-_site
 
 # Editor files
 .vscode/
@@ -19,6 +29,7 @@ _site
 *.swo
 *~
 
-# Logs
-*.log 
+# Logs and secrets
+*.log
 .env
+.env.local

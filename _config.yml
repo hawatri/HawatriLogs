@@ -16,7 +16,7 @@ social:
 
 # Build settings
 markdown: kramdown
-# highlighter: rouge  # Disabled to prevent conflicts with custom syntax highlighting
+highlighter: none  # Custom highlighting via styles.css + main.js (line numbers in same box)
 permalink: /blog/:title/
 
 # Plugins
@@ -85,13 +85,11 @@ sass:
   sass_dir: _sass
   style: compressed
 
-# Markdown settings
+# Markdown settings — fenced ```lang blocks emit plain <pre><code class="language-...">.
+# main.js wraps each line in a <span class="line"> for CSS-counter line numbers.
 kramdown:
   input: GFM
-  syntax_highlighter: null  # Disabled to prevent conflicts with custom syntax highlighting
-  syntax_highlighter_opts:
-    block:
-      line_numbers: true
+  syntax_highlighter: null
 
 # Feed settings
 feed:

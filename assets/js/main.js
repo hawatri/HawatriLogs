@@ -1,6 +1,5 @@
 // ========================================
-// HAWATRI LOGS - OPTIMIZED JAVASCRIPT
-// Compressed but readable and maintainable
+// HAWATRI LOGS - JS
 // ========================================
 
 // Safe storage helper functions
@@ -25,9 +24,9 @@ function initializeDarkMode() {
   const darkModeYes = document.getElementById('darkModeYes');
   const darkModeNo = document.getElementById('darkModeNo');
   const savedDarkMode = getSavedDarkMode();
-  
+
   updateDarkMode(savedDarkMode);
-  
+
   if (darkModeYes && darkModeNo) {
     darkModeYes.checked = savedDarkMode;
     darkModeNo.checked = !savedDarkMode;
@@ -55,45 +54,189 @@ function updateDarkMode(dark) {
   });
 }
 
-// CODE COPY FUNCTIONALITY
-function initializeCodeCopy() {
-  document.querySelectorAll('td.rouge-code pre').forEach(preBlock => {
-    // Prevent duplicates
-    if (preBlock.querySelector('button.copy-btn')) return;
+// CODE BLOCKS — wrap pre with a header bar (language label + copy button)
+//                and number every line.
+function initializeCodeBlocks() {
+  document.querySelectorAll('#contentArea pre').forEach(preBlock => {
+    if (preBlock.dataset.enhanced === 'true') return;
+    preBlock.dataset.enhanced = 'true';
 
-    const copyButton = document.createElement('button');
-    copyButton.className =
-      'copy-btn absolute top-2 right-2 bg-gray-800 text-white px-2 py-1 rounded text-sm hover:bg-gray-700 opacity-75 hover:opacity-100 transition-opacity';
-    copyButton.textContent = 'Copy';
-    copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+    const codeEl = preBlock.querySelector('code') || preBlock;
+    const lang = detectLanguage(codeEl);
 
-    copyButton.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(preBlock.innerText);
-        showCopyFeedback(copyButton, 'Copied!', 'bg-green-600');
-      } catch (err) {
-        console.error('Copy failed:', err);
-        showCopyFeedback(copyButton, 'Failed', 'bg-red-600');
-      }
-    });
-
-    preBlock.style.position = 'relative';
-    preBlock.appendChild(copyButton);
+    wrapLines(codeEl);
+    wrapWithHeader(preBlock, codeEl, lang);
   });
 }
 
+function detectLanguage(codeEl) {
+  const cls = codeEl.className || '';
+  const m = cls.match(/language-([\w+-]+)/);
+  if (!m) return '';
+  const raw = m[1].toLowerCase();
+  const aliases = {
+    js: 'javascript', ts: 'typescript', py: 'python', rb: 'ruby',
+    sh: 'bash', shell: 'bash', yml: 'yaml', md: 'markdown'
+  };
+  return aliases[raw] || raw;
+}
 
-function showCopyFeedback(button, text, className) {
-  const originalText = button.textContent;
-  const originalClasses = button.className;
-  
+function wrapWithHeader(preBlock, codeEl, lang) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'code-block';
+
+  const header = document.createElement('div');
+  header.className = 'code-header';
+
+  const label = document.createElement('span');
+  label.className = 'code-lang';
+  label.textContent = lang || 'text';
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.setAttribute('aria-label', 'Copy code to clipboard');
+  btn.addEventListener('click', async () => {
+    const text = Array.from(codeEl.querySelectorAll('.line .lc'))
+      .map(l => l.textContent === ' ' ? '' : l.textContent)
+      .join('\n');
+    try {
+      await navigator.clipboard.writeText(text);
+      showCopyFeedback(btn, 'Copied!');
+    } catch (err) {
+      console.error('Copy failed:', err);
+      showCopyFeedback(btn, 'Failed');
+    }
+  });
+
+  header.appendChild(label);
+  header.appendChild(btn);
+
+  preBlock.parentNode.insertBefore(wrapper, preBlock);
+  wrapper.appendChild(header);
+  wrapper.appendChild(preBlock);
+}
+
+function wrapLines(codeEl) {
+  if (codeEl.querySelector('.line')) return;
+
+  const raw = codeEl.textContent.replace(/\n$/, '');
+  const lines = raw.split('\n');
+  const frag = document.createDocumentFragment();
+
+  lines.forEach((line, i) => {
+    const lineEl = document.createElement('span');
+    lineEl.className = 'line';
+
+    const num = document.createElement('span');
+    num.className = 'ln';
+    num.setAttribute('aria-hidden', 'true');
+    num.textContent = (i + 1).toString();
+
+    const content = document.createElement('span');
+    content.className = 'lc';
+    content.textContent = line.length ? line : ' ';
+
+    lineEl.appendChild(num);
+    lineEl.appendChild(content);
+    frag.appendChild(lineEl);
+  });
+
+  codeEl.textContent = '';
+  codeEl.appendChild(frag);
+}
+
+function showCopyFeedback(button, text) {
+  const original = button.textContent;
   button.textContent = text;
-  button.classList.add(className);
-  
-  setTimeout(() => {
-    button.textContent = originalText;
-    button.className = originalClasses;
-  }, 2000);
+  setTimeout(() => { button.textContent = original; }, 1500);
+}
+
+// READING PROGRESS BAR — fills as the user scrolls through a post.
+function initializeProgressBar() {
+  const article = document.querySelector('#contentArea article');
+  if (!article) return;
+
+  const bar = document.createElement('div');
+  bar.id = 'readingProgress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+
+  const update = () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+    bar.style.width = Math.min(100, Math.max(0, pct)) + '%';
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+}
+
+// BACK-TO-TOP BUTTON
+function initializeBackToTop() {
+  const btn = document.createElement('button');
+  btn.id = 'backToTop';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.innerHTML = '&#8593;';
+  document.body.appendChild(btn);
+
+  const toggle = () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  };
+  toggle();
+  window.addEventListener('scroll', toggle, { passive: true });
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+// SEARCH SHORTCUT — `/` focuses search (unless user is already typing somewhere)
+function initializeSearchShortcut() {
+  const searchInput = document.getElementById('searchInput');
+  if (!searchInput) return;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== '/') return;
+    const t = e.target;
+    const tag = t && t.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || (t && t.isContentEditable)) return;
+    e.preventDefault();
+    searchInput.focus();
+    searchInput.select();
+  });
+}
+
+// HEADING ANCHORS — adds a clickable # next to h2/h3/h4 in post content
+function initializeHeadingAnchors() {
+  const headings = document.querySelectorAll('#contentArea h2, #contentArea h3, #contentArea h4');
+  headings.forEach(h => {
+    if (!h.id) h.id = slugify(h.textContent);
+    if (h.querySelector('.heading-anchor')) return;
+
+    const a = document.createElement('a');
+    a.className = 'heading-anchor';
+    a.href = '#' + h.id;
+    a.setAttribute('aria-label', 'Link to this section');
+    a.textContent = '#';
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const url = location.origin + location.pathname + '#' + h.id;
+      history.replaceState(null, '', '#' + h.id);
+      h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (navigator.clipboard) navigator.clipboard.writeText(url).catch(() => {});
+    });
+    h.appendChild(a);
+  });
+}
+
+function slugify(s) {
+  return s.toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .slice(0, 60);
 }
 
 // SEARCH FUNCTIONALITY
@@ -105,12 +248,9 @@ function initializeSearch() {
 
     if (!searchInput || !searchResultsContainer) return;
 
-    // Fetch post data
     fetch('/search.json')
         .then(response => response.json())
-        .then(data => {
-            allPosts = data;
-        })
+        .then(data => { allPosts = data; })
         .catch(error => console.error('Error fetching search data:', error));
 
     const debounce = (func, delay) => {
@@ -122,17 +262,14 @@ function initializeSearch() {
     };
 
     const performSearch = (query) => {
-        if (query.length < 2) {
-            hideResults();
-            return;
-        }
+        if (query.length < 2) { hideResults(); return; }
 
         const lowerCaseQuery = query.toLowerCase();
-        const results = allPosts.filter(post => 
+        const results = allPosts.filter(post =>
             post.title.toLowerCase().includes(lowerCaseQuery) ||
             post.excerpt.toLowerCase().includes(lowerCaseQuery) ||
             post.categories.some(cat => cat.toLowerCase().includes(lowerCaseQuery))
-        ).slice(0, 10); // Limit results
+        ).slice(0, 10);
 
         displayResults(results);
     };
@@ -161,10 +298,9 @@ function initializeSearch() {
 
     searchInput.addEventListener('input', debounce(e => performSearch(e.target.value), 300));
     searchInput.addEventListener('focus', e => {
-        if(e.target.value.length >= 2) performSearch(e.target.value);
+        if (e.target.value.length >= 2) performSearch(e.target.value);
     });
 
-    // Keyboard navigation
     searchInput.addEventListener('keydown', e => {
         const items = searchResultsContainer.querySelectorAll('.search-result-item');
         if (items.length === 0) return;
@@ -179,9 +315,7 @@ function initializeSearch() {
             updateSelection(items);
         } else if (e.key === 'Enter') {
             e.preventDefault();
-            if (selectedIndex > -1) {
-                items[selectedIndex].click();
-            }
+            if (selectedIndex > -1) items[selectedIndex].click();
         } else if (e.key === 'Escape') {
             hideResults();
         }
@@ -197,15 +331,13 @@ function initializeSearch() {
             }
         });
     };
-    
-    // Hide results when clicking outside
+
     document.addEventListener('click', (e) => {
         if (!searchInput.contains(e.target) && !searchResultsContainer.contains(e.target)) {
             hideResults();
         }
     });
 }
-
 
 // IMAGE FALLBACKS
 function initializeImageFallbacks() {
@@ -214,10 +346,8 @@ function initializeImageFallbacks() {
       const placeholder = document.createElement('div');
       placeholder.className = 'w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center';
       placeholder.innerHTML = '<span class="text-gray-600 text-sm font-[Indie Flower]">Image unavailable</span>';
-      
-      if(this.parentNode) {
-          this.parentNode.insertBefore(placeholder, this);
-      }
+
+      if (this.parentNode) this.parentNode.insertBefore(placeholder, this);
       this.style.display = 'none';
     });
   });
@@ -230,9 +360,7 @@ function initializeSmoothScrolling() {
       e.preventDefault();
       try {
         const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } catch (error) {
         console.warn('Smooth scroll target not found:', this.getAttribute('href'));
       }
@@ -243,8 +371,12 @@ function initializeSmoothScrolling() {
 // INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
   initializeDarkMode();
-  initializeCodeCopy();
+  initializeCodeBlocks();
   initializeImageFallbacks();
   initializeSmoothScrolling();
-  initializeSearch(); // Initialize the new search feature
+  initializeSearch();
+  initializeSearchShortcut();
+  initializeHeadingAnchors();
+  initializeProgressBar();
+  initializeBackToTop();
 });

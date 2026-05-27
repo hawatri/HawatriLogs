@@ -11,8 +11,8 @@ tags: [jekyll, static-sites, github-pages, web-development]
 Building your own website doesn't have to be complicated or expensive. With Jekyll, you can create a beautiful, fast, and maintainable site that's perfect for blogs, portfolios, or documentation. Let's explore how you can get started with this powerful static site generator.
 
 <div class="blog-image w-1/2 mx-auto">
-  <img src="{{ '/assets/images/posts/2025-08-30-jekyll-tutorial/thumbnail.jpg' | relative_url }}" 
-       alt="Description" 
+  <img src="{{ '/assets/images/posts/2025-08-30-jekyll-tutorial/thumbnail.jpg' | relative_url }}"
+       alt="Description"
        loading="lazy">
   <div class="blog-image-caption">
     Create Your Own Sites
@@ -43,8 +43,8 @@ Before diving in, you'll need:
 
 ### Installation
 
-<div class="code-snippet">
-<pre><code># Install Jekyll
+```bash
+# Install Jekyll
 gem install jekyll bundler
 
 # Create a new Jekyll site
@@ -54,8 +54,8 @@ jekyll new my-awesome-site
 cd my-awesome-site
 
 # Start the local server
-bundle exec jekyll serve</code></pre>
-</div>
+bundle exec jekyll serve
+```
 
 Your site will be available at `http://localhost:4000`!
 
@@ -63,23 +63,23 @@ Your site will be available at `http://localhost:4000`!
 
 A typical Jekyll site looks like this:
 
-<div class="code-snippet">
-<pre><code>my-site/
+```text
+my-site/
 ├── _posts/          # Blog posts go here
 ├── _layouts/        # HTML templates
 ├── _includes/       # Reusable components
 ├── _sass/           # Sass stylesheets
 ├── assets/          # Images, CSS, JavaScript
 ├── _config.yml      # Site configuration
-└── index.md         # Homepage content</code></pre>
-</div>
+└── index.md         # Homepage content
+```
 
 ## Writing Your First Post
 
 Create a new file in the `_posts` directory with the naming convention `YYYY-MM-DD-title.md`:
 
-<div class="code-snippet">
-<pre><code>---
+```markdown
+---
 layout: post
 title: "My First Jekyll Post"
 date: 2025-08-30
@@ -90,7 +90,7 @@ Welcome to my Jekyll blog! This is my first post.
 
 ## Getting Started
 
-Jekyll makes it easy to write in Markdown and have it 
+Jekyll makes it easy to write in Markdown and have it
 converted to beautiful HTML automatically.
 
 ### Features I Love
@@ -98,8 +98,8 @@ converted to beautiful HTML automatically.
 - Simple markdown syntax
 - Automatic syntax highlighting
 - Built-in pagination
-- Theme support</code></pre>
-</div>
+- Theme support
+```
 
 ## Customizing Your Site
 
@@ -107,8 +107,8 @@ converted to beautiful HTML automatically.
 
 Edit `_config.yml` to customize your site:
 
-<div class="code-snippet">
-<pre><code>title: My Awesome Site
+```yaml
+title: My Awesome Site
 description: A blog about web development and life
 author: Your Name
 email: your-email@example.com
@@ -123,86 +123,88 @@ permalink: /posts/:title/
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-seo-tag</code></pre>
-</div>
+  - jekyll-seo-tag
+```
 
 ### Layouts and Includes
 
 Create reusable templates in `_layouts` and components in `_includes`:
 
-<div class="code-snippet">
-<pre><code>&lt;!-- _layouts/default.html --&gt;
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;{% raw %}{{ page.title }} - {{ site.title }}{% endraw %}&lt;/title&gt;
-  &lt;meta name="description" content="{% raw %}{{ page.excerpt | strip_html }}{% endraw %}"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  {% raw %}{% include header.html %}{% endraw %}
-  
-  &lt;main&gt;
-    {% raw %}{{ content }}{% endraw %}
-  &lt;/main&gt;
-  
-  {% raw %}{% include footer.html %}{% endraw %}
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-</div>
+{% raw %}
+```html
+<!-- _layouts/default.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ page.title }} - {{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | strip_html }}">
+</head>
+<body>
+  {% include header.html %}
+
+  <main>
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+</body>
+</html>
+```
+{% endraw %}
 
 ## Styling with Sass
 
 Jekyll has built-in Sass support. Create a `_sass` directory and import your stylesheets:
 
-<div class="code-snippet">
-<pre><code>// assets/css/main.scss
+```scss
+// assets/css/main.scss
 ---
 ---
 @import "base";
 @import "layout";
-@import "components";</code></pre>
-</div>
+@import "components";
+```
 
 ## Adding Features
 
 ### Search Functionality
 
-<div class="code-snippet">
-<pre><code>// assets/js/search.js
+```javascript
+// assets/js/search.js
 function performSearch() {
   const query = document.getElementById('search-input').value.toLowerCase();
   const posts = document.querySelectorAll('.post');
-  
+
   posts.forEach(post => {
     const title = post.querySelector('h2').textContent.toLowerCase();
     const content = post.querySelector('.excerpt').textContent.toLowerCase();
-    
+
     if (title.includes(query) || content.includes(query)) {
       post.style.display = 'block';
     } else {
       post.style.display = 'none';
     }
   });
-}</code></pre>
-</div>
+}
+```
 
 ### Contact Form
 
-<div class="code-snippet">
-<pre><code>&lt;!-- _includes/contact-form.html --&gt;
-&lt;form action="https://formspree.io/f/your-form-id" method="POST"&gt;
-  &lt;label for="name"&gt;Name:&lt;/label&gt;
-  &lt;input type="text" name="name" required&gt;
-  
-  &lt;label for="email"&gt;Email:&lt;/label&gt;
-  &lt;input type="email" name="email" required&gt;
-  
-  &lt;label for="message"&gt;Message:&lt;/label&gt;
-  &lt;textarea name="message" required&gt;&lt;/textarea&gt;
-  
-  &lt;button type="submit"&gt;Send&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-</div>
+```html
+<!-- _includes/contact-form.html -->
+<form action="https://formspree.io/f/your-form-id" method="POST">
+  <label for="name">Name:</label>
+  <input type="text" name="name" required>
+
+  <label for="email">Email:</label>
+  <input type="email" name="email" required>
+
+  <label for="message">Message:</label>
+  <textarea name="message" required></textarea>
+
+  <button type="submit">Send</button>
+</form>
+```
 
 ## Deployment to GitHub Pages
 
@@ -219,34 +221,36 @@ To use a custom domain:
 2. Configure DNS settings with your domain provider
 3. Enable HTTPS in GitHub Pages settings
 
-<div class="code-snippet">
-<pre><code># CNAME file content
-www.yourdomain.com</code></pre>
-</div>
+```text
+# CNAME file content
+www.yourdomain.com
+```
 
 ## Performance Optimization
 
 ### Image Optimization
 
-<div class="code-snippet">
-<pre><code>&lt;!-- Responsive images --&gt;
-&lt;picture&gt;
-  &lt;source media="(max-width: 768px)" srcset="{% raw %}{{ '/assets/images/mobile-image.jpg' | relative_url }}{% endraw %}"&gt;
-  &lt;img src="{% raw %}{{ '/assets/images/desktop-image.jpg' | relative_url }}{% endraw %}" alt="Description"&gt;
-&lt;/picture&gt;</code></pre>
-</div>
+{% raw %}
+```html
+<!-- Responsive images -->
+<picture>
+  <source media="(max-width: 768px)" srcset="{{ '/assets/images/mobile-image.jpg' | relative_url }}">
+  <img src="{{ '/assets/images/desktop-image.jpg' | relative_url }}" alt="Description">
+</picture>
+```
+{% endraw %}
 
 ### Minification
 
 Add to your `_config.yml`:
 
-<div class="code-snippet">
-<pre><code>sass:
+```yaml
+sass:
   style: compressed
 
 plugins:
-  - jekyll-minifier</code></pre>
-</div>
+  - jekyll-minifier
+```
 
 ## Advanced Tips
 
@@ -254,42 +258,44 @@ plugins:
 
 Create custom content types beyond posts:
 
-<div class="code-snippet">
-<pre><code># _config.yml
+```yaml
+# _config.yml
 collections:
   projects:
     output: true
-    permalink: /projects/:name/</code></pre>
-</div>
+    permalink: /projects/:name/
+```
 
 ### Data Files
 
 Store structured data in `_data` directory:
 
-<div class="code-snippet">
-<pre><code># _data/team.yml
+```yaml
+# _data/team.yml
 - name: John Doe
   role: Developer
   image: john.jpg
 
 - name: Jane Smith
   role: Designer
-  image: jane.jpg</code></pre>
-</div>
+  image: jane.jpg
+```
 
 ### Liquid Templating
 
 Use Jekyll's templating language for dynamic content:
 
-<div class="code-snippet">
-<pre><code>{% raw %}{% for post in site.posts limit:5 %}{% endraw %}
-  &lt;article&gt;
-    &lt;h2&gt;&lt;a href="{% raw %}{{ post.url }}{% endraw %}"&gt;{% raw %}{{ post.title }}{% endraw %}&lt;/a&gt;&lt;/h2&gt;
-    &lt;time&gt;{% raw %}{{ post.date | date: "%B %d, %Y" }}{% endraw %}&lt;/time&gt;
-    &lt;p&gt;{% raw %}{{ post.excerpt }}{% endraw %}&lt;/p&gt;
-  &lt;/article&gt;
-{% raw %}{% endfor %}{% endraw %}</code></pre>
-</div>
+{% raw %}
+```liquid
+{% for post in site.posts limit:5 %}
+  <article>
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <time>{{ post.date | date: "%B %d, %Y" }}</time>
+    <p>{{ post.excerpt }}</p>
+  </article>
+{% endfor %}
+```
+{% endraw %}
 
 ## Common Pitfalls to Avoid
 
@@ -324,4 +330,3 @@ Ready to start building? Head over to [Jekyll's official documentation](https://
 - [Jekyll Themes](https://jekyllthemes.io/)
 - [Liquid Template Language](https://shopify.github.io/liquid/)
 - [Jekyll Talk Community](https://talk.jekyllrb.com/)
-

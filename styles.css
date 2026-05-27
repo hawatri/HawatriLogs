@@ -1,62 +1,176 @@
 /* ========================================
-   HAWATRI LOGS - OPTIMIZED STYLES
-   Compressed but readable version
+   HAWATRI LOGS - STYLES
    ======================================== */
+
+/* DESIGN TOKENS — single source of truth for the papery palette.
+   Override under .dark for night-time paper. */
+:root {
+  --paper:        #faf6e8;
+  --paper-card:   #fbf8eb;
+  --paper-sunken: #f3eed5;
+  --ink:          #2b2a26;
+  --ink-soft:     #5a564c;
+  --ink-faint:    #8a8678;
+  --accent:       #6b4f2a;
+  --accent-warn:  #b45309;
+  --accent-info:  #1e6091;
+  --rule:         #d6cfb5;
+}
+
+.dark {
+  --paper:        #14110d;
+  --paper-card:   #1d1812;
+  --paper-sunken: #261f17;
+  --ink:          #e8dfca;
+  --ink-soft:     #b8af9a;
+  --ink-faint:    #7c7565;
+  --accent:       #d4a76a;
+  --accent-warn:  #f59e0b;
+  --accent-info:  #7dd3fc;
+  --rule:         #3a3328;
+}
 
 /* BASE STYLES */
 body {
   font-family: "Indie Flower", cursive;
-  transition: all 0.3s ease;
-  background-color: white;
-  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(0, 0, 0, 0.012) 1px, transparent 1px);
+  background-size: 60px 60px, 80px 80px, 100px 100px;
+  color: var(--ink);
 }
 
-/* DARK MODE */
-.dark body { 
-  background-color: #1a1a1a; 
-  color: #f0f0f0; 
-}
-.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 { 
-  color: #f0f0f0; 
-}
-.dark p { 
-  color: #e0e0e0; 
+.dark body {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
 }
 
-/* LAYOUT COMPONENTS */
-header div, nav, aside, #contentArea, footer div {
-  background-color: white;
-  border-color: black;
-  transition: all 0.3s ease;
+/* Heading + paragraph colors come from the token */
+h1, h2, h3, h4, h5, h6 { color: var(--ink); }
+p { color: var(--ink); }
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 { color: var(--ink); }
+.dark p { color: var(--ink); }
+
+/* PAPERY BOXES — header, nav, sidebar, content, footer, cards.
+   Borders are drawn on a ::before overlay so the pencil filter can warp the line
+   without distorting the actual text/images inside. */
+.papery,
+header > div,
+nav,
+aside,
+#contentArea,
+footer > div,
+#blogGrid > div,
+#contentArea .border-2.border-black,
+#contentArea .border-l-4.border-black {
+  position: relative;
+  background-color: var(--paper-card);
+  border: none !important;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.dark header div, .dark nav, .dark aside, .dark #contentArea, .dark footer div {
-  background-color: #2a2a2a;
-  border-color: #f0f0f0;
+.papery::before,
+header > div::before,
+nav::before,
+aside::before,
+#contentArea::before,
+footer > div::before,
+#blogGrid > div::before,
+#contentArea .border-2.border-black::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 2px solid var(--ink);
+  border-radius: 0.5rem;
+  filter: url(#pencil-border);
+  pointer-events: none;
+  z-index: 0;
 }
+
+/* Make sure interactive content sits above the border overlay. */
+header > div > *,
+nav > *,
+aside > *,
+#contentArea > *,
+footer > div > *,
+#blogGrid > div > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* The H1/H2 underlines in post body — also pencil-y */
+#contentArea h1,
+#contentArea h2 {
+  border-bottom: none;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+#contentArea h1::after,
+#contentArea h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--ink);
+  filter: url(#pencil-border);
+}
+
+/* Hand-drawn left bars (home page "What you'll find here" section) */
+#contentArea .border-l-4.border-black {
+  border: none !important;
+  padding-left: 1.5rem;
+  position: relative;
+}
+#contentArea .border-l-4.border-black::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--ink);
+  filter: url(#pencil-border);
+  border: none;
+  border-radius: 0;
+  inset: auto;
+}
+
+/* CARD TILT — sticky-note feel on grids */
+#blogGrid > div:nth-child(3n + 1) { transform: rotate(-1deg); }
+#blogGrid > div:nth-child(3n + 2) { transform: rotate(0.5deg); }
+#blogGrid > div:nth-child(3n + 3) { transform: rotate(-0.3deg); }
+#blogGrid > div:nth-child(5n)     { transform: rotate(1.2deg); }
+#blogGrid > div:hover { transform: rotate(0deg) translateY(-2px); }
+
+#contentArea .grid > div:nth-child(odd)  { transform: rotate(-0.6deg); }
+#contentArea .grid > div:nth-child(even) { transform: rotate(0.7deg); }
+#contentArea .grid > div:hover           { transform: rotate(0deg); }
 
 /* NAVIGATION */
 nav input {
-  background-color: white;
-  color: black;
-  transition: all 0.3s ease;
+  background-color: var(--paper-card);
+  color: var(--ink);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dark nav input {
-  background-color: #2a2a2a;
-  color: #f0f0f0;
-}
-
-.dark nav input::placeholder { 
-  color: #999; 
+nav input::placeholder {
+  color: var(--ink-faint);
 }
 
 nav button:hover, .hover\:bg-gray-100:hover {
-  background-color: #f5f5f5;
+  background-color: var(--paper-sunken);
 }
 
 .dark nav button:hover, .dark .hover\:bg-gray-100:hover {
-  background-color: #3a3a3a;
+  background-color: var(--paper-sunken);
 }
 
 /* SEARCH DROPDOWN */
@@ -66,27 +180,19 @@ nav button:hover, .hover\:bg-gray-100:hover {
   left: 0;
   right: 0;
   z-index: 50;
-  background-color: white;
-  border: 2px solid black;
+  background-color: var(--paper-card);
+  border: 2px solid var(--ink);
   border-radius: 0.5rem;
   max-height: 400px;
   overflow-y: auto;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-.dark #searchResults {
-  background-color: #2a2a2a;
-  border-color: #f0f0f0;
-}
 .search-result-item {
   display: block;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e5e7eb;
-  color: black;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
   transition: background-color 0.2s;
-}
-.dark .search-result-item {
-  border-bottom-color: #4a4a4a;
-  color: #f0f0f0;
 }
 .search-result-item:last-child {
   border-bottom: none;
@@ -105,36 +211,26 @@ nav button:hover, .hover\:bg-gray-100:hover {
 }
 .search-result-excerpt {
   font-size: 0.9rem;
-  color: #4b5563;
+  color: var(--ink-soft);
   margin-top: 0.25rem;
-}
-.dark .search-result-excerpt {
-  color: #9ca3af;
 }
 .search-no-results {
   padding: 1rem;
   text-align: center;
-  color: #6b7280;
-}
-.dark .search-no-results {
-  color: #9ca3af;
+  color: var(--ink-faint);
 }
 
 /* TEXT COLORS */
-.text-gray-400 { color: #999; }
-.text-gray-600 { color: #666; }
-.text-gray-700 { color: #555; }
+.text-gray-400 { color: var(--ink-faint); }
+.text-gray-600 { color: var(--ink-soft); }
+.text-gray-700 { color: var(--ink-soft); }
 
-.dark .text-gray-400 { color: #666; }
-.dark .text-gray-600 { color: #999; }
-.dark .text-gray-700 { color: #ccc; }
-
-/* LINKS */
-.text-black.underline { color: black; }
-.dark .text-black.underline { color: #f0f0f0; }
-
-.text-black.underline:hover { color: #666; }
-.dark .text-black.underline:hover { color: #ccc; }
+/* LINKS — Tailwind's text-black class shipped on titles, nav arrows, search
+   input. Override at class level so it follows the ink token in both themes. */
+.text-black { color: var(--ink) !important; }
+.text-black:hover,
+.hover\:text-gray-700:hover { color: var(--ink-soft) !important; }
+.text-black.underline:hover { color: var(--accent) !important; }
 
 /* SEARCH INPUT ENHANCEMENTS */
 nav form {
@@ -147,7 +243,7 @@ nav form svg {
 }
 
 .dark nav form svg {
-  color: #999;
+  color: var(--ink-faint);
 }
 
 nav input:focus {
@@ -200,7 +296,7 @@ nav input:focus {
 }
 
 .dark #contentArea h1, .dark #contentArea h2 {
-  border-color: #f0f0f0;
+  border-color: var(--ink);
 }
 
 #contentArea p {
@@ -209,8 +305,7 @@ nav input:focus {
 }
 
 #contentArea strong { font-weight: 900; }
-#contentArea em { font-style: italic; color: #333; }
-.dark #contentArea em { color: #ccc; }
+#contentArea em { font-style: italic; color: var(--ink-soft); }
 
 /* LISTS */
 #contentArea ul, #contentArea ol {
@@ -225,63 +320,132 @@ nav input:focus {
 
 /* BLOCKQUOTES */
 #contentArea blockquote {
-  border-left: 4px solid black;
-  background: #f8f9fa;
+  border-left: 4px solid var(--ink);
+  background: var(--paper-sunken);
   padding: 1.5rem 2rem;
   margin: 2rem 0;
   font-style: italic;
+  color: var(--ink-soft);
   border-radius: 0 8px 8px 0;
-}
-
-.dark #contentArea blockquote {
-  border-left-color: #f0f0f0;
-  background: #2a2a2a;
-  color: #e0e0e0;
 }
 
 /* CODE STYLING */
 #contentArea code {
-  background: #f1f5f9;
-  color: #e11d48;
+  background: var(--paper-sunken);
+  color: var(--accent);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
   font-family: 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
   font-size: 0.9em;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--rule);
 }
 
 .dark #contentArea code {
-  background: #2a2a2a;
-  color: #fbbf24;
-  border-color: #4a4a4a;
+  color: var(--accent);
+}
+
+/* CODE BLOCKS — wrapper holds a header bar + the scrollable <pre>.
+   Header is outside the scroll area, so the Copy button never overlaps code. */
+.code-block {
+  margin: 2rem 0;
+  border: 2px solid black;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #1e1e1e;
+}
+
+.dark .code-block {
+  border-color: var(--ink);
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem 0.4rem 1rem;
+  background: #111827;
+  color: #d1d5db;
+  border-bottom: 1px solid #374151;
+  font-family: 'Indie Flower', cursive;
+  font-size: 0.85rem;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.code-lang {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.code-header .copy-btn {
+  background: #374151;
+  color: white;
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: 'Indie Flower', cursive;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.code-header .copy-btn:hover {
+  background: #4b5563;
 }
 
 #contentArea pre {
-  background: white;
-  color: black;
-  border: 2px solid black;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin: 2rem 0;
+  background: #1e1e1e;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
   overflow-x: auto;
   font-family: 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
   font-size: 0.9rem;
   line-height: 1.5;
-  position: relative;
-}
-
-.dark #contentArea pre {
-  border-color: #f0f0f0;
-  background: transparent;
-  color: white
 }
 
 #contentArea pre code {
   background: none;
   border: none;
-  padding: 0;
+  padding: 1rem 0;
   color: inherit;
   display: block;
+  font-family: inherit;
+  font-size: inherit;
+  width: max-content;
+  min-width: 100%;
+}
+
+#contentArea pre code .line {
+  display: flex;
+  align-items: flex-start;
+  white-space: pre;
+}
+
+#contentArea pre code .ln {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 3rem;
+  padding: 0 0.75rem 0 0.5rem;
+  text-align: right;
+  color: #6b7280;
+  background: #1e1e1e;
+  border-right: 1px solid #3a3a3a;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#contentArea pre code .lc {
+  flex: 1 1 auto;
+  padding: 0 1rem;
+  white-space: pre;
 }
 
 /* TABLES */
@@ -289,63 +453,42 @@ nav input:focus {
   width: 100%;
   border-collapse: collapse;
   margin: 2rem 0;
-  border: 2px solid black;
+  border: 2px solid var(--ink);
   border-radius: 8px;
   overflow: hidden;
 }
 
 #contentArea th, #contentArea td {
-  border: 1px solid black;
+  border: 1px solid var(--ink);
   padding: 0.75rem 1rem;
   text-align: left;
 }
 
 #contentArea th {
-  background: black;
-  color: white;
+  background: var(--ink);
+  color: var(--paper);
   font-weight: bold;
 }
 
 #contentArea tr:nth-child(even) {
-  background: #f8f9fa;
-}
-
-.dark #contentArea th, .dark #contentArea td {
-  border-color: #f0f0f0;
-}
-
-.dark #contentArea th {
-  background: #f0f0f0;
-  color: black;
-}
-
-.dark #contentArea tr:nth-child(even) {
-  background: #2a2a2a;
+  background: var(--paper-sunken);
 }
 
 /* HORIZONTAL RULES */
 #contentArea hr {
   border: none;
   height: 3px;
-  background: linear-gradient(90deg, transparent, black, transparent);
+  background: linear-gradient(90deg, transparent, var(--ink), transparent);
   margin: 2.5rem 0;
   border-radius: 2px;
 }
 
-.dark #contentArea hr {
-  background: linear-gradient(90deg, transparent, #f0f0f0, transparent);
-}
-
 /* IMAGES */
 .blog-image {
-  border: 2px solid black;
+  border: 2px solid var(--ink);
   border-radius: 0.5rem;
   overflow: hidden;
   margin: 1.5rem 0;
-}
-
-.dark .blog-image {
-  border-color: #f0f0f0;
 }
 
 .blog-image img {
@@ -358,26 +501,47 @@ nav input:focus {
   padding: 0.75rem;
   text-align: center;
   font-size: 0.9rem;
-  color: #666;
-  border-top: 1px solid #ddd;
-  background-color: white;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--rule);
+  background-color: var(--paper-card);
 }
 
-.dark .blog-image-caption {
-  color: #ccc;
-  border-top-color: #555;
-  background-color: #2a2a2a;
-}
-
-/* TAGS AND CATEGORIES */
+/* TAGS AND CATEGORIES — paper-stamp look. Light cream fill, soft ink text,
+   subtle pencil border via the existing SVG filter. Read like ink stamps in
+   both themes since they use design tokens. */
 .bg-gray-200 {
-  background-color: #e5e7eb;
-  color: #374151;
+  background-color: var(--paper-sunken);
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+  font-weight: 600;
+  position: relative;
+  border: none !important;
 }
 
-.dark .bg-gray-200 {
-  background-color: #4b5563;
-  color: #f9fafb;
+/* Outlined tag pills (border-gray-300 in post.html) — pencil-bordered, no fill */
+.border-gray-300 {
+  background-color: transparent;
+  color: var(--ink-soft);
+  border: none !important;
+  position: relative;
+  letter-spacing: 0.02em;
+}
+
+.border-gray-300::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 1.5px solid var(--ink-soft);
+  border-radius: 9999px;
+  filter: url(#pencil-border);
+  pointer-events: none;
+}
+
+/* Slight lift on hover for both pill kinds */
+.bg-gray-200:hover,
+.border-gray-300:hover {
+  color: var(--ink);
 }
 
 /* FOCUS AND INTERACTION */
@@ -459,7 +623,8 @@ button:focus, input:focus {
   #contentArea h2 { font-size: 1.75rem; }
   #contentArea h3 { font-size: 1.5rem; }
   #contentArea p { font-size: 1rem; text-align: left; }
-  #contentArea pre { padding: 1rem; font-size: 0.85rem; }
+  #contentArea pre { font-size: 0.85rem; }
+  #contentArea pre code { padding: 1rem 0; }
   
   /* Blog post cards on mobile */
   #blogGrid > div {
@@ -539,10 +704,15 @@ button:focus, input:focus {
   }
   
   #contentArea pre {
-    padding: 0.75rem;
     font-size: 0.8rem;
-    border-radius: 6px;
+    border-radius: 0;
   }
+  .code-block { border-radius: 6px; }
+  .code-header { padding: 0.35rem 0.6rem; font-size: 0.8rem; }
+  .code-lang { font-size: 0.7rem; }
+  #contentArea pre code { padding: 0.75rem 0; }
+  #contentArea pre code .ln { width: 2.25rem; padding: 0 0.5rem 0 0.25rem; }
+  #contentArea pre code .lc { padding: 0 0.75rem; }
   
   #contentArea blockquote {
     padding: 1rem;
@@ -648,16 +818,144 @@ button:focus, input:focus {
   }
 }
 
-/* Default light mode dropdown */
-select {
-  background-color: white;
-  color: black;
-  transition: all 0.3s ease;
+/* READING PROGRESS BAR */
+#readingProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: black;
+  z-index: 100;
+  transition: width 0.1s linear;
 }
 
-/* Dark mode dropdown */
-.dark select {
-  background-color: #2a2a2a;
-  color: #f0f0f0;
-  border-color: #f0f0f0;
+.dark #readingProgress {
+  background: var(--ink);
+}
+
+/* BACK-TO-TOP BUTTON */
+#backToTop {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--paper-card);
+  color: var(--ink);
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.15s ease;
+  z-index: 50;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+#backToTop.visible {
+  opacity: 0.9;
+  visibility: visible;
+}
+
+#backToTop:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.dark #backToTop {
+  background: var(--paper-card);
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+/* CALLOUTS — class-based replacement for inline-style callouts.
+   Use:  <div class="callout callout-tip"><strong>Tip:</strong> ...</div>
+   Variants: .callout-tip (default), .callout-warn, .callout-info */
+.callout {
+  position: relative;
+  background: var(--paper-sunken);
+  color: var(--ink);
+  padding: 1rem 1.25rem 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+  border: none;
+}
+
+.callout::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+  filter: url(#pencil-border);
+}
+
+.callout strong {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.callout.callout-tip::before  { background: var(--accent); }
+.callout.callout-tip strong   { color: var(--accent); }
+
+.callout.callout-warn::before { background: var(--accent-warn); }
+.callout.callout-warn strong  { color: var(--accent-warn); }
+
+.callout.callout-info::before { background: var(--accent-info); }
+.callout.callout-info strong  { color: var(--accent-info); }
+
+.callout p { margin: 0; color: inherit; }
+.callout p + p { margin-top: 0.5rem; }
+
+/* ABBREVIATIONS */
+abbr[title] {
+  text-decoration: underline dotted var(--ink-soft);
+  text-underline-offset: 3px;
+  cursor: help;
+}
+
+/* HEADING ANCHORS */
+#contentArea h2,
+#contentArea h3,
+#contentArea h4 {
+  scroll-margin-top: 1rem;
+}
+
+.heading-anchor {
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: var(--ink-faint);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  font-weight: normal;
+  font-size: 0.85em;
+}
+
+#contentArea h2:hover .heading-anchor,
+#contentArea h3:hover .heading-anchor,
+#contentArea h4:hover .heading-anchor,
+.heading-anchor:focus {
+  opacity: 1;
+}
+
+.heading-anchor:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 768px) {
+  /* Anchors are always visible on touch (no hover) */
+  .heading-anchor { opacity: 0.5; }
+  #backToTop { bottom: 1rem; right: 1rem; width: 40px; height: 40px; }
+}
+select {
+  background-color: var(--paper-card);
+  color: var(--ink);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

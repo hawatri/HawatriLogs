@@ -473,7 +473,7 @@ And this is after a third style.
 
 When markdown isn't enough, you can use HTML:
 
-<div style="background: #f0f8ff; padding: 1rem; border-left: 4px solid #0066cc; margin: 1rem 0;">
+<div class="callout callout-tip">
   <strong>Pro Tip:</strong> You can mix HTML with markdown for more complex layouts!
 </div>
 
