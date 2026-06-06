@@ -1,20 +1,34 @@
 /* ========================================
    HAWATRI LOGS - STYLES
+   "Scribble / Hand-Drawn Notebook" design system
    ======================================== */
 
 /* DESIGN TOKENS — single source of truth for the papery palette.
    Override under .dark for night-time paper. */
 :root {
-  --paper:        #faf6e8;
-  --paper-card:   #fbf8eb;
-  --paper-sunken: #f3eed5;
-  --ink:          #2b2a26;
-  --ink-soft:     #5a564c;
-  --ink-faint:    #8a8678;
+  --paper:        #fdfbf7;   /* warm cream — base of everything */
+  --paper-card:   #fffdf8;
+  --paper-sunken: #f3eed9;
+  --ink:          #1f2937;   /* near-black "pen ink" */
+  --ink-soft:     #4b5563;
+  --ink-faint:    #6b7280;
   --accent:       #6b4f2a;
   --accent-warn:  #b45309;
   --accent-info:  #1e6091;
   --rule:         #d6cfb5;
+
+  /* pastel "marker" note fills */
+  --note-yellow:  #fef9c3;
+  --note-pink:    #fce7f3;
+  --note-blue:    #dbeafe;
+  --note-green:   #dcfce7;
+  --note-purple:  #f3e8ff;
+  /* tape / pin accents */
+  --tape-yellow:  #fde68a;
+  --tape-pink:    #f9a8d4;
+  --tape-blue:    #93c5fd;
+  --tape-green:   #86efac;
+  --tape-purple:  #d8b4fe;
 }
 
 .dark {
@@ -28,102 +42,214 @@
   --accent-warn:  #f59e0b;
   --accent-info:  #7dd3fc;
   --rule:         #3a3328;
+
+  /* muted, low-light pastels so notes still read as colored paper */
+  --note-yellow:  #3a3410;
+  --note-pink:    #3a1f2e;
+  --note-blue:    #16263f;
+  --note-green:   #163020;
+  --note-purple:  #2a1f3a;
+  --tape-yellow:  #6b5e1a;
+  --tape-pink:    #7a3b58;
+  --tape-blue:    #2f5688;
+  --tape-green:   #2f6644;
+  --tape-purple:  #54387a;
 }
 
-/* BASE STYLES */
+/* ------------------------------------------------------------------
+   THE HAND-DRAWN TOOLKIT  (define once, reuse everywhere)
+   ------------------------------------------------------------------ */
+
+/* faint notebook grid on cream paper */
+.bg-grid-pattern {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(to right,  rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.dark .bg-grid-pattern {
+  background-image:
+    linear-gradient(to right,  rgba(255,255,255,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px);
+}
+
+/* THE signature: uneven, hand-drawn corners. Two variants so adjacent
+   boxes look different, like each was drawn separately. */
+.border-sketch {
+  border: 2px solid var(--ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+.border-sketch-2 {
+  border: 2px solid var(--ink);
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+}
+.border-sketch-dashed {        /* for "empty"/placeholder/drop zones */
+  border: 2px dashed var(--ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+
+/* soft paper drop shadow */
+.shadow-sketch { box-shadow: 2px 4px 8px rgba(0,0,0,0.08); }
+.dark .shadow-sketch { box-shadow: 2px 4px 10px rgba(0,0,0,0.35); }
+
+/* diagonal hatch "scribble fill" for progress bars / shapes */
+.scribble-fill-bar {
+  background: repeating-linear-gradient(45deg,
+    transparent, transparent 2px, var(--ink) 2px, var(--ink) 4px);
+}
+
+/* PASTEL STICKY NOTES — pastel fill that adapts to the theme. Pair with a
+   border-sketch class + a rotation in the markup. */
+.note-yellow { background-color: var(--note-yellow); }
+.note-pink   { background-color: var(--note-pink); }
+.note-blue   { background-color: var(--note-blue); }
+.note-green  { background-color: var(--note-green); }
+.note-purple { background-color: var(--note-purple); }
+
+/* WASHI TAPE — a small semi-transparent bar stuck to the top of a note.
+   <span class="tape tape-blue"></span> inside a `relative` note. */
+.tape {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 3rem;
+  height: 1.1rem;
+  background-color: var(--tape-yellow);
+  opacity: 0.8;
+  border-radius: 2px;
+  z-index: 2;
+}
+.tape-yellow { background-color: var(--tape-yellow); }
+.tape-pink   { background-color: var(--tape-pink); }
+.tape-blue   { background-color: var(--tape-blue); }
+.tape-green  { background-color: var(--tape-green); }
+.tape-purple { background-color: var(--tape-purple); }
+
+/* PUSHPIN — a colored dot with a soft shadow + tiny stem. */
+.pin {
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 30%, #fff6, var(--tape-pink) 60%);
+  border: 1.5px solid var(--ink);
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.25);
+  z-index: 2;
+}
+.pin-yellow { background: radial-gradient(circle at 35% 30%, #fff6, var(--tape-yellow) 60%); }
+.pin-pink   { background: radial-gradient(circle at 35% 30%, #fff6, var(--tape-pink) 60%); }
+.pin-blue   { background: radial-gradient(circle at 35% 30%, #fff6, var(--tape-blue) 60%); }
+.pin-green  { background: radial-gradient(circle at 35% 30%, #fff6, var(--tape-green) 60%); }
+.pin-purple { background: radial-gradient(circle at 35% 30%, #fff6, var(--tape-purple) 60%); }
+
+/* MARKER UNDERLINE — a short rotated colored bar under a heading/logo.
+   Wrap text in `.marker` (position:relative) and drop a `.marker-line` after. */
+.marker { position: relative; display: inline-block; z-index: 1; }
+.marker-line {
+  position: absolute;
+  bottom: -0.2rem;
+  left: -2%;
+  right: -2%;
+  height: 0.45rem;
+  background-color: var(--tape-blue);
+  opacity: 0.6;
+  border-radius: 9999px;
+  transform: rotate(-1.5deg);
+  z-index: -1;
+}
+.marker-line-yellow { background-color: var(--tape-yellow); }
+.marker-line-pink   { background-color: var(--tape-pink); }
+.marker-line-blue   { background-color: var(--tape-blue); }
+.marker-line-green  { background-color: var(--tape-green); }
+.marker-line-purple { background-color: var(--tape-purple); }
+
+/* INK DOODLES — monochrome pen-stroke SVGs. */
+.doodle { color: var(--ink); display: inline-block; vertical-align: middle; }
+
+/* ------------------------------------------------------------------
+   BASE
+   ------------------------------------------------------------------ */
 body {
-  font-family: "Indie Flower", cursive;
+  font-family: "Kalam", cursive;
   transition: background-color 0.3s ease, color 0.3s ease;
   background-color: var(--paper);
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.018) 1px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(0, 0, 0, 0.018) 1px, transparent 1px),
-    radial-gradient(circle at 40% 80%, rgba(0, 0, 0, 0.012) 1px, transparent 1px);
-  background-size: 60px 60px, 80px 80px, 100px 100px;
+    linear-gradient(to right,  rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--ink);
 }
 
 .dark body {
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    linear-gradient(to right,  rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
 }
 
-/* Heading + paragraph colors come from the token */
 h1, h2, h3, h4, h5, h6 { color: var(--ink); }
 p { color: var(--ink); }
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 { color: var(--ink); }
 .dark p { color: var(--ink); }
 
-/* PAPERY BOXES — header, nav, sidebar, content, footer, cards.
-   Borders are drawn on a ::before overlay so the pencil filter can warp the line
-   without distorting the actual text/images inside. */
+/* ------------------------------------------------------------------
+   CHROME BOXES — header, nav, sidebar, content, footer, cards.
+   Now wobble comes from the asymmetric border-sketch radius applied
+   directly (the old SVG pencil filter is retired).
+   ------------------------------------------------------------------ */
 .papery,
 header > div,
 nav,
 aside,
 #contentArea,
-footer > div,
-#blogGrid > div,
-#contentArea .border-2.border-black,
-#contentArea .border-l-4.border-black {
+footer > div {
   position: relative;
   background-color: var(--paper-card);
-  border: none !important;
+  border: 2px solid var(--ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.08);
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-
-.papery::before,
-header > div::before,
-nav::before,
-aside::before,
-#contentArea::before,
-footer > div::before,
-#blogGrid > div::before,
-#contentArea .border-2.border-black::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  box-sizing: border-box;
-  border: 2px solid var(--ink);
-  border-radius: 0.5rem;
-  filter: url(#pencil-border);
-  pointer-events: none;
-  z-index: 0;
+.dark .papery,
+.dark header > div,
+.dark nav,
+.dark aside,
+.dark #contentArea,
+.dark footer > div {
+  box-shadow: 2px 4px 10px rgba(0,0,0,0.35);
 }
 
-/* Make sure interactive content sits above the border overlay. */
-header > div > *,
-nav > *,
-aside > *,
-#contentArea > *,
-footer > div > *,
-#blogGrid > div > * {
-  position: relative;
-  z-index: 1;
-}
+/* alternate the radius on neighbours so corners never line up */
+nav { border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px; }
+aside { border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px; }
 
-/* The H1/H2 underlines in post body — also pencil-y */
+/* The H1/H2 underlines in post body — quick marker swipe */
 #contentArea h1,
 #contentArea h2 {
   border-bottom: none;
   position: relative;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.6rem;
 }
 #contentArea h1::after,
 #contentArea h2::after {
   content: '';
   position: absolute;
   left: 0;
-  right: 0;
+  width: 60%;
   bottom: 0;
-  height: 2px;
-  background: var(--ink);
-  filter: url(#pencil-border);
+  height: 0.4rem;
+  background: var(--tape-blue);
+  opacity: 0.55;
+  border-radius: 9999px;
+  transform: rotate(-1deg);
 }
+#contentArea h2::after { background: var(--tape-yellow); width: 45%; }
 
-/* Hand-drawn left bars (home page "What you'll find here" section) */
+/* Hand-drawn left bars (home / about "What you'll find here" sections) */
 #contentArea .border-l-4.border-black {
   border: none !important;
   padding-left: 1.5rem;
@@ -135,45 +261,60 @@ footer > div > *,
   left: 0;
   top: 0;
   bottom: 0;
-  width: 3px;
+  width: 4px;
   background: var(--ink);
-  filter: url(#pencil-border);
-  border: none;
-  border-radius: 0;
-  inset: auto;
+  border-radius: 2px;
 }
 
 /* CARD TILT — sticky-note feel on grids */
-#blogGrid > div:nth-child(3n + 1) { transform: rotate(-1deg); }
-#blogGrid > div:nth-child(3n + 2) { transform: rotate(0.5deg); }
-#blogGrid > div:nth-child(3n + 3) { transform: rotate(-0.3deg); }
-#blogGrid > div:nth-child(5n)     { transform: rotate(1.2deg); }
-#blogGrid > div:hover { transform: rotate(0deg) translateY(-2px); }
+#blogGrid > div:nth-child(3n + 1) { transform: rotate(-1.2deg); }
+#blogGrid > div:nth-child(3n + 2) { transform: rotate(0.6deg); }
+#blogGrid > div:nth-child(3n + 3) { transform: rotate(-0.4deg); }
+#blogGrid > div:nth-child(5n)     { transform: rotate(1.4deg); }
+#blogGrid > div:hover { transform: rotate(0deg) translateY(-4px) scale(1.02); z-index: 5; }
+/* blog cards clip their thumbnail (overflow-hidden), so seat the pin fully inside */
+#blogGrid > div .pin { top: 0.5rem; }
 
-#contentArea .grid > div:nth-child(odd)  { transform: rotate(-0.6deg); }
-#contentArea .grid > div:nth-child(even) { transform: rotate(0.7deg); }
-#contentArea .grid > div:hover           { transform: rotate(0deg); }
+#contentArea .grid > div:nth-child(odd)  { transform: rotate(-0.7deg); }
+#contentArea .grid > div:nth-child(even) { transform: rotate(0.8deg); }
+#contentArea .grid > div:hover           { transform: rotate(0deg) translateY(-2px); }
 
-/* NAVIGATION */
+/* ------------------------------------------------------------------
+   NAVIGATION
+   ------------------------------------------------------------------ */
 nav input {
   background-color: var(--paper-card);
   color: var(--ink);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+nav input::placeholder { color: var(--ink-faint); }
 
-nav input::placeholder {
-  color: var(--ink-faint);
+nav button:hover, .hover\:bg-gray-100:hover { background-color: var(--paper-sunken); }
+.dark nav button:hover, .dark .hover\:bg-gray-100:hover { background-color: var(--paper-sunken); }
+
+/* nav active item: rotated yellow highlight on a sketch box */
+nav a.nav-active {
+  background-color: var(--note-yellow);
+  border: 2px solid var(--ink);
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  transform: rotate(-1.5deg);
 }
 
-nav button:hover, .hover\:bg-gray-100:hover {
-  background-color: var(--paper-sunken);
+/* sketch search box */
+nav form {
+  position: relative;
+  border: 2px solid var(--ink) !important;
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px !important;
+  overflow: visible !important;
 }
+nav form svg { transition: color 0.3s ease; }
+.dark nav form svg { color: var(--ink-faint); }
+nav input:focus { outline: none; background-color: var(--paper-card); box-shadow: 0 0 0 3px rgba(0,0,0,0.08); }
+.dark nav input:focus { box-shadow: 0 0 0 3px rgba(240,240,240,0.1); }
 
-.dark nav button:hover, .dark .hover\:bg-gray-100:hover {
-  background-color: var(--paper-sunken);
-}
-
-/* SEARCH DROPDOWN */
+/* ------------------------------------------------------------------
+   SEARCH DROPDOWN
+   ------------------------------------------------------------------ */
 #searchResults {
   position: absolute;
   top: calc(100% + 8px);
@@ -182,10 +323,10 @@ nav button:hover, .hover\:bg-gray-100:hover {
   z-index: 50;
   background-color: var(--paper-card);
   border: 2px solid var(--ink);
-  border-radius: 0.5rem;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   max-height: 400px;
   overflow-y: auto;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.12);
 }
 .search-result-item {
   display: block;
@@ -194,131 +335,46 @@ nav button:hover, .hover\:bg-gray-100:hover {
   color: var(--ink);
   transition: background-color 0.2s;
 }
-.search-result-item:last-child {
-  border-bottom: none;
-}
+.search-result-item:last-child { border-bottom: none; }
 .search-result-item:hover, .search-result-item.selected {
-  background-color: #f3f4f6;
+  background-color: var(--paper-sunken);
   text-decoration: none;
 }
-.dark .search-result-item:hover, .dark .search-result-item.selected {
-  background-color: #3a3a3a;
-}
-.search-result-title {
-  font-weight: bold;
-  font-family: 'Indie Flower', cursive;
-  font-size: 1.1rem;
-}
-.search-result-excerpt {
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-  margin-top: 0.25rem;
-}
-.search-no-results {
-  padding: 1rem;
-  text-align: center;
-  color: var(--ink-faint);
-}
+.search-result-title { font-weight: bold; font-family: 'Kalam', cursive; font-size: 1.1rem; }
+.search-result-excerpt { font-size: 0.9rem; color: var(--ink-soft); margin-top: 0.25rem; }
+.search-no-results { padding: 1rem; text-align: center; color: var(--ink-faint); }
 
-/* TEXT COLORS */
+/* ------------------------------------------------------------------
+   TEXT COLORS / LINKS
+   ------------------------------------------------------------------ */
 .text-gray-400 { color: var(--ink-faint); }
+.text-gray-500 { color: var(--ink-faint); }
 .text-gray-600 { color: var(--ink-soft); }
 .text-gray-700 { color: var(--ink-soft); }
 
-/* LINKS — Tailwind's text-black class shipped on titles, nav arrows, search
-   input. Override at class level so it follows the ink token in both themes. */
 .text-black { color: var(--ink) !important; }
 .text-black:hover,
 .hover\:text-gray-700:hover { color: var(--ink-soft) !important; }
 .text-black.underline:hover { color: var(--accent) !important; }
 
-/* SEARCH INPUT ENHANCEMENTS */
-nav form {
-  position: relative;
-}
+/* ------------------------------------------------------------------
+   CONTENT TYPOGRAPHY
+   ------------------------------------------------------------------ */
+#contentArea { font-size: 1.125rem; line-height: 1.7; }
 
-/* Search icon */
-nav form svg {
-  transition: color 0.3s ease;
-}
+#contentArea h1 { font-size: 2.5rem; font-weight: bold; margin: 2rem 0 1.5rem 0; padding-bottom: 0.6rem; }
+#contentArea h2 { font-size: 2rem; font-weight: bold; margin: 1.75rem 0 1rem 0; padding-bottom: 0.4rem; }
+#contentArea h3 { font-size: 1.5rem; font-weight: bold; margin: 1.5rem 0 0.75rem 0; }
+#contentArea h4 { font-size: 1.25rem; font-weight: bold; margin: 1.25rem 0 0.5rem 0; }
+#contentArea h5, #contentArea h6 { font-size: 1.125rem; font-weight: bold; margin: 1rem 0 0.5rem 0; }
 
-.dark nav form svg {
-  color: var(--ink-faint);
-}
-
-nav input:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
-}
-
-.dark nav input:focus {
-  box-shadow: 0 0 0 3px rgba(240, 240, 240, 0.1);
-}
-
-/* CONTENT TYPOGRAPHY */
-#contentArea {
-  font-size: 1.125rem;
-  line-height: 1.7;
-}
-
-#contentArea h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin: 2rem 0 1.5rem 0;
-  border-bottom: 3px solid black;
-  padding-bottom: 0.5rem;
-}
-
-#contentArea h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 1.75rem 0 1rem 0;
-  border-bottom: 2px solid black;
-  padding-bottom: 0.25rem;
-}
-
-#contentArea h3 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 1.5rem 0 0.75rem 0;
-}
-
-#contentArea h4 {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 1.25rem 0 0.5rem 0;
-}
-
-#contentArea h5, #contentArea h6 {
-  font-size: 1.125rem;
-  font-weight: bold;
-  margin: 1rem 0 0.5rem 0;
-}
-
-.dark #contentArea h1, .dark #contentArea h2 {
-  border-color: var(--ink);
-}
-
-#contentArea p {
-  margin: 1rem 0;
-  text-align: justify;
-}
-
-#contentArea strong { font-weight: 900; }
+#contentArea p { margin: 1rem 0; text-align: justify; }
+#contentArea strong { font-weight: 700; }
 #contentArea em { font-style: italic; color: var(--ink-soft); }
 
-/* LISTS */
-#contentArea ul, #contentArea ol {
-  margin: 1.5rem 0;
-  padding-left: 2rem;
-}
+#contentArea ul, #contentArea ol { margin: 1.5rem 0; padding-left: 2rem; }
+#contentArea li { margin: 0.5rem 0; line-height: 1.6; }
 
-#contentArea li {
-  margin: 0.5rem 0;
-  line-height: 1.6;
-}
-
-/* BLOCKQUOTES */
 #contentArea blockquote {
   border-left: 4px solid var(--ink);
   background: var(--paper-sunken);
@@ -329,7 +385,9 @@ nav input:focus {
   border-radius: 0 8px 8px 0;
 }
 
-/* CODE STYLING */
+/* ------------------------------------------------------------------
+   CODE  (inline + blocks) — unchanged behaviour
+   ------------------------------------------------------------------ */
 #contentArea code {
   background: var(--paper-sunken);
   color: var(--accent);
@@ -339,66 +397,51 @@ nav input:focus {
   font-size: 0.9em;
   border: 1px solid var(--rule);
 }
+.dark #contentArea code { color: var(--accent); }
 
-.dark #contentArea code {
-  color: var(--accent);
-}
-
-/* CODE BLOCKS — wrapper holds a header bar + the scrollable <pre>.
-   Header is outside the scroll area, so the Copy button never overlaps code. */
 .code-block {
   margin: 2rem 0;
-  border: 2px solid black;
-  border-radius: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   overflow: hidden;
-  background: #1e1e1e;
+  background: var(--paper-sunken);
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.08);
 }
-
-.dark .code-block {
-  border-color: var(--ink);
-}
+.dark .code-block { box-shadow: 2px 4px 10px rgba(0,0,0,0.35); }
 
 .code-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.4rem 0.75rem 0.4rem 1rem;
-  background: #111827;
-  color: #d1d5db;
-  border-bottom: 1px solid #374151;
-  font-family: 'Indie Flower', cursive;
+  padding: 0.4rem 0.75rem 0.4rem 1.25rem;
+  background: var(--note-blue);
+  color: var(--ink);
+  border-bottom: 2px dashed var(--ink);
+  font-family: 'Kalam', cursive;
   font-size: 0.85rem;
   position: sticky;
   top: 0;
   z-index: 3;
 }
-
-.code-lang {
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #9ca3af;
-  font-size: 0.75rem;
-}
-
+.code-lang { text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-soft); font-size: 0.75rem; font-weight: 700; }
 .code-header .copy-btn {
-  background: #374151;
-  color: white;
-  padding: 0.2rem 0.7rem;
-  border-radius: 4px;
+  background: var(--paper-card);
+  color: var(--ink);
+  padding: 0.15rem 0.7rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
   font-size: 0.8rem;
-  font-family: 'Indie Flower', cursive;
-  border: none;
+  font-family: 'Kalam', cursive;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.15s ease;
 }
-
-.code-header .copy-btn:hover {
-  background: #4b5563;
-}
+.code-header .copy-btn:hover { background: var(--note-yellow); transform: rotate(-2deg); }
+.code-header .copy-btn:active { transform: translateY(1px); }
 
 #contentArea pre {
-  background: #1e1e1e;
-  color: #f0f0f0;
+  background: var(--paper-sunken);
+  color: var(--ink);
   border: none;
   border-radius: 0;
   padding: 0;
@@ -406,9 +449,8 @@ nav input:focus {
   overflow-x: auto;
   font-family: 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
-
 #contentArea pre code {
   background: none;
   border: none;
@@ -420,13 +462,7 @@ nav input:focus {
   width: max-content;
   min-width: 100%;
 }
-
-#contentArea pre code .line {
-  display: flex;
-  align-items: flex-start;
-  white-space: pre;
-}
-
+#contentArea pre code .line { display: flex; align-items: flex-start; white-space: pre; }
 #contentArea pre code .ln {
   position: sticky;
   left: 0;
@@ -435,20 +471,17 @@ nav input:focus {
   width: 3rem;
   padding: 0 0.75rem 0 0.5rem;
   text-align: right;
-  color: #6b7280;
-  background: #1e1e1e;
-  border-right: 1px solid #3a3a3a;
+  color: var(--ink-faint);
+  background: var(--paper-sunken);
+  border-right: 1.5px dashed var(--rule);
   user-select: none;
   -webkit-user-select: none;
 }
+#contentArea pre code .lc { flex: 1 1 auto; padding: 0 1rem; white-space: pre; }
 
-#contentArea pre code .lc {
-  flex: 1 1 auto;
-  padding: 0 1rem;
-  white-space: pre;
-}
-
-/* TABLES */
+/* ------------------------------------------------------------------
+   TABLES
+   ------------------------------------------------------------------ */
 #contentArea table {
   width: 100%;
   border-collapse: collapse;
@@ -457,24 +490,13 @@ nav input:focus {
   border-radius: 8px;
   overflow: hidden;
 }
+#contentArea th, #contentArea td { border: 1px solid var(--ink); padding: 0.75rem 1rem; text-align: left; }
+#contentArea th { background: var(--ink); color: var(--paper); font-weight: bold; }
+#contentArea tr:nth-child(even) { background: var(--paper-sunken); }
 
-#contentArea th, #contentArea td {
-  border: 1px solid var(--ink);
-  padding: 0.75rem 1rem;
-  text-align: left;
-}
-
-#contentArea th {
-  background: var(--ink);
-  color: var(--paper);
-  font-weight: bold;
-}
-
-#contentArea tr:nth-child(even) {
-  background: var(--paper-sunken);
-}
-
-/* HORIZONTAL RULES */
+/* ------------------------------------------------------------------
+   HR / IMAGES
+   ------------------------------------------------------------------ */
 #contentArea hr {
   border: none;
   height: 3px;
@@ -483,20 +505,13 @@ nav input:focus {
   border-radius: 2px;
 }
 
-/* IMAGES */
 .blog-image {
   border: 2px solid var(--ink);
-  border-radius: 0.5rem;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   overflow: hidden;
   margin: 1.5rem 0;
 }
-
-.blog-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
+.blog-image img { width: 100%; height: auto; display: block; }
 .blog-image-caption {
   padding: 0.75rem;
   text-align: center;
@@ -506,9 +521,9 @@ nav input:focus {
   background-color: var(--paper-card);
 }
 
-/* TAGS AND CATEGORIES — paper-stamp look. Light cream fill, soft ink text,
-   subtle pencil border via the existing SVG filter. Read like ink stamps in
-   both themes since they use design tokens. */
+/* ------------------------------------------------------------------
+   TAGS & CATEGORIES — paper-stamp pills
+   ------------------------------------------------------------------ */
 .bg-gray-200 {
   background-color: var(--paper-sunken);
   color: var(--ink-soft);
@@ -517,416 +532,55 @@ nav input:focus {
   position: relative;
   border: none !important;
 }
-
-/* Outlined tag pills (border-gray-300 in post.html) — pencil-bordered, no fill */
 .border-gray-300 {
   background-color: transparent;
   color: var(--ink-soft);
-  border: none !important;
+  border: 1.5px solid var(--ink-soft) !important;
+  border-radius: 9999px;
   position: relative;
   letter-spacing: 0.02em;
 }
-
-.border-gray-300::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  box-sizing: border-box;
-  border: 1.5px solid var(--ink-soft);
-  border-radius: 9999px;
-  filter: url(#pencil-border);
-  pointer-events: none;
-}
-
-/* Slight lift on hover for both pill kinds */
 .bg-gray-200:hover,
-.border-gray-300:hover {
-  color: var(--ink);
-}
+.border-gray-300:hover { color: var(--ink); }
 
-/* FOCUS AND INTERACTION */
-button:focus, input:focus {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
+/* ------------------------------------------------------------------
+   FOCUS / INTERACTION
+   ------------------------------------------------------------------ */
+button:focus, input:focus { outline: 2px solid currentColor; outline-offset: 2px; }
+.hover\:shadow-lg:hover { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+.dark .hover\:shadow-lg:hover { box-shadow: 0 10px 15px -3px rgba(255,255,255,0.1); }
 
-.hover\:shadow-lg:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-.dark .hover\:shadow-lg:hover {
-  box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
-}
-
-/* RESPONSIVE DESIGN */
-@media (max-width: 768px) {
-  body { padding: 0.5rem; }
-  
-  header div {
-    width: 200px !important;
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-  }
-  
-  main {
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  aside {
-    width: 100% !important;
-    min-height: auto !important;
-    padding: 1rem;
-    order: 1;
-  }
-
-  #contentArea {
-    width: 100%;
-    padding: 1rem;
-    min-height: 400px !important;
-    order: 2;
-  }
-  
-  nav {
-    padding: 0.75rem;
-    min-height: auto !important;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  
-  nav ul {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    font-size: 1rem;
-  }
-  
-  nav ul li {
-    white-space: nowrap;
-  }
-  
-  nav form {
-    min-width: 150px;
-    max-width: 200px;
-    min-height: 36px !important;
-    margin-left: 0;
-    margin-top: 0.5rem;
-    width: 100%;
-  }
-  
-  #blogGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  #contentArea h1 { font-size: 2rem; }
-  #contentArea h2 { font-size: 1.75rem; }
-  #contentArea h3 { font-size: 1.5rem; }
-  #contentArea p { font-size: 1rem; text-align: left; }
-  #contentArea pre { font-size: 0.85rem; }
-  #contentArea pre code { padding: 1rem 0; }
-  
-  /* Blog post cards on mobile */
-  #blogGrid > div {
-    margin-bottom: 1rem;
-  }
-  
-  #blogGrid .h-48 {
-    height: 200px;
-  }
-  
-  /* Table responsiveness */
-  #contentArea table {
-    font-size: 0.875rem;
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-  
-  #contentArea th, #contentArea td {
-    padding: 0.5rem;
-    min-width: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  body { padding: 0.25rem; }
-  
-  header div {
-    width: 180px !important;
-    font-size: 1.25rem;
-    padding: 0.5rem;
-  }
-  
-  nav {
-    flex-direction: column;
-    padding: 0.5rem;
-    gap: 0.75rem;
-    align-items: stretch;
-  }
-
-  nav ul {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-    font-size: 0.9rem;
-  }
-  
-  nav form {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-  }
-  
-  aside, #contentArea {
-    padding: 0.75rem;
-  }
-  
-  /* Typography adjustments for very small screens */
-  #contentArea {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-  
-  #contentArea h1 { 
-    font-size: 1.75rem; 
-    margin: 1.5rem 0 1rem 0;
-  }
-  
-  #contentArea h2 { 
-    font-size: 1.5rem; 
-    margin: 1.25rem 0 0.75rem 0;
-  }
-  
-  #contentArea h3 { 
-    font-size: 1.25rem; 
-    margin: 1rem 0 0.5rem 0;
-  }
-  
-  #contentArea pre {
-    font-size: 0.8rem;
-    border-radius: 0;
-  }
-  .code-block { border-radius: 6px; }
-  .code-header { padding: 0.35rem 0.6rem; font-size: 0.8rem; }
-  .code-lang { font-size: 0.7rem; }
-  #contentArea pre code { padding: 0.75rem 0; }
-  #contentArea pre code .ln { width: 2.25rem; padding: 0 0.5rem 0 0.25rem; }
-  #contentArea pre code .lc { padding: 0 0.75rem; }
-  
-  #contentArea blockquote {
-    padding: 1rem;
-    margin: 1.5rem 0;
-    font-size: 0.95rem;
-  }
-  
-  /* Blog grid improvements for small screens */
-  #blogGrid .p-4 {
-    padding: 0.75rem;
-  }
-  
-  #blogGrid h3 {
-    font-size: 1.125rem;
-    line-height: 1.4;
-  }
-  
-  #blogGrid .text-gray-700 {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-  
-  /* Recent posts sidebar adjustments */
-  aside h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  aside ul li {
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
-}
-
-/* Additional responsive utilities */
-@media (max-width: 640px) {
-  /* Improve touch targets */
-  nav a, nav button {
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-  }
-  
-  /* Better spacing for touch interfaces */
-  #blogGrid a, aside a {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  /* Improve form elements */
-  nav input {
-    font-size: 16px; /* Prevents zoom on iOS */
-    min-height: 44px;
-  }
-  
-  nav button {
-    min-width: 60px;
-  }
-}
-
-/* Landscape orientation adjustments */
-@media (max-width: 768px) and (orientation: landscape) {
-  main {
-    flex-direction: row;
-  }
-  
-  aside {
-    width: 300px !important;
-    order: 1;
-  }
-  
-  #contentArea {
-    order: 2;
-  }
-  
-  nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  
-  nav form {
-    margin-left: auto;
-    margin-top: 0;
-    width: auto;
-  }
-}
-
-/* High DPI display optimizations */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  #contentArea pre {
-    font-size: 0.85rem;
-  }
-  
-  nav {
-    border-width: 1px;
-  }
-  
-  header div, aside, #contentArea, footer div {
-    border-width: 1px;
-  }
-}
-
-/* READING PROGRESS BAR */
-#readingProgress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 0;
-  background: black;
-  z-index: 100;
-  transition: width 0.1s linear;
-}
-
-.dark #readingProgress {
-  background: var(--ink);
-}
-
-/* BACK-TO-TOP BUTTON */
-#backToTop {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+/* SKETCH PILL BUTTON — for the CTA links scattered around the pages.
+   Apply `.sketch-btn` (optionally with a `.note-*` color) in markup. */
+.sketch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   border: 2px solid var(--ink);
-  background: var(--paper-card);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  background-color: var(--note-yellow);
   color: var(--ink);
-  font-size: 1.25rem;
-  font-weight: bold;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.15s ease;
-  z-index: 50;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-#backToTop.visible {
-  opacity: 0.9;
-  visibility: visible;
-}
-
-#backToTop:hover {
-  opacity: 1;
-  transform: translateY(-2px);
-}
-
-.dark #backToTop {
-  background: var(--paper-card);
-  color: var(--ink);
-  border-color: var(--ink);
-}
-
-/* CALLOUTS — class-based replacement for inline-style callouts.
-   Use:  <div class="callout callout-tip"><strong>Tip:</strong> ...</div>
-   Variants: .callout-tip (default), .callout-warn, .callout-info */
-.callout {
-  position: relative;
-  background: var(--paper-sunken);
-  color: var(--ink);
-  padding: 1rem 1.25rem 1rem 1.5rem;
-  margin: 1.5rem 0;
-  border-radius: 0 6px 6px 0;
-  border: none;
-}
-
-.callout::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--accent);
-  filter: url(#pencil-border);
-}
-
-.callout strong {
-  color: var(--accent);
   font-weight: 700;
-  letter-spacing: 0.01em;
+  padding: 0.6rem 1.25rem;
+  transform: rotate(-2deg);
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease, background-color 0.2s ease;
+  text-decoration: none;
 }
+.sketch-btn:nth-of-type(even) { border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px; transform: rotate(2deg); }
+.sketch-btn:hover { transform: rotate(0deg) translateY(-2px); }
+.sketch-btn:active { transform: rotate(0deg) translateY(1px); }
 
-.callout.callout-tip::before  { background: var(--accent); }
-.callout.callout-tip strong   { color: var(--accent); }
-
-.callout.callout-warn::before { background: var(--accent-warn); }
-.callout.callout-warn strong  { color: var(--accent-warn); }
-
-.callout.callout-info::before { background: var(--accent-info); }
-.callout.callout-info strong  { color: var(--accent-info); }
-
-.callout p { margin: 0; color: inherit; }
-.callout p + p { margin-top: 0.5rem; }
-
-/* ABBREVIATIONS */
+/* ------------------------------------------------------------------
+   ABBR / HEADING ANCHORS
+   ------------------------------------------------------------------ */
 abbr[title] {
   text-decoration: underline dotted var(--ink-soft);
   text-underline-offset: 3px;
   cursor: help;
 }
 
-/* HEADING ANCHORS */
-#contentArea h2,
-#contentArea h3,
-#contentArea h4 {
-  scroll-margin-top: 1rem;
-}
-
+#contentArea h2, #contentArea h3, #contentArea h4 { scroll-margin-top: 1rem; }
 .heading-anchor {
   display: inline-block;
   margin-left: 0.5rem;
@@ -937,25 +591,155 @@ abbr[title] {
   font-weight: normal;
   font-size: 0.85em;
 }
-
 #contentArea h2:hover .heading-anchor,
 #contentArea h3:hover .heading-anchor,
 #contentArea h4:hover .heading-anchor,
-.heading-anchor:focus {
-  opacity: 1;
+.heading-anchor:focus { opacity: 1; }
+.heading-anchor:hover { color: var(--ink); }
+
+/* ------------------------------------------------------------------
+   READING PROGRESS / BACK-TO-TOP
+   ------------------------------------------------------------------ */
+#readingProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--ink);
+  z-index: 100;
+  transition: width 0.1s linear;
 }
 
-.heading-anchor:hover {
+#backToTop {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 46px;
+  height: 46px;
+  border: 2px solid var(--ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  background: var(--paper-card);
   color: var(--ink);
+  font-size: 1.25rem;
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.15s ease;
+  z-index: 50;
+  box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
 }
+#backToTop.visible { opacity: 0.9; visibility: visible; }
+#backToTop:hover { opacity: 1; transform: translateY(-2px) rotate(-3deg); }
+.dark #backToTop { background: var(--paper-card); color: var(--ink); border-color: var(--ink); }
 
-@media (max-width: 768px) {
-  /* Anchors are always visible on touch (no hover) */
-  .heading-anchor { opacity: 0.5; }
-  #backToTop { bottom: 1rem; right: 1rem; width: 40px; height: 40px; }
+/* ------------------------------------------------------------------
+   CALLOUTS
+   ------------------------------------------------------------------ */
+.callout {
+  position: relative;
+  background: var(--paper-sunken);
+  color: var(--ink);
+  padding: 1rem 1.25rem 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+  border: none;
 }
+.callout::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+.callout strong { color: var(--accent); font-weight: 700; letter-spacing: 0.01em; }
+.callout.callout-tip::before  { background: var(--accent); }
+.callout.callout-tip strong   { color: var(--accent); }
+.callout.callout-warn::before { background: var(--accent-warn); }
+.callout.callout-warn strong  { color: var(--accent-warn); }
+.callout.callout-info::before { background: var(--accent-info); }
+.callout.callout-info strong  { color: var(--accent-info); }
+.callout p { margin: 0; color: inherit; }
+.callout p + p { margin-top: 0.5rem; }
+
 select {
   background-color: var(--paper-card);
   color: var(--ink);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ------------------------------------------------------------------
+   RESPONSIVE
+   ------------------------------------------------------------------ */
+@media (max-width: 768px) {
+  body { padding: 0.5rem; }
+  header div { width: 220px !important; font-size: 1.5rem; padding: 0.5rem 1rem; }
+  main { flex-direction: column; gap: 1rem; margin-top: 1rem; }
+  aside { width: 100% !important; min-height: auto !important; padding: 1rem; order: 1; }
+  #contentArea { width: 100%; padding: 1rem; min-height: 400px !important; order: 2; }
+  nav { padding: 0.75rem; min-height: auto !important; flex-wrap: wrap; gap: 0.5rem; }
+  nav ul { flex-wrap: wrap; gap: 0.5rem; font-size: 1rem; }
+  nav ul li { white-space: nowrap; }
+  nav form { min-width: 150px; max-width: 200px; min-height: 36px !important; margin-left: 0; margin-top: 0.5rem; width: 100%; }
+  #blogGrid { grid-template-columns: 1fr; gap: 1rem; }
+  #contentArea h1 { font-size: 2rem; }
+  #contentArea h2 { font-size: 1.75rem; }
+  #contentArea h3 { font-size: 1.5rem; }
+  #contentArea p { font-size: 1rem; text-align: left; }
+  #contentArea pre { font-size: 0.85rem; }
+  #contentArea pre code { padding: 1rem 0; }
+  #blogGrid > div { margin-bottom: 1rem; }
+  #blogGrid .h-48 { height: 200px; }
+  #contentArea table { font-size: 0.875rem; display: block; overflow-x: auto; white-space: nowrap; }
+  #contentArea th, #contentArea td { padding: 0.5rem; min-width: 100px; }
+}
+
+@media (max-width: 480px) {
+  body { padding: 0.25rem; }
+  header div { width: 190px !important; font-size: 1.25rem; padding: 0.5rem; }
+  nav { flex-direction: column; padding: 0.5rem; gap: 0.75rem; align-items: stretch; }
+  nav ul { justify-content: center; flex-wrap: wrap; gap: 0.25rem; font-size: 0.9rem; }
+  nav form { width: 100%; max-width: none; margin: 0; }
+  aside, #contentArea { padding: 0.75rem; }
+  #contentArea { font-size: 1rem; line-height: 1.6; }
+  #contentArea h1 { font-size: 1.75rem; margin: 1.5rem 0 1rem 0; }
+  #contentArea h2 { font-size: 1.5rem; margin: 1.25rem 0 0.75rem 0; }
+  #contentArea h3 { font-size: 1.25rem; margin: 1rem 0 0.5rem 0; }
+  #contentArea pre { font-size: 0.8rem; border-radius: 0; }
+  .code-block { border-radius: 6px; }
+  .code-header { padding: 0.35rem 0.6rem; font-size: 0.8rem; }
+  .code-lang { font-size: 0.7rem; }
+  #contentArea pre code { padding: 0.75rem 0; }
+  #contentArea pre code .ln { width: 2.25rem; padding: 0 0.5rem 0 0.25rem; }
+  #contentArea pre code .lc { padding: 0 0.75rem; }
+  #contentArea blockquote { padding: 1rem; margin: 1.5rem 0; font-size: 0.95rem; }
+  #blogGrid .p-4 { padding: 0.75rem; }
+  #blogGrid h3 { font-size: 1.125rem; line-height: 1.4; }
+  #blogGrid .text-gray-700 { font-size: 0.9rem; line-height: 1.5; }
+  aside h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+  aside ul li { font-size: 0.9rem; line-height: 1.4; }
+}
+
+@media (max-width: 640px) {
+  nav a, nav button { min-height: 44px; display: flex; align-items: center; justify-content: center; padding: 0.5rem 1rem; }
+  #blogGrid a, aside a { min-height: 44px; display: inline-flex; align-items: center; }
+  nav input { font-size: 16px; min-height: 44px; }
+  nav button { min-width: 60px; }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  main { flex-direction: row; }
+  aside { width: 300px !important; order: 1; }
+  #contentArea { order: 2; }
+  nav { flex-direction: row; flex-wrap: wrap; }
+  nav form { margin-left: auto; margin-top: 0; width: auto; }
+}
+
+@media (max-width: 768px) {
+  .heading-anchor { opacity: 0.5; }
+  #backToTop { bottom: 1rem; right: 1rem; width: 40px; height: 40px; }
 }

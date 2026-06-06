@@ -345,7 +345,7 @@ function initializeImageFallbacks() {
     img.addEventListener('error', function() {
       const placeholder = document.createElement('div');
       placeholder.className = 'w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center';
-      placeholder.innerHTML = '<span class="text-gray-600 text-sm font-[Indie Flower]">Image unavailable</span>';
+      placeholder.innerHTML = '<span class="text-gray-600 text-sm">Image unavailable</span>';
 
       if (this.parentNode) this.parentNode.insertBefore(placeholder, this);
       this.style.display = 'none';

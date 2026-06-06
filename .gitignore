@@ -33,3 +33,9 @@ Thumbs.db
 *.log
 .env
 .env.local
+
+# AI agent / scratch artifacts (not part of the published site)
+master-prompt.md
+.claude/
+*.local.md
+scratch/

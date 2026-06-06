@@ -5,28 +5,30 @@ layout: default
 <article>
   <!-- Post Header -->
   <header class="mb-6 md:mb-8">
-    <h1 class="font-[Indie Flower] text-2xl md:text-4xl mb-3 md:mb-4 leading-tight">{{ page.title }}</h1>
-    
+    <h1 class="text-2xl md:text-4xl mb-3 md:mb-4 leading-tight">
+      <span class="marker">{{ page.title }}<span class="marker-line marker-line-yellow" aria-hidden="true"></span></span>
+    </h1>
+
     <!-- Post Meta -->
     <div class="flex flex-wrap items-center gap-2 md:gap-4 text-gray-600 mb-3 md:mb-4 text-sm md:text-base">
       <time datetime="{{ page.date | date_to_xmlschema }}">
         {{ page.date | date: "%B %d, %Y" }}
       </time>
-      
+
       {% if page.content %}
-        <span class="hidden sm:inline">•</span>
+        <span class="hidden sm:inline" aria-hidden="true">·</span>
         <span>
           {% assign words = page.content | number_of_words %}
           {% if words < 360 %}1 min{% else %}{{ words | divided_by: 180 }} min{% endif %} read
         </span>
       {% endif %}
-      
+
       {% if page.author %}
-        <span class="hidden sm:inline">•</span>
+        <span class="hidden sm:inline" aria-hidden="true">·</span>
         <span>by {{ page.author }}</span>
       {% endif %}
     </div>
-    
+
     <!-- Categories and Tags -->
     {% if page.categories.size > 0 or page.tags.size > 0 %}
     <div class="flex flex-wrap gap-1 md:gap-2 mb-3 md:mb-4">
@@ -35,7 +37,7 @@ layout: default
           {{ category }}
         </span>
       {% endfor %}
-      
+
       {% for tag in page.tags limit:5 %}
         <span class="border border-gray-300 text-gray-600 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm">
           #{{ tag }}
@@ -44,20 +46,24 @@ layout: default
     </div>
     {% endif %}
   </header>
-  
+
   <!-- Post Content -->
   <div class="prose prose-sm md:prose-lg max-w-none mb-6 md:mb-8">
     {{ content }}
   </div>
-  
+
   <!-- Post Footer -->
-  <footer class="border-t border-gray-200 pt-4 md:pt-6">
+  <footer class="pt-4 md:pt-6" style="border-top: 2px solid var(--rule);">
     <!-- Navigation between posts -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4 md:mb-6">
       {% if page.previous.url %}
-        <a href="{{ page.previous.url | absolute_url }}" 
+        <a href="{{ page.previous.url | absolute_url }}"
            class="flex items-center text-black hover:text-gray-700 group text-sm md:text-base">
-          <span class="mr-2">←</span>
+          <!-- back arrow doodle -->
+          <svg class="doodle mr-2 transition-transform group-hover:-translate-x-1" width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5 M11 6 L5 12 L11 18"/>
+          </svg>
           <div>
             <div class="text-xs md:text-sm text-gray-600">Previous</div>
             <div class="group-hover:underline">{{ page.previous.title | truncate: 25 }}</div>
@@ -66,26 +72,34 @@ layout: default
       {% else %}
         <div class="hidden sm:block"></div>
       {% endif %}
-      
+
       {% if page.next.url %}
-        <a href="{{ page.next.url | absolute_url }}" 
+        <a href="{{ page.next.url | absolute_url }}"
            class="flex items-center text-black hover:text-gray-700 text-right group text-sm md:text-base self-end sm:self-auto">
           <div>
             <div class="text-xs md:text-sm text-gray-600">Next</div>
             <div class="group-hover:underline">{{ page.next.title | truncate: 25 }}</div>
           </div>
-          <span class="ml-2">→</span>
+          <!-- forward arrow doodle -->
+          <svg class="doodle ml-2 transition-transform group-hover:translate-x-1" width="20" height="20" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12H19 M13 6 L19 12 L13 18"/>
+          </svg>
         </a>
       {% else %}
         <div class="hidden sm:block"></div>
       {% endif %}
     </div>
-    
+
     <!-- Back to blog -->
     <div class="text-center">
-      <a href="{{ '/blog/' | absolute_url }}" 
-         class="inline-flex items-center border-2 border-black rounded-lg px-4 md:px-6 py-2 hover:bg-gray-100 transition-colors text-sm md:text-base">
-        ← Back to All Posts
+      <a href="{{ '/blog/' | absolute_url }}" class="sketch-btn note-blue text-sm md:text-base">
+        <!-- back arrow doodle -->
+        <svg class="doodle" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M19 12H5 M11 6 L5 12 L11 18"/>
+        </svg>
+        Back to All Posts
       </a>
     </div>
   </footer>
